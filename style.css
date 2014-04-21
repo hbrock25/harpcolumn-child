@@ -1,0 +1,113 @@
+/*
+ Theme Name:   SmartMag Child
+ Theme URI:    http://example.com/smartmag-child/
+ Description:  SmartMag Child Theme for Harp Column
+ Author:       Hugh Brock
+ Author URI:   http://example.com
+ Template:     smart-mag
+ Version:      1.0.0
+*/
+
+@import url("../smart-mag/style.css");
+
+/* =Theme customization starts here
+-------------------------------------------------------------- */
+
+#buddypress #whats-new-options {
+	overflow: hidden;
+}
+
+#buddypress form#whats-new-form textarea {
+	overflow: hidden;
+}
+
+/* style the banner ad widget */
+
+div.ad_container_1 {
+  float: right;
+  margin-top: 22px;
+}
+
+
+#pmpro_levels {
+  display: block; 
+  margin: 0 auto; 
+  position: relative; 
+  color: #666; 
+}
+.pmpro_level {
+  display: inline-block; 
+  border: 1px solid #AAA; 
+  border-radius: 10px; 
+  width: 47%; 
+  margin: 1%; 
+  background: #FFF; 
+  box-shadow: 1px 1px 3px #AAA; 
+  text-align: center; 
+  vertical-align: top;
+  height: 500px;
+}
+#pmpro_levels h2 {
+  display: block; 
+  padding: 15px 20px; 
+  margin: 0; 
+  text-align: center; 
+  border-top-left-radius: 10px; 
+  border-top-right-radius: 10px; 
+  color: #444; 
+  border-bottom: 1px solid #AAA; 
+  background-color: #CCC; 
+  background-image: -webkit-linear-gradient(#EEE, #BBB); 
+  background-image: -moz-linear-gradient(#EEE, #BBB); 
+  background-image: -o-linear-gradient(#EEE, #BBB); 
+  background-image: linear-gradient(#EEE, #BBB); 
+  font-size: 30px; 
+  line-height: 40px; 
+  text-shadow: 1px 1px 1px #FFF; 
+}
+.pmpro_level p {
+  display: block; 
+  margin: 15px 20px; 
+  padding: 0px; 
+  font-size: 16px; 
+  line-height: 24px; 
+  text-align: center; 
+}
+.pmpro_level .pmpro_level-price {
+  display: block; 
+  font-size: 22px; 
+  line-height: 28px; 
+  color: #444; 
+  margin: 15px 20px; 
+}
+.pmpro_level .pmpro_level-price strong {
+  font-size: 30px; 
+}
+.pmpro_level .pmpro_btn, .pmpro_level .pmpro_btn:link {
+  display: inline-block; 
+  margin: 0 auto; 
+  padding: 8px 15px; 
+  border-radius: 8px; 
+  -moz-border-radius: 8px; 
+  text-transform: uppercase; 
+  font-weight: bold; 
+  text-align: center; 
+  text-decoration: none; 
+  box-shadow: 1px 1px 4px #999; 
+  background: #666; 
+  color: #FFF; 
+  background-image: -webkit-linear-gradient(#999, #444); 
+  background-image: -moz-linear-gradient(#999, #444); 
+  background-image: -o-linear-gradient(#999, #444); 
+  background-image: linear-gradient(#999, #444); 
+  border: none; 
+  text-shadow: none; 
+}
+.pmpro_level .pmpro_btn:hover {
+  background: #000; 
+  color: #FFF; 
+  background-image: -webkit-linear-gradient(#444, #000); 
+  background-image: -moz-linear-gradient(#444, #000); 
+  background-image: -o-linear-gradient(#444, #000); 
+  background-image: linear-gradient(#444, #000); 
+}

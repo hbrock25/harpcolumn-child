@@ -63,16 +63,12 @@
 	      <ol class="links">
 		<li><a href="/membership-account/">
 		  <?php _e('My Membership Account', 'bbPress', 'bunyad-widgets'); ?></a></li>
-                <!-- the account is pmpro, but the profile is buddypress... -->
-		<li><a href="<?php bp_logged_in_user_domain(); ?>">
-		  <?php _e('My Profile', 'bbPress', 'bunyad-widgets'); ?></a></li>
-                <?php if(pmpro_hasMembershipLevel(array(2,3,4,5,6))): ?>
+                <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6))): ?>
 		  <li><a href="/category/magazine/">Latest Magazine Subscriber Content</a></li>
                 <?php else: ?>
 		  <li><a href="/membership-account">No subscription found; subscribe or renew today!</a></li>
                 <?php endif; ?>
-		<li><a href="<?php bbp_favorites_permalink(bbp_get_current_user_id()); ?>">
-		  <?php _e('Forum Favorites', 'bbPress', 'bunyad-widgets'); ?></a></li>
+		<li><a href="<?php bbp_favorites_permalink(bbp_get_current_user_id()); ?>"><?php _e('Forum Favorites', 'bbPress', 'bunyad-widgets'); ?></a></li>
 	      </ol>
 	      
 	      <?php bbp_logout_link(); ?>
@@ -126,8 +122,7 @@
 	      
 	      <?php do_action( 'lostpassword_form' ); ?>
 	      
-	      <button type="submit" name="wp-submit" id="user-submit" tabindex="2" class="button submit user-submit"><?php 
-								                                                     _e('Recover', 'bunyad'); ?></button>	
+	      <button type="submit" name="wp-submit" id="user-submit" tabindex="2" class="button submit user-submit"><?php _e('Recover', 'bunyad'); ?></button>	
 	    </div>
 	    
 	  </fieldset>
@@ -168,8 +163,7 @@
 	      
 	      <?php do_action('register_form'); ?>
 	      
-	      <button type="submit" name="wp-submit" id="wp-submit" tabindex="3" class="button submit user-submit"><?php 
-								                                                   _e('Register', 'bunyad'); ?></button>	
+	      <button type="submit" name="wp-submit" id="wp-submit" tabindex="3" class="button submit user-submit"><?php _e('Register', 'bunyad'); ?></button>	
 	    </div>
 	    
 	  </fieldset>

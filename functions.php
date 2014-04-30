@@ -34,3 +34,18 @@ return do_shortcode($content);
 
 }
 add_shortcode("protection_text", "pmpro_shortcode_protection_text");
+
+/*
+Customize the pmpro membership template
+*/
+
+//use custom levels template
+function pmprodiv_pmpro_pages_shortcode_levels($content)
+{
+	ob_start();
+	include(get_stylesheet_directory() . '/templates/levels.php' );
+	$temp_content = ob_get_contents();
+	ob_end_clean();
+	return $temp_content;
+}
+add_filter("pmpro_pages_shortcode_levels", "pmprodiv_pmpro_pages_shortcode_levels");

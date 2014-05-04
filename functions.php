@@ -49,3 +49,16 @@ function pmprodiv_pmpro_pages_shortcode_levels($content)
 	return $temp_content;
 }
 add_filter("pmpro_pages_shortcode_levels", "pmprodiv_pmpro_pages_shortcode_levels");
+
+/*
+	When users cancel (are changed to membership level 0) we give them another "cancelled" level. Can be used to downgrade someone to a free level when they cancel.
+*/
+function my_pmpro_after_change_membership_level($level_id, $user_id)
+{
+	if($level_id == 0)
+	{
+		//cancelling, give them level 1 instead
+		pmpro_changeMembershipLevel(1, $user_id);
+	}
+}
+add_action("pmpro_after_change_membership_level", "my_pmpro_after_change_membership_level", 10, 2);

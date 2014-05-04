@@ -62,3 +62,11 @@ function my_pmpro_after_change_membership_level($level_id, $user_id)
 	}
 }
 add_action("pmpro_after_change_membership_level", "my_pmpro_after_change_membership_level", 10, 2);
+
+function dae_pmpro_email_recipient($recipient, $email)
+{
+	//if($email->template == "invoice")			//use this to check for a certain template
+	$recipient = NULL;	
+	return $recipient;
+}
+add_filter("pmpro_email_recipient", "dae_pmpro_email_recipient", 10, 2);

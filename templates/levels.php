@@ -19,7 +19,9 @@ if($pmpro_msg)
 	   else
 	     $current_level = false; ?>
       <section class="author-info">
-	<h2><?php echo $current_level ? "<strong>{$level->name}: </strong>" : $level->name . ": ";
+	<h2><?php echo $current_level ? "<strong>{$level->name}: </strong>" : $level->name . ": "; ?>
+          <span class="pmpro_level-price">
+            <?php
 	          if(pmpro_isLevelFree($level)) 
 	          {
                     _e('Free', 'pmpro');
@@ -28,11 +30,9 @@ if($pmpro_msg)
 	          { 
 	            echo pmpro_getLevelCost($level);
 	          }
-	      ?>
+	    ?></span>
         </h2>
         <div class="pmpro_level-price-select col-3">
-	  <p class="pmpro_level-price">						
-	  </p> <!-- end pmpro_level-price -->
 
 	  <p class="pmpro_level-select">
 	    <?php if(empty($current_user->membership_level->ID)) { ?>

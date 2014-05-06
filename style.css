@@ -28,15 +28,12 @@ div.ad_container_1 {
   margin-top: 22px;
 }
 
-.pmpro_levels {
+authors-list > .pmpro_level-price-select {
+  text-align: center;
+}
 
-  .pmpro_level-price-select {
-    text-align: center;
-  }
-  
-  .pmpro_level-price {
-    color: #cd0074;
-  }
+authors-list > .pmpro_level-price {
+  color: #cd0074;
 }
 
 

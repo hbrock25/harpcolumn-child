@@ -70,3 +70,17 @@ function dae_pmpro_email_recipient($recipient, $email)
 	return $recipient;
 }
 add_filter("pmpro_email_recipient", "dae_pmpro_email_recipient", 10, 2);
+
+// For buddyblog form -- don't let users set their own categories
+
+function buddyblog_my_postform_settings($settings)
+{
+
+  // edit existing settings array rather than make a whole new one
+  unset $settings['tax'];
+  $settings['upload_count'] = 3;
+  return $settings;
+  
+}
+
+add_filter("buddyblog_post_form_settings", "buddyblog_my_post_form_settings");

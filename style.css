@@ -32,6 +32,8 @@ div.ad_container_1 {
   text-align: center;
   min-height: 150px;
   width: 200px;
+  margin-top: 20px;
+  float: left;
 }
 
 /* #pmpro_levels { */

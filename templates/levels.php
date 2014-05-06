@@ -18,7 +18,7 @@ if($pmpro_msg)
 	     $current_level = ($current_user->membership_level->ID == $level->id);
 	   else
 	     $current_level = false; ?>
-      <section class="author-info pmpro_levels">
+      <section class="author-info">
 	<h2><?php echo $current_level ? "<strong>{$level->name}: </strong>" : $level->name . ": "; ?>
           <span style="color: #cd0074">
             <?php
@@ -32,7 +32,7 @@ if($pmpro_msg)
 	          }
 	    ?></span>
         </h2>
-        <div class="pmpro_level-price-select col-3">
+        <div class="pmpro_level-price-select">
 
 	  <p class="pmpro_level-select">
 	    <?php if(empty($current_user->membership_level->ID)) { ?>

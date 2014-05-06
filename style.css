@@ -30,7 +30,8 @@ div.ad_container_1 {
 
 .pmpro_level-price-select {
   text-align: center;
-  min-height: 150px; !important
+  min-height: 150px;
+  width: 200px;
 }
 
 /* #pmpro_levels { */

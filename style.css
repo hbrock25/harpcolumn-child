@@ -28,14 +28,9 @@ div.ad_container_1 {
   margin-top: 22px;
 }
 
-authors-list > .pmpro_level-price-select {
+.pmpro_level-price-select {
   text-align: center;
 }
-
-authors-list > .pmpro_level-price {
-  color: #cd0074;
-}
-
 
 /* #pmpro_levels { */
 /*   display: block;  */

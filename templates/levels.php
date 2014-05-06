@@ -20,7 +20,7 @@ if($pmpro_msg)
 	     $current_level = false; ?>
       <section class="author-info pmpro_levels">
 	<h2><?php echo $current_level ? "<strong>{$level->name}: </strong>" : $level->name . ": "; ?>
-          <span class="pmpro_level-price">
+          <span style="color: #cd0074">
             <?php
 	          if(pmpro_isLevelFree($level)) 
 	          {

@@ -17,23 +17,21 @@ if($pmpro_msg)
 	   if(isset($current_user->membership_level->ID))
 	     $current_level = ($current_user->membership_level->ID == $level->id);
 	   else
-	     $current_level = false;
-    ?>
+	     $current_level = false; ?>
       <section class="author-info">
-	<h2><?php echo $current_level ? "<strong>{$level->name}</strong>" : $level->name?></h2>
+	<h2><?php echo $current_level ? "<strong>{$level->name}: </strong>" : $level->name . ": ";
+	          if(pmpro_isLevelFree($level)) 
+	          {
+                    _e('Free', 'pmpro');
+                  } 
+	          else 
+	          { 
+	            echo pmpro_getLevelCost($level);
+	          }
+	      ?>
+        </h2>
         <div class="pmpro_level-price-select col-3">
 	  <p class="pmpro_level-price">						
-            <strong>
-	      <?php if(pmpro_isLevelFree($level)) 
-	            {
-                      _e('Free', 'pmpro');
-                    } 
-	            else 
-	            { 
-	              echo pmpro_getLevelCost($level);
-	            }
-	      ?>
-            </strong>
 	  </p> <!-- end pmpro_level-price -->
 
 	  <p class="pmpro_level-select">
@@ -41,9 +39,9 @@ if($pmpro_msg)
 	      <a class="pmpro_btn pmpro_btn-select" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'Choose a level from levels page', 'pmpro');?></a>               
 	    <?php } elseif ( !$current_level ) { ?>                	
 	    <a class="pmpro_btn pmpro_btn-select"href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'Choose a level from levels page', 'pmpro');?></a>       			
-	      <?php } elseif($current_level) { ?>      
-	      <a class="pmpro_btn disabled"href="<?php echo pmpro_url("account")?>"><?php _e('Your&nbsp;Level', 'pmpro');?></a>
-	    <?php } ?>
+    <?php } elseif($current_level) { ?>      
+    <a class="pmpro_btn disabled"href="<?php echo pmpro_url("account")?>"><?php _e('Your&nbsp;Level', 'pmpro');?></a>
+<?php } ?>
 	  </p>
         </div>
         <div class="description">
@@ -63,7 +61,7 @@ if($pmpro_msg)
 	    <a href="<?php echo pmpro_url("account")?>"><?php _e('&larr; Return to Your Account', 'pmpro');?></a>
 	  <?php } else { ?>
 	  <a href="<?php echo home_url()?>"><?php _e('&larr; Return to Home', 'pmpro');?></a>
-    <?php } ?>
+          <?php } ?>
 	</div>
       </nav>
   </div>  

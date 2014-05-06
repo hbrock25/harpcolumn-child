@@ -29,13 +29,11 @@ div.ad_container_1 {
 }
 
 .pmpro_level-price-select {
-  float: left;
-  width: 30%;
+  text-align: center;
   .pmpro_level-price {
      display: block;
-     font-size: 22px;
-     line-height: 28px;
-     margin: 15px 20px;
+     font-size: 36px;
+     line-height: 44px;
   }
 
 }

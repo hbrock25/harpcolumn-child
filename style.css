@@ -38,7 +38,7 @@ div.ad_container_1 {
 
 .bbp-logged-in .links li {
   margin-bottom: 1em;
-  a {
-    font-weight: bold;
-  }
+}
+.bbp-logged-in .links li a {
+  font-weight: bold;
 }

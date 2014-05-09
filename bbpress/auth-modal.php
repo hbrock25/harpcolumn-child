@@ -48,6 +48,11 @@
 	  
 	  <div class="bbp-register-info"><?php _e("Don't have an account?", 'bbPress', 'bunyad'); ?>
 	    <a href="/membership-account/"><?php _e('Register Now!', 'bbPress', 'bunyad'); ?></a>
+            <br />
+            Old harpcolumn.com site users: use the <a href="<?php echo wp_lostpassword_url(); ?>" 
+                   title="<?php esc_attr_e('Lost password?', 'bunyad'); ?>" 
+                   class="bbp-lostpass-link lost-pass-modal"><?php _e('Lost password?', 'bunyad'); ?></a> form
+                   to create a password on the new site.
 	  </div>
 	  
 	  <?php elseif (class_exists('bbpress')): ?>
@@ -63,7 +68,7 @@
 	      <ol class="links">
 		<li><a href="/membership-account/">Your membership account</a> 
                   (change private information: address, password)</li>
-		<li><a href="<?php bbp_user_profile_url(bbp_get_current_user_id()); ?>/profile">Your profile</a> 
+		<li><a href="<?php bbp_user_profile_url(bbp_get_current_user_id()); ?>profile">Your profile</a> 
                   (change public information: your bio, your harp information)</li>
                 <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6))): ?>
 		  <li>This month's <a href="/category/magazine/">Harp Column</a></li>

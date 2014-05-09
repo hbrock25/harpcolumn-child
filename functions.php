@@ -84,3 +84,25 @@ function buddyblog_my_postform_settings($settings)
 }
 
 add_filter("buddyblog_post_form_settings", "buddyblog_my_post_form_settings");
+
+// Shortcode to pull up buddypress profile link
+
+function display_profile_link_bbpress_func() {
+     
+//Get user ID
+$user_ID = get_current_user_id();
+ 
+//Get the profile domain in BBpress
+$profile_domain= bp_core_get_user_domain($user_ID );
+ 
+//Get profile link as requested
+$profile_link=$profile_domain.'profile';
+ 
+//make it a hyperlink
+$profile_link_hyperlink="<a href='$profile_link'>$profile_link</a>";
+ 
+//return the shortcode value
+return $profile_link_hyperlink;
+}
+
+add_shortcode('display_profile_link_bbpress','display_profile_link_bbpress_func');

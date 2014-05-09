@@ -36,12 +36,9 @@ div.ad_container_1 {
   float: left;
 }
 
-.bbp-logged-in .links {
-  li {
-    margin-bottom: 1em;
-    a {
-      font-weight: bold;
-    }
+.bbp-logged-in .links li {
+  margin-bottom: 1em;
+  a {
+    font-weight: bold;
   }
 }
-

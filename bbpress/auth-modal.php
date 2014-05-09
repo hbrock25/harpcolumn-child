@@ -61,11 +61,11 @@
 	      <?php bbp_user_profile_link(bbp_get_current_user_id()); ?>
 	      
 	      <ol class="links">
-		<li style="border-bottom: 1px solid #ccc"><a href="/membership-account/">Your Account</a> (change address, change password)</li>
+		<li><a href="/membership-account/">Your Account</a> (change address, change password)</li>
                 <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6))): ?>
-		  <li style="border-bottom: 1px solid #ccc">This month's <a href="/category/magazine/">Harp Column</a></li>
+		  <li>This month's <a href="/category/magazine/">Harp Column</a></li>
                 <?php else: ?>
-		  <li style="border-bottom: 1px solid #ccc">You are not a subscriber! 
+		  <li>You are not a subscriber! 
                     <a href="/membership-account">Subscribe now</a> to receive full access to Harp Column online.</a></li>
                 <?php endif; ?>
 	      </ol>

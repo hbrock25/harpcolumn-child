@@ -47,7 +47,7 @@
 	  
 	  
 	  <div class="bbp-register-info"><?php _e("Don't have an account?", 'bbPress', 'bunyad'); ?>
-	    <a href="/membership-account/membership-levels/"><?php _e('Register Now!', 'bbPress', 'bunyad'); ?></a>
+	    <a href="/membership-account/"><?php _e('Register Now!', 'bbPress', 'bunyad'); ?></a>
 	  </div>
 	  
 	  <?php elseif (class_exists('bbpress')): ?>
@@ -66,9 +66,9 @@
                 <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6))): ?>
 		  <li><a href="/category/magazine/">Latest Magazine Subscriber Content</a></li>
                 <?php else: ?>
-		  <li><a href="/membership-account">No subscription found; subscribe or renew today!</a></li>
+		  <li>You are not a subscriber! 
+                    <a href="/membership-account">Subscribe now</a> to receive full access to Harp Column online.</a></li>
                 <?php endif; ?>
-		<li><a href="<?php bbp_favorites_permalink(bbp_get_current_user_id()); ?>"><?php _e('Forum Favorites', 'bbPress', 'bunyad-widgets'); ?></a></li>
 	      </ol>
 	      
 	      <?php bbp_logout_link(); ?>

@@ -106,3 +106,9 @@ return $profile_link_hyperlink;
 }
 
 add_shortcode('display_profile_link_bbpress','display_profile_link_bbpress_func');
+
+function hc_bp_user_can_create_groups_func($can_create, $restricted) {
+  return true;
+}
+
+add_filter("hc_bp_user_can_create_groups", "hc_bp_user_can_create_groups_func");

@@ -66,7 +66,7 @@
 		  <li>This month's <a href="/category/magazine/">Harp Column</a></li>
                 <?php else: ?>
 		  <li>You are not a subscriber! 
-                    <a href="/membership-account">Subscribe now</a> to receive full access to Harp Column online.</a></li>
+                    <a href="/membership-account/subscribe/">Subscribe now</a> to receive full access to Harp Column online.</a></li>
                 <?php endif; ?>
 	      </ol>
 	      

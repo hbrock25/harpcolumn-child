@@ -99,7 +99,7 @@ $profile_domain= bp_core_get_user_domain($user_ID );
 $profile_link=$profile_domain.'profile';
  
 //make it a hyperlink
-$profile_link_hyperlink="<a href='$profile_link'>$profile_link</a>";
+$profile_link_hyperlink="<a href='$profile_link'>profile</a>";
  
 //return the shortcode value
 return $profile_link_hyperlink;

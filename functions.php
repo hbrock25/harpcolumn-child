@@ -112,3 +112,11 @@ function hc_bp_user_can_create_groups_func($can_create, $restricted) {
 }
 
 add_filter("hc_bp_user_can_create_groups", "hc_bp_user_can_create_groups_func");
+
+// default country to US
+
+function hc_pmpro_default_country($default)
+{	
+	return "GB";
+}
+add_filter("pmpro_default_country", "hc_pmpro_default_country");

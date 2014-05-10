@@ -42,3 +42,9 @@ div.ad_container_1 {
 .bbp-logged-in .links li a {
   font-weight: bold;
 }
+
+.current-level-text {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}

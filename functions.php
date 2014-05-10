@@ -143,3 +143,14 @@ function hc_pmpro_countries($countries)
 	return $countries;
 }
 add_filter("pmpro_countries", "hc_pmpro_countries");
+
+// add renew link to bottom of membership account page
+
+function hc_pmpro_member_links_top()
+{
+  if (pmpro_hasMembershipLevel(array(2,3,4,5,6,7,8,9,10))) {
+    return '?><li><a href="/membership-account/subscribe/">Renew your subscription</a></li><?php'
+  }
+}                                                                                                
+
+add_action("pmpro_member_links_top", "hc_pmpro_member_links_top");

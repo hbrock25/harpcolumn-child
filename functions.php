@@ -120,3 +120,16 @@ function hc_pmpro_default_country($default)
 	return "GB";
 }
 add_filter("pmpro_default_country", "hc_pmpro_default_country");
+
+// un-require CVV, phone
+
+function hc_pmpro_required_billing_fields($fields)
+{
+	//remove state and zip
+	unset($fields['bphond']);
+	unset($fields['bcountry']);
+	unset($fields['CVV']);
+
+	return $fields;
+}
+add_filter("pmpro_required_billing_fields", "hc_pmpro_required_billing_fields");

@@ -117,7 +117,7 @@ add_filter("hc_bp_user_can_create_groups", "hc_bp_user_can_create_groups_func");
 
 function hc_pmpro_default_country($default)
 {	
-	return "GB";
+	return "US";
 }
 add_filter("pmpro_default_country", "hc_pmpro_default_country");
 
@@ -126,7 +126,7 @@ add_filter("pmpro_default_country", "hc_pmpro_default_country");
 function hc_pmpro_required_billing_fields($fields)
 {
 	//remove state and zip
-	unset($fields['bphond']);
+	unset($fields['bphone']);
 	unset($fields['bcountry']);
 	unset($fields['CVV']);
 

@@ -73,7 +73,7 @@ add_filter("pmpro_email_recipient", "dae_pmpro_email_recipient", 10, 2);
 
 // For buddyblog form -- don't let users set their own categories.
 
-function buddyblog_my_postform_settings($settings)
+function buddyblog_my_post_form_settings($settings)
 {
 
   // edit existing settings array rather than make a whole new one

@@ -133,3 +133,13 @@ function hc_pmpro_required_billing_fields($fields)
 	return $fields;
 }
 add_filter("pmpro_required_billing_fields", "hc_pmpro_required_billing_fields");
+
+// Fix bug in my import -- US is "USA"
+
+function hc_pmpro_countries($countries)
+{
+	$countries["USA"] = "United States";
+
+	return $countries;
+}
+add_filter("pmpro_countries", "hc_pmpro_countries");

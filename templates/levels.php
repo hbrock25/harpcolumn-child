@@ -19,6 +19,9 @@ if($pmpro_msg)
 	   else
 	     $current_level = false; ?>
       <section class="author-info">
+        <?php if ($current_level) {  ?>
+          <div class="current-level-text">Your current level</div>
+        <?php } ?>
 	<h2><?php echo $current_level ? "<strong>{$level->name}: </strong>" : $level->name . ": "; ?>
           <span style="color: #cd0074">
             <?php
@@ -32,12 +35,6 @@ if($pmpro_msg)
 	          }
 	    ?></span>
         </h2>
-          <?php if ($current_level) {  ?>
-            <div class="right">
-              <em>Your current level</em>
-            </div>
-          <?php } ?>
-
         <div class="pmpro_level-price-select">
 
 	  <p class="pmpro_level-select">

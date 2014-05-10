@@ -32,9 +32,12 @@ if($pmpro_msg)
 	          }
 	    ?></span>
         </h2>
-        <?php if ($current_level) {  ?>
-          <em>Your current level</em><br />
-        <?php } ?>
+          <?php if ($current_level) {  ?>
+            <div class="right">
+              <em>Your current level</em>
+            </div>
+          <?php } ?>
+
         <div class="pmpro_level-price-select">
 
 	  <p class="pmpro_level-select">

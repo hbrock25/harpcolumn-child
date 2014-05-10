@@ -45,16 +45,16 @@ if($pmpro_msg)
       if(!pmpro_isLevelRecurring($current_user->membership_level))
       {
     ?>
+      <em>Your current level</em><br />
       <a class="pmpro_btn pmpro_btn-select" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Renew', 'pmpro');?></a>
       <?php
       } else {
       ?><a class="pmpro_btn disabled"href="<?php echo pmpro_url("account")?>"><?php _e('Your&nbsp;Level', 'pmpro');?></a>
         <?php 
-        } 
-        ?>
+      } 
+    } ?>
 	  </p>
         </div>
-      <?php } ?>
         <div class="description">
 	  <?php 
 	  if(!empty($level->description))

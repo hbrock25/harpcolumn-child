@@ -149,7 +149,7 @@ add_filter("pmpro_countries", "hc_pmpro_countries");
 function hc_pmpro_member_links_top()
 {
   if (pmpro_hasMembershipLevel(array(2,3,4,5,6,7,8,9,10))) 
-  ?><li><a href="/membership-account/subscribe/">Renew your subscription</a></li><?php
-}                                                                                                
+  ?><li><a href="/membership-account/subscribe/">Renew your subscription</a></li><li><a href="/membership-account/your-profile/">Change your print magazine mailing address</a></li><?php
+}                                                 
 
 add_action("pmpro_member_links_top", "hc_pmpro_member_links_top");

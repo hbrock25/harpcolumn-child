@@ -67,8 +67,8 @@
 	      
 	      <ol class="links">
 		<li><a href="/membership-account/">Your membership account</a> 
-                  (change private information: address, password)</li>
-		<li><a href="<?php bbp_user_profile_url(bbp_get_current_user_id()); ?>profile">Your profile</a> 
+                  (change private information: your mailing address, your password)</li>
+		<li><a href="<?php bbp_user_profile_url(bbp_get_current_user_id()); ?>profile">Your community profile</a> 
                   (change public information: your bio, your harp information)</li>
                 <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6))): ?>
 		  <li>This month's <a href="/category/magazine/">Harp Column</a></li>

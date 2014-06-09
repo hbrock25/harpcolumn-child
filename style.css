@@ -59,4 +59,8 @@ div.ad_container_1 {
     color: #222
 }
 
+body#tinymce {
+	font-size: 17px;
+	line-height: 22px;
+}
 

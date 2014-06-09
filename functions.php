@@ -147,3 +147,10 @@ function hc_pmpro_member_links_top()
 }                                                 
 
 add_action("pmpro_member_links_top", "hc_pmpro_member_links_top");
+
+function tinymce_other_css_for_content( $init ) {
+$init['content_css'] = get_bloginfo('stylesheet_url') . "customtinymce.css";
+return $init;
+}
+
+add_filter('tiny_mce_before_init', 'tinymce_other_css_for_content');

@@ -78,7 +78,7 @@ function buddyblog_my_post_form_settings($settings)
 
   // edit existing settings array rather than make a whole new one
   unset($settings['tax']);
-  // $settings['upload_count'] = 3;
+  // $settings['upload_count'] = 10;
   return $settings;
   
 }
@@ -148,9 +148,12 @@ function hc_pmpro_member_links_top()
 
 add_action("pmpro_member_links_top", "hc_pmpro_member_links_top");
 
-function tinymce_other_css_for_content( $init ) {
-$init['content_css'] = get_bloginfo('stylesheet_url') . "customtinymce.css";
-return $init;
+add_action('frm_validate_entry', 'validate_my_form', 20, 2);
+function validate_my_form($errors, $values){
+  if( ($values['form_id'] == 5) || ($values['form_id'] == 6)){
+    if ( ! is_user_logged_in() ) {
+      $errors['my_error'] = 'You must be logged in to submit this form.';
+      return $errors;
+    }
+  }
 }
-
-add_filter('tiny_mce_before_init', 'tinymce_other_css_for_content');

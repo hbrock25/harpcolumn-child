@@ -59,4 +59,7 @@ div.ad_container_1 {
     color: #222
 }
 
+/* Provide a 6-column grid */
+
+div.column.one-6 { width: 16%; }
 

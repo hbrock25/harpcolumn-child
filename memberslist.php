@@ -612,7 +612,7 @@ if(!empty($_REQUEST['user_id'])) {
 	    <select name="l" onchange="jQuery('#posts-filter').submit();">
 	      <option value="" <?php if(!$l) { ?>selected="selected"<?php } ?>><?php _e('All Levels', 'pmpro');?></option>
 	      <option value="paid" <?php if($l == "paid") { ?>selected="selected"<?php } ?>><?php _e('Paid Subscribers', 'pmpro');?></option>
-	      <option value="paid_print" <?php if($l == "paid_print") { ?>selected="selected"<?php } ?>><?php _e('Paid Print Subscribers', 'pmpro');?></option>
+	      <option value="paid_print_domestic" <?php if($l == "paid_print_domestic") { ?>selected="selected"<?php } ?>><?php _e('Paid Domestic Print Subscribers', 'pmpro');?></option>
 	      <option value="exp_next_60" <?php if($l == "exp_next_60") { ?>selected="selected"<?php } ?>><?php _e('Expires within 60 days', 'pmpro');?></option>
 	      <option value="exp_next_60_120" <?php if($l == "exp_next_60_120") { ?>selected="selected"<?php } ?>><?php _e('Expires within 60-120 days', 'pmpro');?></option>
 
@@ -664,9 +664,9 @@ if(!empty($_REQUEST['user_id'])) {
 
 	  // This is horrific, I should make it better
 	  elseif($l == "paid")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1'";
-	  elseif($l == "paid_print")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND mu.membership_id <> '5'";
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
+	  elseif($l == "paid_print_domestic")
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
 	  elseif($l == "exp_next_60")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (DATE_ADD(CURDATE(), INTERVAL 60 DAY) > mu.enddate)";
 	  elseif($l == "exp_next_60_120")
@@ -698,9 +698,9 @@ if(!empty($_REQUEST['user_id'])) {
 	    $sqlQuery .= " AND mu.status = 'inactive' AND mu2.status IS NULL ";
 	  // This is horrific, I should make it better
 	  elseif($l == "paid")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1'";
-	  elseif($l == "paid_print")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND mu.membership_id <> '5'";
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
+	  elseif($l == "paid_print_domestic")
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
 	  elseif($l == "exp_next_60")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (DATE_ADD(CURDATE(), INTERVAL 60 DAY) > mu.enddate)";
 	  elseif($l == "exp_next_60_120")

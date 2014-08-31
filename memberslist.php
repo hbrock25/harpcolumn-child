@@ -151,6 +151,8 @@ if(!empty($_REQUEST['user_id'])) {
   ?>
     <h3>Most recent order</h3>
     <ul>
+      <li>ID: <a href="admin.php?page=pmpro-orders&order=<?php echo $last_order->id;?>"><?php echo $last_order->id?></a>
+
       <li>Subtotal: <?php echo 
 			  money_format('%n', $last_order->subtotal)?></li>
       <li>Tax: <?php echo money_format('%n', $last_order->tax)?></li>

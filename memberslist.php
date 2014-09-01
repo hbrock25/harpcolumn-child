@@ -613,6 +613,7 @@ if(!empty($_REQUEST['user_id'])) {
 	      <option value="" <?php if(!$l) { ?>selected="selected"<?php } ?>><?php _e('All Levels', 'pmpro');?></option>
 	      <option value="paid" <?php if($l == "paid") { ?>selected="selected"<?php } ?>><?php _e('Paid Subscribers', 'pmpro');?></option>
 	      <option value="paid_print_domestic" <?php if($l == "paid_print_domestic") { ?>selected="selected"<?php } ?>><?php _e('Paid Domestic Print Subscribers', 'pmpro');?></option>
+	      <option value="exp_last_60_print" <?php if($l == "exp_last_60_print") { ?>selected="selected"<?php } ?>><?php _e('Recently Expired Domestic Print Subs', 'pmpro');?></option>
 	      <option value="exp_next_60" <?php if($l == "exp_next_60") { ?>selected="selected"<?php } ?>><?php _e('Expires within 60 days', 'pmpro');?></option>
 	      <option value="exp_next_60_120" <?php if($l == "exp_next_60_120") { ?>selected="selected"<?php } ?>><?php _e('Expires within 60-120 days', 'pmpro');?></option>
 
@@ -652,12 +653,15 @@ if(!empty($_REQUEST['user_id'])) {
         
 	if($s)
 	{
-	  $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS u.ID, u.user_login, u.user_email, UNIX_TIMESTAMP(u.user_registered) as joindate, mu.membership_id, mu.initial_payment, mu.billing_amount, mu.cycle_period, mu.cycle_number, mu.billing_limit, mu.trial_amount, mu.trial_limit, UNIX_TIMESTAMP(mu.startdate) as startdate, UNIX_TIMESTAMP(mu.enddate) as enddate, m.name as membership FROM $wpdb->users u LEFT JOIN $wpdb->usermeta um ON u.ID = um.user_id LEFT JOIN $wpdb->pmpro_memberships_users mu ON u.ID = mu.user_id LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id ";
-	  
-	  if($l == "oldmembers")
+	  $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS u.ID, u.user_login, u.user_email, UNIX_TIMESTAMP(u.user_registered) as joindate, mu.membership_id, mu.initial_payment, mu.billing_amount, mu.cycle_period, mu.cycle_number, mu.billing_limit, mu.trial_amount, mu.trial_limit, UNIX_TIMESTAMP(mu.startdate) as startdate, UNIX_TIMESTAMP(mu.enddate) as enddate, m.name as membership FROM $wpdb->users u LEFT JOIN $wpdb->usermeta um ON u.ID = um.user_id LEFT JOIN $wpdb->pmpro_memberships_users mu ON u.ID = mu.user_id";
+
+	  if($l == "exp_last_60_print") {
+	    $sqlQuery .= " AND mu.status = 'inactive' AND mu.membership_id IN(2, 6) LEFT JOIN wp_pmpro_memberships_users mu2 ON u.ID = mu2.user_id AND mu2.status = 'active' AND mu2.membership_id = 1 "; 
+	  } elseif($l == "oldmembers") {
 	    $sqlQuery .= " LEFT JOIN $wpdb->pmpro_memberships_users mu2 ON u.ID = mu2.user_id AND mu2.status = 'active' ";
-	  
-	  $sqlQuery .= " WHERE mu.membership_id > 0 AND (u.user_login LIKE '%$s%' OR u.user_email LIKE '%$s%' OR um.meta_value LIKE '%$s%') ";        
+	  }
+
+	  $sqlQuery .= " LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE mu.membership_id > 0 AND (u.user_login LIKE '%$s%' OR u.user_email LIKE '%$s%' OR um.meta_value LIKE '%$s%') ";        
 	  
 	  if($l == "oldmembers")
 	    $sqlQuery .= " AND mu.status = 'inactive' AND mu2.status IS NULL ";
@@ -667,6 +671,9 @@ if(!empty($_REQUEST['user_id'])) {
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
 	  elseif($l == "paid_print_domestic")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
+	  elseif($l == "exp_last_60_print")
+	  $sqlQuery .= " AND mu.enddate < CURDATE() AND mu.enddate > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) and mu.status IS NOT NULL and mu2.status IS NOT NULL";
+
 	  elseif($l == "exp_next_60")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (DATE_ADD(CURDATE(), INTERVAL 60 DAY) > mu.enddate)";
 	  elseif($l == "exp_next_60_120")
@@ -676,7 +683,7 @@ if(!empty($_REQUEST['user_id'])) {
 	  else
 	    $sqlQuery .= " AND mu.status = 'active' ";      
 	  
-	  $sqlQuery .= "GROUP BY u.ID ";
+	  $sqlQuery .= " GROUP BY u.ID ";
 	  
 	  if($l == "oldmembers")
 	    $sqlQuery .= "ORDER BY enddate DESC ";
@@ -687,12 +694,15 @@ if(!empty($_REQUEST['user_id'])) {
 	}
 	else
 	{
-	  $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS u.ID, u.user_login, u.user_email, UNIX_TIMESTAMP(u.user_registered) as joindate, mu.membership_id, mu.initial_payment, mu.billing_amount, mu.cycle_period, mu.cycle_number, mu.billing_limit, mu.trial_amount, mu.trial_limit, UNIX_TIMESTAMP(mu.startdate) as startdate, UNIX_TIMESTAMP(mu.enddate) as enddate, m.name as membership FROM $wpdb->users u LEFT JOIN $wpdb->pmpro_memberships_users mu ON u.ID = mu.user_id LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id";
+	  $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS u.ID, u.user_login, u.user_email, UNIX_TIMESTAMP(u.user_registered) as joindate, mu.membership_id, mu.initial_payment, mu.billing_amount, mu.cycle_period, mu.cycle_number, mu.billing_limit, mu.trial_amount, mu.trial_limit, UNIX_TIMESTAMP(mu.startdate) as startdate, UNIX_TIMESTAMP(mu.enddate) as enddate, m.name as membership FROM $wpdb->users u LEFT JOIN $wpdb->pmpro_memberships_users mu ON u.ID = mu.user_id ";
 	  
-	  if($l == "oldmembers")
+	  if($l == "exp_last_60_print") {
+	    $sqlQuery .= " AND mu.status = 'inactive' AND mu.membership_id IN (2, 6) LEFT JOIN wp_pmpro_memberships_users mu2 ON u.ID = mu2.user_id AND mu2.status = 'active' AND mu2.membership_id = 1 "; 
+	  } elseif($l == "oldmembers") {
 	    $sqlQuery .= " LEFT JOIN $wpdb->pmpro_memberships_users mu2 ON u.ID = mu2.user_id AND mu2.status = 'active' ";
+	  }
 	  
-	  $sqlQuery .= " WHERE mu.membership_id > 0  ";
+	  $sqlQuery .= " LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE mu.membership_id > 0  ";
 	  
 	  if($l == "oldmembers")
 	    $sqlQuery .= " AND mu.status = 'inactive' AND mu2.status IS NULL ";
@@ -701,6 +711,8 @@ if(!empty($_REQUEST['user_id'])) {
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
 	  elseif($l == "paid_print_domestic")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
+	  elseif($l == "exp_last_60_print")
+	  $sqlQuery .= " AND mu.enddate < CURDATE() AND mu.enddate > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) and mu.status IS NOT NULL and mu2.status IS NOT NULL";
 	  elseif($l == "exp_next_60")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (DATE_ADD(CURDATE(), INTERVAL 60 DAY) > mu.enddate)";
 	  elseif($l == "exp_next_60_120")
@@ -709,7 +721,7 @@ if(!empty($_REQUEST['user_id'])) {
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id = '" . $l . "' ";
 	  else
 	    $sqlQuery .= " AND mu.status = 'active' ";
-	  $sqlQuery .= "GROUP BY u.ID ";
+	  $sqlQuery .= " GROUP BY u.ID ";
           
 	  if($l == "oldmembers")
 	    $sqlQuery .= "ORDER BY enddate DESC ";

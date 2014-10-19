@@ -21,6 +21,13 @@
 	overflow: hidden;
 }
 
+/* fix buddypress - smartmag conflict on "wrap" */
+
+#buddypress .wrap {
+    float: left;
+    width: 97%;
+}
+
 /* style the banner ad widget */
 
 div.ad_container_1 {

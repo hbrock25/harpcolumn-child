@@ -62,7 +62,7 @@
        $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
        elseif($l == "exp_last_60_print")
        $sqlQuery .= " AND mu.enddate < CURDATE() AND mu.enddate > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) and mu.status IS NOT NULL and mu2.status IS NOT NULL";
-       elseif($l == "exp_next_60")
+       elseif($l == "exp_next_2_3")
        $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (DATE_ADD(CURDATE(), INTERVAL 60 DAY) > mu.enddate)";
        elseif($l == "exp_next_60_120")
        $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (mu.enddate BETWEEN DATE_ADD(CURDATE(), INTERVAL 60 DAY) AND DATE_ADD(CURDATE(), INTERVAL 120 DAY))";
@@ -105,7 +105,7 @@
        $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
        elseif($l == "exp_last_60_print")
        $sqlQuery .= " AND mu.enddate < CURDATE() AND mu.enddate > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) and mu.status IS NOT NULL and mu2.status IS NOT NULL";
-       elseif($l == "exp_next_60")
+       elseif($l == "exp_next_2_3")
        $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (DATE_ADD(CURDATE(), INTERVAL 60 DAY) > mu.enddate)";
        elseif($l == "exp_next_60_120")
        $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (mu.enddate BETWEEN DATE_ADD(CURDATE(), INTERVAL 60 DAY) AND DATE_ADD(CURDATE(), INTERVAL 120 DAY))";

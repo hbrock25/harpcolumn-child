@@ -614,8 +614,9 @@ if(!empty($_REQUEST['user_id'])) {
 	      <option value="paid" <?php if($l == "paid") { ?>selected="selected"<?php } ?>><?php _e('Paid Subscribers', 'pmpro');?></option>
 	      <option value="paid_print_domestic" <?php if($l == "paid_print_domestic") { ?>selected="selected"<?php } ?>><?php _e('Paid Domestic Print Subscribers', 'pmpro');?></option>
 	      <option value="exp_last_60_print" <?php if($l == "exp_last_60_print") { ?>selected="selected"<?php } ?>><?php _e('Recently Expired Domestic Print Subs', 'pmpro');?></option>
-	      <option value="exp_next_60" <?php if($l == "exp_next_60") { ?>selected="selected"<?php } ?>><?php _e('Expires within 60 days', 'pmpro');?></option>
-	      <option value="exp_next_60_120" <?php if($l == "exp_next_60_120") { ?>selected="selected"<?php } ?>><?php _e('Expires within 60-120 days', 'pmpro');?></option>
+              <option value="exp_next_month" <?php if($l == "exp_next_month") { ?>selected="selected"<?php } ?>><?php _e('Expires next month', 'pmpro');?></option>
+	      <option value="exp_next_2_3" <?php if($l == "exp_next_2_3") { ?>selected="selected"<?php } ?>><?php _e('Expires 2-3 months out', 'pmpro');?></option>
+	      <option value="exp_next_4_5" <?php if($l == "exp_next_4_5") { ?>selected="selected"<?php } ?>><?php _e('Expires 4-5 months out', 'pmpro');?></option>
 
 	      <?php
 	      $levels = $wpdb->get_results("SELECT id, name FROM $wpdb->pmpro_membership_levels ORDER BY name");
@@ -674,10 +675,12 @@ if(!empty($_REQUEST['user_id'])) {
 	  elseif($l == "exp_last_60_print")
 	  $sqlQuery .= " AND mu.enddate < CURDATE() AND mu.enddate > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) and mu.status IS NOT NULL and mu2.status IS NOT NULL";
 
-	  elseif($l == "exp_next_60")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (DATE_ADD(CURDATE(), INTERVAL 60 DAY) > mu.enddate)";
-	  elseif($l == "exp_next_60_120")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (mu.enddate BETWEEN DATE_ADD(CURDATE(), INTERVAL 60 DAY) AND DATE_ADD(CURDATE(), INTERVAL 120 DAY))";
+	  elseif($l == "exp_next_month")
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) > mu.enddate)";
+	  elseif($l == "exp_next_2_3")
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (mu.enddate BETWEEN STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),2)*100)+1), '%Y%m%d') AND LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 3 MONTH)))";
+	  elseif($l == "exp_next_4_5")
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (mu.enddate BETWEEN STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d') AND LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
 	  elseif($l)
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id = '" . $l . "' ";          
 	  else

@@ -112,9 +112,9 @@
 	  elseif($l == "exp_next_month")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) >= date(mu.enddate))";
 	  elseif($l == "exp_next_2_3")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),2)*100)+1), '%Y%m%d')) AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 3 MONTH)))";
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (date(mu.enddate) >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),2)*100)+1), '%Y%m%d')) AND (date(mu.enddate) <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 3 MONTH)))";
 	  elseif($l == "exp_next_4_5")
-	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d')) AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
+	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id <> '0' AND mu.membership_id <> '1' AND (date(mu.enddate) >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d')) AND (date(mu.enddate) <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
        // End horror
 
 		elseif($l)

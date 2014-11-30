@@ -158,11 +158,11 @@ function validate_my_form($errors, $values){
   }
 }
 
-// Add event manager widget to Smart Mag page builder
+// Add event manager widget to Smart Mag page builder. Commenting out since we may stop using event-manager...
 
-include 'em-events.php';
+// include 'em-events.php';
 
-add_filter('siteorigin_panels_widgets', 'my_add_widgets', 20);
+// add_filter('siteorigin_panels_widgets', 'my_add_widgets', 20);
 
 function my_add_widgets($widgets) {
   $widgets['events-list-widget'] = array('class' => 'EM_Widget', 'name' => 'Events List Widget');

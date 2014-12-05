@@ -58,7 +58,7 @@ endif;
 			
 		</div>
 		
-		<?php Bunyad::core()->theme_sidebar(); ?>
+		<?php get_sidebar('cs-community'); ?>
 		
 	</div> <!-- .row -->
 </div> <!-- .main -->

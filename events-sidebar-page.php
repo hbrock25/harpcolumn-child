@@ -65,9 +65,7 @@ endif;
     <aside class="col-4 sidebar">
       <ul>
 	
-	<?php if (!get_sidebar('primary-sidebar')) : ?>
-	<?php _e("<li>Nothing yet.</li>", 'bunyad'); ?>
-	<?php endif; ?>
+	<?php dynamic_sidebar('cs-events-sidebar'); ?>
 	
       </ul>
     </aside>

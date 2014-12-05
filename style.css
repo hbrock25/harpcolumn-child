@@ -70,3 +70,10 @@ div.ad_container_1 {
 
 div.column.one-6 { width: 16%; }
 
+/* fix event calendar buttons */
+
+#tribe-community-events .button {
+    color: #fff;
+}
+
+

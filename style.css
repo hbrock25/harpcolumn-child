@@ -72,7 +72,7 @@ div.column.one-6 { width: 16%; }
 
 /* fix event calendar buttons */
 
-#tribe-community-events .button {
+#tribe-community-events a.button {
     color: #fff;
 }
 

@@ -62,14 +62,20 @@ endif;
       
     </div>
     
+    <?php do_action('bunyad_sidebar_start'); ?>
+
     <aside class="col-4 sidebar">
       <ul>
-	
-	<?php dynamic_sidebar('cs-events-sidebar'); ?>
-	
+
+        <?php if (!dynamic_sidebar('Events Sidebar')) : ?>
+        <?php _e("<li>Nothing yet.</li>", 'bunyad'); ?>
+        <?php endif; ?>
+
       </ul>
     </aside>
-    
+
+    <?php do_action('bunyad_sidebar_end'); ?>
+
   </div> <!-- .row -->
 </div> <!-- .main -->
 

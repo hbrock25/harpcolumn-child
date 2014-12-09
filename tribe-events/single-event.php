@@ -90,4 +90,10 @@ $event_id = get_the_ID();
 	</div>
 	<!-- #tribe-events-footer -->
 
+        <h1 class="main-heading author-title"><?php echo sprintf(__('Author %s', 'bunyad'), '<strong>' . get_the_author() . '</strong>'); ?></h1>
+
+        <?php get_template_part('partial-author'); ?>
+
+
+
 </div><!-- #tribe-events-content -->

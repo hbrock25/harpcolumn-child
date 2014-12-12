@@ -50,7 +50,7 @@ if ( $posts ):
 
 	<?php do_action( 'tribe_events_list_widget_before_the_event_title' ); ?>
 
-        <?php echo tribe_event_featured_image(null, 'thumbnail') ?>
+        <a href="<?php echo tribe_get_event_link(); ?>" class="hc_post_thumbnail"><?php echo tribe_event_featured_image(null, array(100,100)) ?></a>
 
 	<h4 class="entry-title summary">
 	  <a href="<?php echo tribe_get_event_link(); ?>" rel="bookmark"><?php the_title(); ?></a>

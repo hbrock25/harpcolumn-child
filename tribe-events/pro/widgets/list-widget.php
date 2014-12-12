@@ -52,12 +52,10 @@ if ( $posts ):
 
         <?php echo tribe_event_featured_image(null, 'thumbnail') ?>
 
-        <div class="tribe-mini-calendar-event list-info"
-	  <h2 class="entry-title summary">
+	<h2 class="entry-title summary hc_entry_title">
 	  <a href="<?php echo tribe_get_event_link(); ?>" rel="bookmark"><?php the_title(); ?></a>
 	</h2>
-        </div>
-
+        
 	<?php do_action( 'tribe_events_list_widget_after_the_event_title' ); ?>
 
 	<?php do_action( 'tribe_events_list_widget_before_the_meta' ) ?>

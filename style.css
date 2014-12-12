@@ -81,3 +81,11 @@ div.column.one-6 { width: 16%; }
     float: left;
     padding: 0 5px 5px 0;
 }
+
+.hc_entry_title h2 {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}

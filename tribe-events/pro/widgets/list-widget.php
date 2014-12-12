@@ -52,7 +52,7 @@ if ( $posts ):
 
         <?php echo tribe_event_featured_image(null, 'thumbnail') ?>
 
-	<h2 class="entry-title summary hc_entry_title">
+	<h2 class="hc_entry_title">
 	  <a href="<?php echo tribe_get_event_link(); ?>" rel="bookmark"><?php the_title(); ?></a>
 	</h2>
         

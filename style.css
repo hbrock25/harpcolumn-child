@@ -79,13 +79,13 @@ div.column.one-6 { width: 16%; }
 .hc_post_thumbnail {
     clear: left;
     float: left;
-    padding: 0 5px 5px 0;
+    padding: 0 10px 10px 0;
 }
 
-.hc_entry_title h2 {
+h2.hc_entry_title {
   font-size: 14px;
   font-weight: bold;
   line-height: 18px;
   margin-top: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }

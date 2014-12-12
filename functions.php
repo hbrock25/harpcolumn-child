@@ -177,5 +177,6 @@ function my_tribe_event_featured_image($featured_image, $post_id, $size, $image_
   }
 }
 
+add_filter('tribe_event_featured_image', 'my_tribe_event_featured_image',10, 4);
 
 

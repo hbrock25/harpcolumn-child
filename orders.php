@@ -58,7 +58,7 @@
 		$status = "";
 
         if(isset($_REQUEST['starting-order-id']))
-                $starting_order_id = $_REQUEST['starting_order_id'];
+                $starting_order_id = $_REQUEST['starting-order-id'];
         else
                 $starting_order_id = "";
 	

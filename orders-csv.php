@@ -322,7 +322,7 @@
            // amount, deposit-ticket-id,date,number-of-distributions,invoice-paid,quantity,item-id,
            // description,gl-account,cash-account
            // deposit-ticket-id takes some trickery -- group by date, but separate checks from cred cards
-	   $csvoutput .= ",-" . $order->amount;
+	   $csvoutput .= ",-" . $order->total;
            if($order->gateway == "check") {
              $csvoutput .= ",C" . date("dmy", $order->timestamp);
            } else {

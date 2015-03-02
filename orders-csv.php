@@ -63,6 +63,16 @@
 	else
 		$filter = "all";	
 	
+	if(isset($_REQUEST['starting-order-id']))
+		$starting_order_id = $_REQUEST['starting-order-id'];
+	else
+		$starting_order_id = "";	
+        
+	if(isset($_REQUEST['report-type']))
+		$report_type = sanitize_text_field($_REQUEST['report-type']);
+	else
+		$report_type = "";	
+
 	//some vars for the search
 	if(!empty($_REQUEST['pn']))
 		$pn = $_REQUEST['pn'];
@@ -140,6 +150,10 @@
 		$condition = "status = '$status' ";
 	}		
 	
+        elseif($filter == "starting-from-order-id")
+        {
+                $condition = "o.id >= $starting_order_id AND o.status = 'success' ";
+        }		
 	//string search
 	if($s)
 	{
@@ -168,7 +182,7 @@
 	}
 	else
 	{
-		$sqlQuery = "SELECT SQL_CALC_FOUND_ROWS id FROM $wpdb->pmpro_membership_orders WHERE ".$condition." ORDER BY id DESC, timestamp DESC ";
+		$sqlQuery = "SELECT SQL_CALC_FOUND_ROWS id FROM $wpdb->pmpro_membership_orders o WHERE ".$condition." ORDER BY o.id DESC, o.timestamp DESC ";
 	}
 	
 	if(!empty($start) && !empty($limit))

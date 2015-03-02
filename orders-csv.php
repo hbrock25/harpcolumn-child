@@ -193,16 +193,15 @@
 	//begin output
 	header("Content-type: text/csv");	
 	
-	$filename = "orders.csv";
-	/*
-		Insert logic here for building filename from $filter and other values.
-	*/
-	header("Content-Disposition: attachment; filename=$filename;");		
+        if($report_type == "peachtree-customers") {
+            // This is the peachtree-customers export
+
+            header("Content-Disposition: attachment; filename=peachtree-customers.csv");		
 	
-	$csvoutput = "id,user_id,user_login,first_name,last_name,user_email,billing_name,billing_street,billing_city,billing_state,billing_zip,billing_country,billing_phone,membership_id,level_name,subtotal,tax,couponamount,total,payment_type,cardtype,accountnumber,expirationmonth,expirationyear,status,gateway,gateway_environment,payment_transaction_id,subscription_transaction_id,discount_code_id,discount_code,timestamp";
+	    $csvoutput = "id,user_id,user_login,first_name,last_name,user_email,billing_name,billing_street,billing_city,billing_state,billing_zip,billing_country,billing_phone,membership_id,level_name,subtotal,tax,couponamount,total,payment_type,cardtype,accountnumber,expirationmonth,expirationyear,status,gateway,gateway_environment,payment_transaction_id,subscription_transaction_id,discount_code_id,discount_code,timestamp";
 	
-	//these are the meta_keys for the fields (arrays are object, property. so e.g. $theuser->ID)
-	$default_columns = array(
+	    //these are the meta_keys for the fields (arrays are object, property. so e.g. $theuser->ID)
+	    $default_columns = array(
 		array("order", "id"),
 		array("user", "ID"),
 		array("user", "user_login"),
@@ -234,7 +233,90 @@
 		array("order", "subscription_transactiond_id"),
 		array("discount_code", "id"),
 		array("discount_code", "code")
-	);
+	    );
+        } elseif($report_type == "peachtree-orders") {
+            // The peachtree-orders export
+
+            header("Content-Disposition: attachment; filename=peachtree-orders.csv");		
+	    $csvoutput = "id,user_id,user_login,first_name,last_name,user_email,billing_name,billing_street,billing_city,billing_state,billing_zip,billing_country,billing_phone,membership_id,level_name,subtotal,tax,couponamount,total,payment_type,cardtype,accountnumber,expirationmonth,expirationyear,status,gateway,gateway_environment,payment_transaction_id,subscription_transaction_id,discount_code_id,discount_code,timestamp";
+	
+	    //these are the meta_keys for the fields (arrays are object, property. so e.g. $theuser->ID)
+	    $default_columns = array(
+		array("order", "id"),
+		array("user", "ID"),
+		array("user", "user_login"),
+		array("user", "first_name"),
+		array("user", "last_name"),
+		array("user", "user_email"),
+		array("order", "billing", "name"),
+		array("order", "billing", "street"),
+		array("order", "billing", "city"),
+		array("order", "billing", "state"),
+		array("order", "billing", "zip"),
+		array("order", "billing", "country"),
+		array("order", "billing", "phone"),
+		array("order", "membership_id"),
+		array("level", "name"),
+		array("order", "subtotal"),
+		array("order", "tax"),		
+		array("order", "couponamount"),
+		array("order", "total"),
+		array("order", "payment_type"),
+		array("order", "cardtype"),
+		array("order", "accountnumber"),
+		array("order", "expirationmonth"),
+		array("order", "expirationyear"),
+		array("order", "status"),
+		array("order", "gateway"),
+		array("order", "gateway_environment"),
+		array("order", "payment_transaction_id"),
+		array("order", "subscription_transactiond_id"),
+		array("discount_code", "id"),
+		array("discount_code", "code")
+	    );
+
+
+        } else { 
+            // The standard export
+            header("Content-Disposition: attachment; filename=orders.csv");		
+	    $csvoutput = "id,user_id,user_login,first_name,last_name,user_email,billing_name,billing_street,billing_city,billing_state,billing_zip,billing_country,billing_phone,membership_id,level_name,subtotal,tax,couponamount,total,payment_type,cardtype,accountnumber,expirationmonth,expirationyear,status,gateway,gateway_environment,payment_transaction_id,subscription_transaction_id,discount_code_id,discount_code,timestamp";
+	
+	    //these are the meta_keys for the fields (arrays are object, property. so e.g. $theuser->ID)
+	    $default_columns = array(
+		array("order", "id"),
+		array("user", "ID"),
+		array("user", "user_login"),
+		array("user", "first_name"),
+		array("user", "last_name"),
+		array("user", "user_email"),
+		array("order", "billing", "name"),
+		array("order", "billing", "street"),
+		array("order", "billing", "city"),
+		array("order", "billing", "state"),
+		array("order", "billing", "zip"),
+		array("order", "billing", "country"),
+		array("order", "billing", "phone"),
+		array("order", "membership_id"),
+		array("level", "name"),
+		array("order", "subtotal"),
+		array("order", "tax"),		
+		array("order", "couponamount"),
+		array("order", "total"),
+		array("order", "payment_type"),
+		array("order", "cardtype"),
+		array("order", "accountnumber"),
+		array("order", "expirationmonth"),
+		array("order", "expirationyear"),
+		array("order", "status"),
+		array("order", "gateway"),
+		array("order", "gateway_environment"),
+		array("order", "payment_transaction_id"),
+		array("order", "subscription_transactiond_id"),
+		array("discount_code", "id"),
+		array("discount_code", "code")
+	    );
+
+        }
 	
 	//any extra columns
 	$extra_columns = apply_filters("pmpro_orders_csv_extra_columns", array());

@@ -198,14 +198,13 @@
 
             header("Content-Disposition: attachment; filename=peachtree-customers.csv");		
 	
-	    $csvoutput = "customer-id,customer-name,bill-to-address-line-one,bill-to-address-line-two,bill-to-city,bill-to-state,bill-to-zip,bill-to-country,gl-sales";
+	    $csvoutput = "customer-id,customer-name,bill-to-address-line-one,bill-to-city,bill-to-state,bill-to-zip,bill-to-country,gl-sales";
 	
 	    //these are the meta_keys for the fields (arrays are object, property. so e.g. $theuser->ID)
 	    $default_columns = array(
 		array("user", "user_login"),
 		array("order", "billing", "name"),
 		array("order", "billing", "street"),
-		array("order", "billing", "street2"),
 		array("order", "billing", "city"),
 		array("order", "billing", "state"),
 		array("order", "billing", "zip"),

@@ -592,8 +592,22 @@
                                 "starting-order-id"=>$starting_order_id
 			);			
 			$export_url = add_query_arg($url_params, $export_url);
+                 
+                        // Add params for custom reports for Peachtree
+                        $ptree_cust_params = array(
+                                "starting-order-id"=>$starting_order_id,
+                                "report-type"=>"peachtree-customers"
+                        );
+                        $ptree_cust_url = add_query_arg($ptree_cust_params, $export_url);
+                        $ptree_order_params = array(
+                                "starting-order-id"=>$starting_order_id,
+                                "report-type"=>"peachtree-orders"
+                        );
+                        $ptree_order_url = add_query_arg($ptree_order_params, $export_url);
 		?>		
 		<a target="_blank" href="<?php echo $export_url;?>" class="add-new-h2"><?php _e('Export to CSV', 'pmpro');?></a>
+		<a target="_blank" href="<?php echo $ptree_cust_url;?>" class="add-new-h2"><?php _e('Export Peachtree Customers to CSV', 'pmpro');?></a>
+		<a target="_blank" href="<?php echo $ptree_order_url;?>" class="add-new-h2"><?php _e('Export Peachtree Orders to CSV', 'pmpro');?></a>
 	</h2>
 	
 		

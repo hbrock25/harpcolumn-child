@@ -319,7 +319,7 @@
          if($report_type == "peachtree-customers") {
            // gl-sales
            $csvoutput .= "," . "20530";
-         } elseif($report_type == "peacthree-orders") { 
+         } elseif($report_type == "peachtree-orders") { 
            // deposit-ticket-id,date,number-of-distributions,invoice-paid,quantity,item-id,
            // description,gl-account,cash-account
            // deposit-ticket-id takes some trickery -- group by date, but separate checks from cred cards

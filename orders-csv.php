@@ -334,7 +334,7 @@
            // number-of-distributions, invoice paid, quantity
            $csvoutput .= ",1,,1";
            // item-id, description
-           $csvoutput .= ",HCSUB" . $order->membership_id . "," . $level->name;
+           $csvoutput .= ",HCSUB" . $order->membership_id . "," . pmpro_enclose($level->name);
            // gl-account, cash-account
            $csvoutput .= ",20530,10105";
          } else {

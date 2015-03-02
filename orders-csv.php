@@ -222,7 +222,6 @@
 		array("order", "billing", "name"),
                 array("order", "payment_transaction_id"),
 		array("order", "total"),
-		array("order", "total"),
 	    );
 
 
@@ -320,9 +319,10 @@
            // gl-sales
            $csvoutput .= "," . "20530";
          } elseif($report_type == "peachtree-orders") { 
-           // deposit-ticket-id,date,number-of-distributions,invoice-paid,quantity,item-id,
+           // amount, deposit-ticket-id,date,number-of-distributions,invoice-paid,quantity,item-id,
            // description,gl-account,cash-account
            // deposit-ticket-id takes some trickery -- group by date, but separate checks from cred cards
+	   $csvoutput .= ",-" . $order->amount;
            if($order->gateway == "check") {
              $csvoutput .= ",C" . date("dmy", $order->timestamp);
            } else {

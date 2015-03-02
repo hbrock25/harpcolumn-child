@@ -909,7 +909,7 @@
 		}
 		else
 		{
-			$sqlQuery = "SELECT SQL_CALC_FOUND_ROWS id FROM $wpdb->pmpro_membership_orders WHERE ".$condition." ORDER BY id DESC, timestamp DESC ";
+			$sqlQuery = "SELECT SQL_CALC_FOUND_ROWS id FROM $wpdb->pmpro_membership_orders o WHERE ".$condition." ORDER BY o.id DESC, o.timestamp DESC ";
 		}
 		
 		$sqlQuery .= "LIMIT $start, $limit";

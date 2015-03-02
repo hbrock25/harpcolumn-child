@@ -324,10 +324,10 @@
            // description,gl-account,cash-account
            // deposit-ticket-id takes some trickery -- group by date, but separate checks from cred cards
            if($order->gateway == "check") {
-             $csvoutput .= ",C" . pmpro_enclose(date("dmy", $order->timestamp));
+             $csvoutput .= ",C" . date("dmy", $order->timestamp);
            } else {
              // web credit card order
-             $csvoutput .= ",W" . pmpro_enclose(date("dmy", $order->timestamp));
+             $csvoutput .= ",W" . date("dmy", $order->timestamp);
            }
            // date
 	   $csvoutput .= "," . pmpro_enclose(date("n/j/Y", $order->timestamp));

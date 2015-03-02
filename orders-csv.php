@@ -315,9 +315,32 @@
 				}
 			}
 									
-			//timestamp
-			$csvoutput .= "," . pmpro_enclose(date(get_option("date_format"), $order->timestamp));
-							
+         // peachtree special fields
+         if($report_type == "peachtree-customers") {
+           // gl-sales
+           $csvoutput .= "," . "20530";
+         } elseif($report_type == "peacthree-orders") { 
+           // deposit-ticket-id,date,number-of-distributions,invoice-paid,quantity,item-id,
+           // description,gl-account,cash-account
+           // deposit-ticket-id takes some trickery -- group by date, but separate checks from cred cards
+           if($order->gateway == "check") {
+             $csvoutput .= ",C" . pmpro_enclose(date("dmy", $order->timestamp));
+           } else {
+             // web credit card order
+             $csvoutput .= ",W" . pmpro_enclose(date("dmy", $order->timestamp));
+           }
+           // date
+	   $csvoutput .= "," . pmpro_enclose(date("n/j/Y", $order->timestamp));
+           // number-of-distributions, invoice paid, quantity
+           $csvoutput .= ",1,,1";
+           // item-id, description
+           $csvoutput .= ",HCSUB" . $order->membership_id . "," . $level->name;
+           // gl-account, cash-account
+           $csvoutput .= ",20530,10105";
+         } else {
+	   //timestamp
+	   $csvoutput .= "," . pmpro_enclose(date(get_option("date_format"), $order->timestamp));
+	 }					
 			//any extra columns			
 			if(!empty($extra_columns))
 			{

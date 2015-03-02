@@ -878,7 +878,7 @@
 		}		
 		elseif($filter == "starting-from-order-id")
 		{
-			$condition = "id >= $starting_order_id AND status = 'success' ";
+			$condition = "o.id >= $starting_order_id AND o.status = 'success' ";
 		}		
 		
 		//string search

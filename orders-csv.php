@@ -336,7 +336,7 @@
            // item-id, description
            $csvoutput .= ",HCSUB" . $order->membership_id . "," . pmpro_enclose($level->name);
            // gl-account, cash-account
-           $csvoutput .= ",20530,10105";
+           $csvoutput .= ",20530,10200";
          } else {
 	   //timestamp
 	   $csvoutput .= "," . pmpro_enclose(date(get_option("date_format"), $order->timestamp));

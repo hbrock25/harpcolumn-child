@@ -185,3 +185,10 @@ function my_tribe_get_events_title($title) {
 
 add_filter('tribe_get_events_title', 'my_tribe_get_events_title');
 
+function tml_action_url( $url, $action, $instance ) {
+  if ( 'register' == $action )
+    $url = '/membership-account/subscribe/';
+  return $url;
+}
+
+add_filter( 'tml_action_url', 'tml_action_url', 10, 3 );

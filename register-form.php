@@ -5,10 +5,7 @@ Theme My Login will always look in your theme's directory first, before using th
 */
 ?>
 <div class="tml tml-register" id="theme-my-login<?php $template->the_instance(); ?>">
-	<?php $template->the_action_template_message( 'register' ); ?>
-	<?php $template->the_errors(); ?>
+  <h1>To register for Harp Column, please visit: <a href="/membership-account/subscribe/">The subscription page.</a></h1>
 	<?php $template->the_action_links( array( 'register' => false ) ); ?>
 
-  <h1>To register for Harp Column, please visit:</h1>
-  <p><a href="/membership-account/subscribe/">The subscription page.</a></p>
 </div>

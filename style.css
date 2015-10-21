@@ -76,6 +76,21 @@ div.column.one-6 { width: 16%; }
     color: #fff;
 }
 
+.tribe-events-event-image {
+    margin: 0;
+}
+.tribe-events-event-image .attachment-post-thumbnail {
+    clear: left;
+    float: left;
+    padding: 0 10px 10px 0;
+}
+
+.tribe-mini-calendar-event .list-info {
+    width: 90%;
+}
+
+
+
 .hc_post_thumbnail {
     clear: left;
     float: left;

@@ -192,3 +192,17 @@ function tml_action_url( $url, $action, $instance ) {
 }
 
 add_filter( 'tml_action_url', 'tml_action_url', 10, 3 );
+
+/* Always display the "register" link even though we don't 
+* allow native wordpress user registration
+*/
+
+function hc_add_back_register_link( $action_links, $args ) {
+  $action_links[] = array(
+      'title' => 'register',
+      'url'   => '/membership-account/subscribe/'
+                        );
+  return $action_links;
+}
+
+add_filter( 'tml_action_links', 'hc_add_back_register_link, 10, 2);

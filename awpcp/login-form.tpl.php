@@ -1,3 +1,5 @@
+<!-- This form belongs in /usr/share/nginx/harpcolumn/wp-content/plugins/another-wordpress-classifieds-plugin/frontend/templates -->
+
 <?php if ( awpcp_request_param( 'register', false ) ): ?>
 	<?php echo awpcp_print_message( __( 'Please check your email for the password and then return to log in.', 'AWPCP' ) ); ?>
 <?php elseif ( awpcp_request_param( 'reset', false ) ): ?>

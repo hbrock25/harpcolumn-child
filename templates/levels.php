@@ -14,6 +14,9 @@ if($pmpro_msg)
 	 $count = 0;
 	 foreach($pmpro_levels as $level)
 	 {
+	   if($level->id == 8) {
+	     continue;
+	   }
 	   if(isset($current_user->membership_level->ID))
 	     $current_level = ($current_user->membership_level->ID == $level->id);
 	   else

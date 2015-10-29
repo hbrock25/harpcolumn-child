@@ -247,12 +247,13 @@
 				global $discount_code;
 				if(!empty($discount_code)) {
                                 	$this->data["discount_code"] = "<p>" . __("Discount Code", "pmpro") . ": " . $discount_code . "</p>\n";
-                                        // A hack: if there is a discount code, we should send the
-					   paid email, not the free one.
+                                        // A hack: if there is a discount code,
+					// we should send the
+					// paid email, not the free one.
                                         $this->template ="checkout_paid";
-                                }
-				else
-					$this->data["discount_code"] = "";		
+                                } else {
+				  $this->data["discount_code"] = "";		
+				}
 			}						
 			else
 			{

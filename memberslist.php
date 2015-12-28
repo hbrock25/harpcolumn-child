@@ -673,7 +673,7 @@ if(!empty($_REQUEST['user_id'])) {
 	  elseif($l == "paid_print_domestic")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
 	  elseif($l == "exp_last_60_print")
-	  $sqlQuery .= " AND date(mu.enddate) < CURDATE() AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) and mu.status IS NOT NULL and mu2.status IS NOT NULL";
+	  $sqlQuery .= " AND date(mu.enddate) < CURDATE() AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
 
 	  elseif($l == "exp_next_month")
           // This is for renewal notices -- only do them for domestic and foreign non-agency subscribers
@@ -716,7 +716,7 @@ if(!empty($_REQUEST['user_id'])) {
 	  elseif($l == "paid_print_domestic")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
 	  elseif($l == "exp_last_60_print")
-	  $sqlQuery .= " AND date(mu.enddate) < CURDATE() AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH)) and mu.status IS NOT NULL and mu2.status IS NOT NULL";
+	  $sqlQuery .= " AND date(mu.enddate) < CURDATE() AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
 	  elseif($l == "exp_next_month")
 	  $sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) >= date(mu.enddate))";
 	  elseif($l == "exp_next_2_3")

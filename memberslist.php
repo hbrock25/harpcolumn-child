@@ -856,9 +856,6 @@ if(!empty($_REQUEST['user_id'])) {
 	    </table>
       </form>
       
-      <pre>
-        <?php echo $sqlquery; ?>
-      </pre>
       <?php
       echo pmpro_getPaginationString($pn, $totalrows, $limit, 1, get_admin_url(NULL, "/admin.php?page=pmpro-memberslist&s=" . urlencode($s)), "&l=$l&limit=$limit&pn=");
       }

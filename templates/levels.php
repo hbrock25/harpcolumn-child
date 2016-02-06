@@ -25,7 +25,7 @@ if($pmpro_msg)
         <?php if ($current_level) {  ?>
           <div class="current-level-text">Your current level</div>
         <?php } ?>
-	<h2><?php echo $current_level ? "<strong>{$level->name}: </strong>" : $level->name . ": "; ?>
+	<h2><?php echo $level->name . ": "; ?>
           <span style="color: #cd0074">
             <?php
 	          if(pmpro_isLevelFree($level)) 
@@ -41,23 +41,18 @@ if($pmpro_msg)
         <div class="pmpro_level-price-select">
 
 	  <p class="pmpro_level-select">
-	    <?php if(empty($current_user->membership_level->ID)) { ?>
+            <?php 
+            if ($current_level) { 
+              //if it's a one-time-payment level, offer a link to renew                               
+              if( !pmpro_isLevelRecurring($current_user->membership_level) && !pmpro_isLevelFree($level) ) { ?>
+              <a class="pmpro_btn pmpro_btn-select" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Renew', 'pmpro');?></a>
+              <?php
+              } else { ?>
+                <a class="pmpro_btn disabled"href="<?php echo pmpro_url("account")?>"><?php _e('Your&nbsp;Level', 'pmpro');?></a>
+              <?php } 
+              } else { ?>
 	      <a class="pmpro_btn pmpro_btn-select" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'Choose a level from levels page', 'pmpro');?></a>               
-	    <?php } elseif ( !$current_level ) { ?>                	
-	    <a class="pmpro_btn pmpro_btn-select"href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Select', 'Choose a level from levels page', 'pmpro');?></a>       			
-    <?php 
-    } elseif ($current_level) { 
-      //if it's a one-time-payment level, offer a link to renew                               
-      if(!pmpro_isLevelRecurring($current_user->membership_level))
-      {
-    ?>
-      <a class="pmpro_btn pmpro_btn-select" href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e('Renew', 'pmpro');?></a>
-      <?php
-      } else {
-      ?><a class="pmpro_btn disabled"href="<?php echo pmpro_url("account")?>"><?php _e('Your&nbsp;Level', 'pmpro');?></a>
-        <?php 
-      } 
-    } ?>
+	    <?php } ?>                	
 	  </p>
         </div>
         <div class="description">

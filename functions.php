@@ -169,15 +169,17 @@ function my_add_widgets($widgets) {
   return $widgets;
 }
 
-function my_tribe_event_featured_image($featured_image, $post_id, $size, $image_src) {
-  if (($size == 'thumbnail') && (! empty($image_src[0]))) {
-    return '<div class="tribe-events-event-image hc_post_thumbnail"><a href="' . tribe_get_event_link() . '" title="' . get_the_title( $post_id ) . '"><img src="' . $image_src[0] . '" title="' . get_the_title( $post_id ) . '" width="75" height="75" /></a></div>';
-  } else {
-    return $featured_image;
+function my_tribe_event_featured_image($featured_image, $post_id, $size) {
+  if ($size == 'thumbnail') {
+    $image_src = get_the_post_thumbnail( $post_id, $size );
+    if (! empty($image_src[0])) {
+      return '<div class="tribe-events-event-image hc_post_thumbnail"><a href="' . tribe_get_event_link() . '" title="' . get_the_title( $post_id ) . '"><img src="' . $image_src[0] . '" title="' . get_the_title( $post_id ) . '" width="75" height="75" /></a></div>';
+    }
   }
+  return $featured_image;
 }
 
-add_filter('tribe_event_featured_image', 'my_tribe_event_featured_image',10, 4);
+add_filter('tribe_event_featured_image', 'my_tribe_event_featured_image',10, 3);
 
 function my_tribe_get_events_title($title) {
 	return "Harp Concert Calendar";

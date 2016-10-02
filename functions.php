@@ -260,3 +260,14 @@ function pmpro_expiration_date_shortcode( $atts ) {
 
 add_shortcode('pmpro_expiration_date', 'pmpro_expiration_date_shortcode');
   
+add_filter('bbp_get_do_not_reply_address','my_bbp_no_reply_email');
+function no_reply_email(){
+    $email = 'noreply@harpcolumn.com';
+    return $email;
+}
+
+add_filter('bbp_subscription_to_email','my_bbp_subscription_to_email');
+function my_bbp_subscription_to_email(){
+    $email = 'noreply@harpcolumn.com'; // any email you want
+    return $email;
+}

@@ -11,18 +11,43 @@ License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
-function e20r_extend_enddate_by_duration( $enddate, $user_id, $level, $startdate ) {
+function e20r_extend_enddate_by_duration( $enddate, $user_id, $level_obj, $startdate ) {
 
-	// If the user has a current membership level
-	if ( false !== ( $current_level = pmpro_getMembershipLevelForUser( $user_id ) )
-	     && ! empty( $level->expiration_number ) && ! empty( $level->expiration_period )
-	) {
-
-		$enddate = date( 'Y-m-d', strtotime( "+ {$level->expiration_number} {$level->expiration_period}", $current_level->enddate ) );
+        //does this level expire? 
+	if(!empty($level_obj) && !empty($level_obj->expiration_number) )
+	{
+		//get the current enddate of their membership
+		$membership_level = pmpro_getMembershipLevelForUser($user_id);
+		$expiration_date = $membership_level->enddate;
+		
+		//calculate days left
+		$todays_date = current_time('timestamp');
+		$time_left = $expiration_date - $todays_date;
+		
+		//time left?
+		if($time_left > 0)
+		{
+			//convert to days and add to the expiration date (assumes expiration was 1 year)
+			$days_left = floor($time_left/(60*60*24));
+			
+			//figure out days based on period
+			if($level_obj->expiration_period == "Day")
+				$total_days = $days_left + $level_obj->expiration_number;
+			elseif($level_obj->expiration_period == "Week")
+				$total_days = $days_left + $level_obj->expiration_number * 7;
+			elseif($level_obj->expiration_period == "Month")
+				$total_days = $days_left + $level_obj->expiration_number * 30;
+			elseif($level_obj->expiration_period == "Year")
+				$total_days = $days_left + $level_obj->expiration_number * 365;
+			
+			//update the end date
+			$enddate = date("Y-m-d", strtotime("+ $total_days Days", $todays_date));
+		}
 	}
-
+		
 	return $enddate;
-}
+
+  }
 
 add_filter( 'pmpro_checkout_end_date', 'e20r_extend_enddate_by_duration', 10, 4 );
 

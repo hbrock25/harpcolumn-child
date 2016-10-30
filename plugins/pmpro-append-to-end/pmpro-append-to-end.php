@@ -27,16 +27,19 @@ function e20r_extend_enddate_by_duration( $enddate, $user_id, $level, $startdate
 add_filter( 'pmpro_checkout_end_date', 'e20r_extend_enddate_by_duration', 10, 4 );
 
 function harpcolumn_extend_enddate_pmprowoo($custom_level) {
+
+  $pmpro_level = pmpro_getLevel($custom_level->id);
+
   if ( false !== ( $current_level = pmpro_getMembershipLevelForUser( $custom_level->user_id ) )
-	     && ! empty( $custom_level->expiration_number ) && ! empty( $custom_level->expiration_period )
+	     && ! empty( $pmpro_level->expiration_number ) && ! empty( $pmpro_level->expiration_period )
        ) {
-    $custom_level->enddate = date( 'Y-m-d', strtotime( "+ {$custom_level->expiration_number} {$custom_level->expiration_period}", $current_level->enddate ) );
+    $custom_level['enddate'] = date( 'Y-m-d', strtotime( "+ {$pmpro_level->expiration_number} {$pmpro_level->expiration_period}", $current_level->enddate ) );
   }
 
   return $custom_level;
 
 }
 
-add_filter('pmpro_woo_checkout_level', 'harpcolumn_extend_enddate_pmprowoo', 10, 1);
+add_filter('pmprowoo_checkout_level', 'harpcolumn_extend_enddate_pmprowoo', 10, 1);
 
   

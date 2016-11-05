@@ -41,7 +41,7 @@ function pmpro_expiration_date_shortcode( $atts ) {
 
   //no user ID? bail
   if(!$user_id)
-		return '<strong><a href="/my-account">Login or Register</a></strong>';
+		return '<strong><a href="/my-account">Login</a> | <a href="/my-account">Register</a></strong>';
 
 	//get the user's level
 	$level = pmpro_getMembershipLevelForUser($user_id);

@@ -241,12 +241,14 @@ function pmpro_expiration_date_shortcode( $atts ) {
 	} elseif(!empty($a['user'])) {
 		$user = get_user_by('login', $a['user']);
 		$user_id = $user->ID;
-	} else {
-		$user_id = false;
 	}
+
+/* else {
+		$user_id = false;
+	} */
 	
 	//no user ID? bail
-	if($user_id == false)
+	if(!isset($user_id))
 		return '<a href="/my-account">Login or Register</a>';
 
 	//get the user's level

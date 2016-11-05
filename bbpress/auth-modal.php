@@ -73,7 +73,7 @@
                 <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6,7,8,9,10))): ?>
 		  <li>This month's <a href="/category/magazine/">Harp Column</a></li>
                 <?php else: ?>
-		  <li><a href="/woo-subscribe-test">Subscribe now</a> to receive full access to Harp Column online.</a></li>
+		  <li><a href="/subscribe">Subscribe now</a> to receive full access to Harp Column online.</a></li>
                 <?php endif; ?>
 	      </ol>
 	      

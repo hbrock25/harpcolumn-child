@@ -66,14 +66,14 @@
 	      <?php bbp_user_profile_link(bbp_get_current_user_id()); ?>
 	      
 	      <ol class="links">
-		<li><a href="/membership-account/">Your membership account</a> 
+		<li><a href="/my-account/">Your membership account</a> 
                   (change private information: your mailing address, your password)</li>
 		<li><a href="<?php bbp_user_profile_url(bbp_get_current_user_id()); ?>profile">Your community profile</a> 
                   (change public information: your bio, your harp information)</li>
-                <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6))): ?>
+                <?php if (pmpro_hasMembershipLevel(array(2,3,4,5,6,7,8,9,10))): ?>
 		  <li>This month's <a href="/category/magazine/">Harp Column</a></li>
                 <?php else: ?>
-		  <li><a href="/membership-account/subscribe/">Subscribe now</a> to receive full access to Harp Column online.</a></li>
+		  <li><a href="/woo-subscribe-test">Subscribe now</a> to receive full access to Harp Column online.</a></li>
                 <?php endif; ?>
 	      </ol>
 	      

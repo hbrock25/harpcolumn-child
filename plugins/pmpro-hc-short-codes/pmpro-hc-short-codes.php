@@ -47,9 +47,9 @@ function pmpro_expiration_date_shortcode( $atts ) {
 	$level = pmpro_getMembershipLevelForUser($user_id);
 
 	if(!empty($level) && !empty($level->enddate) && $level->id > 1)
-		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <strong><a href="/subscribe">Renew</a> | <a href="/my-account">My Account</a></strong> | <a href="/my-account/customer-logout">Logout</a></strong>';
+		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <strong><a href="/subscribe">Renew</a> | <a href="/my-account">My Account</a> | <a href="/my-account/customer-logout">Logout</a></strong>';
 	else
-		$content = '<strong><a href="/subscribe">Subscribe</a> | <a href="/my-account">My Account</a></strong> | <a href="/my-account/customer-logout">Logout</a></strong>';
+		$content = '<strong><a href="/subscribe">Subscribe</a> | <a href="/my-account">My Account</a> | <a href="/my-account/customer-logout">Logout</a></strong>';
 
 	return $content;
 }

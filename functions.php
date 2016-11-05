@@ -252,7 +252,7 @@ function pmpro_expiration_date_shortcode( $atts ) {
 	//get the user's level
 	$level = pmpro_getMembershipLevelForUser($user_id);
 
-	if(!empty($level) && !empty($level->enddate)) && $level->id > 1
+	if(!empty($level) && !empty($level->enddate) && $level->id > 1)
 		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <a href="/woo-subscribe-test">Renew here</a>';
 	else
 		$content = '<a href="/woo-subscribe-test">Subscribe here</a>';

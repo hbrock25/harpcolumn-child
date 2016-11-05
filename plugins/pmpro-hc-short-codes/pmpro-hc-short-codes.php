@@ -47,9 +47,9 @@ function pmpro_expiration_date_shortcode( $atts ) {
 	$level = pmpro_getMembershipLevelForUser($user_id);
 
 	if(!empty($level) && !empty($level->enddate) && $level->id > 1)
-		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <strong><a href="/woo-subscribe-test">Renew</a> | <a href="/my-account/customer-logout">Logout</a></strong>';
+		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <strong><a href="/subscribe">Renew</a> | <a href="/my-account">My Account</a></strong> | <a href="/my-account/customer-logout">Logout</a></strong>';
 	else
-		$content = '<strong><a href="/woo-subscribe-test">Subscribe</a> | <a href="/my-account/customer-logout">Logout</a></strong>';
+		$content = '<strong><a href="/subscribe">Subscribe</a> | <a href="/my-account">My Account</a></strong> | <a href="/my-account/customer-logout">Logout</a></strong>';
 
 	return $content;
 }
@@ -104,7 +104,7 @@ function pmpro_hc_shortcode_account($atts, $content=null, $code="")
 									<?php do_action("pmpro_member_action_links_before"); ?>
 									
 									<?php if( array_key_exists($level->id, $pmpro_levels) && pmpro_isLevelExpiringSoon( $level ) ) { ?>
-										<a href="/woo-subscribe-test"><?php _e("Renew", "pmpro");?></a>
+										<a href="/subscribe"><?php _e("Renew", "pmpro");?></a>
 									<?php } ?>
 
 									<a href="<?php echo pmpro_url("cancel", "?levelstocancel=" . $level->id)?>"><?php _e("Cancel", "pmpro");?></a>

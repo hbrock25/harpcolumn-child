@@ -84,7 +84,7 @@ function pmpro_hc_shortcode_account($atts, $content=null, $code="")
 
 	              <div id="pmpro_account-membership" class="pmpro_box">
 				
-				<h1 class="main-heading"><?php _e("My Subscription", "pmpro");?></h1>
+				<h2><?php _e("My Subscription", "pmpro");?></h2>
 				<table width="100%" cellpadding="0" cellspacing="0" border="0">
 					<thead>
 						<tr>

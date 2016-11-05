@@ -222,51 +222,6 @@ add_filter( 'tml_action_links', 'hc_add_back_register_link', 10, 2);
 	If the user is logged out or doesn't have an expiration date, then --- is shown.
 */
 
-function pmpro_expiration_date_shortcode( $atts ) {
-
-  //make sure PMPro is active
-	if(!function_exists('pmpro_getMembershipLevelForUser'))
-		return;
-	
-  //get attributes
-	$a = shortcode_atts( array(
-	    'user' => '',
-	), $atts );
-	
-	//find user
-	if(!empty($a['user']) && is_numeric($a['user'])) {
-		$user_id = $a['user'];
-	} elseif(!empty($a['user']) && strpos($a['user'], '@') !== false) {
-		$user = get_user_by('email', $a['user']);
-		$user_id = $user->ID;
-	} elseif(!empty($a['user'])) {
-		$user = get_user_by('login', $a['user']);
-		$user_id = $user->ID;
-	} else {
-		$user_id = false;
-	}
-
-  //use globals if no values supplied
-  if(!$user_id)
-    $user_id = get_current_user_id();
-
-  //no user ID? bail
-  if(!$user_id)
-		return '<strong><a href="/my-account">Login or Register</a></strong>';
-
-	//get the user's level
-	$level = pmpro_getMembershipLevelForUser($user_id);
-
-	if(!empty($level) && !empty($level->enddate) && $level->id > 1)
-		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <strong><a href="/woo-subscribe-test">Renew</a> | <a href="/my-account/customer-logout">Logout</a></strong>';
-	else
-		$content = '<strong><a href="/woo-subscribe-test">Subscribe</a> | <a href="/my-account/customer-logout">Logout</a></strong>';
-
-	return $content;
-}
-
-add_shortcode('pmpro_expiration_date', 'pmpro_expiration_date_shortcode');
-  
 add_filter('bbp_get_do_not_reply_address','my_bbp_no_reply_email');
 function no_reply_email(){
     $email = 'noreply@harpcolumn.com';

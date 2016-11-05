@@ -40,7 +40,7 @@ Customize the pmpro membership template
 */
 
 //use custom levels template
-function pmprodiv_pmpro_pages_shortcode_levels($content)
+/* function pmprodiv_pmpro_pages_shortcode_levels($content)
 {
 	ob_start();
 	include(get_stylesheet_directory() . '/templates/levels.php' );
@@ -49,11 +49,11 @@ function pmprodiv_pmpro_pages_shortcode_levels($content)
 	return $temp_content;
 }
 add_filter("pmpro_pages_shortcode_levels", "pmprodiv_pmpro_pages_shortcode_levels");
-
+*/
 /*
 	When users cancel (are changed to membership level 0) we give them another "cancelled" level. Can be used to downgrade someone to a free level when they cancel.
 */
-function my_pmpro_after_change_membership_level($level_id, $user_id)
+/*function my_pmpro_after_change_membership_level($level_id, $user_id)
 {
 	if($level_id == 0)
 	{
@@ -62,7 +62,7 @@ function my_pmpro_after_change_membership_level($level_id, $user_id)
 	}
 }
 add_action("pmpro_after_change_membership_level", "my_pmpro_after_change_membership_level", 10, 2);
-
+*/
 function dae_pmpro_email_recipient($recipient, $email)
 {
 	//if($email->template == "invoice")			//use this to check for a certain template
@@ -117,7 +117,7 @@ add_filter("pmpro_default_country", "hc_pmpro_default_country");
 
 // un-require CVV, phone
 
-function hc_pmpro_required_billing_fields($fields)
+/*function hc_pmpro_required_billing_fields($fields)
 {
 	//remove state and zip
 	unset($fields['bphone']);
@@ -127,7 +127,7 @@ function hc_pmpro_required_billing_fields($fields)
 	return $fields;
 }
 add_filter("pmpro_required_billing_fields", "hc_pmpro_required_billing_fields");
-
+*/
 // Fix bug in my import -- US is "USA"
 
 function hc_pmpro_countries($countries)
@@ -140,13 +140,14 @@ add_filter("pmpro_countries", "hc_pmpro_countries");
 
 // add renew link to bottom of membership account page
 
-function hc_pmpro_member_links_top()
+/*function hc_pmpro_member_links_top()
 {
   if (pmpro_hasMembershipLevel(array(2,3,4,5,6,7,8,9,10))) 
   ?><li><a href="/membership-account/subscribe/">Renew your subscription</a></li><li><a href="/membership-account/your-profile/">Change your print magazine mailing address</a></li><?php
 }                                                 
 
 add_action("pmpro_member_links_top", "hc_pmpro_member_links_top");
+*/
 
 add_action('frm_validate_entry', 'validate_my_form', 20, 2);
 function validate_my_form($errors, $values){
@@ -164,10 +165,11 @@ function validate_my_form($errors, $values){
 
 // add_filter('siteorigin_panels_widgets', 'my_add_widgets', 20);
 
-function my_add_widgets($widgets) {
+/*function my_add_widgets($widgets) {
   $widgets['events-list-widget'] = array('class' => 'EM_Widget', 'name' => 'Events List Widget');
   return $widgets;
 }
+*/
 
 function my_tribe_event_featured_image($featured_image, $post_id, $size) {
   if ($size == 'thumbnail') {
@@ -271,3 +273,14 @@ function my_bbp_subscription_to_email(){
     $email = 'noreply@harpcolumn.com'; // any email you want
     return $email;
 }
+
+/**
+ * Hide admin bar from certain user roles
+ */
+function hide_admin_bar( $show ) {
+	if ( ! current_user_can( 'administrator' ) ) :
+		return false;
+	endif;
+	return $show;
+}
+add_filter( 'show_admin_bar', 'hide_admin_bar' );

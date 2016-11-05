@@ -223,7 +223,6 @@ add_filter( 'tml_action_links', 'hc_add_back_register_link', 10, 2);
 */
 
 function pmpro_expiration_date_shortcode( $atts ) {
-  global $current_user;
 
   //make sure PMPro is active
 	if(!function_exists('pmpro_getMembershipLevelForUser'))
@@ -249,10 +248,10 @@ function pmpro_expiration_date_shortcode( $atts ) {
 
   //use globals if no values supplied
   if(!$user_id)
-    $user_id = $current_user->ID;
+    $user_id = get_current_user_id();
 
-	//no user ID? bail
-	if(!($user_id))
+  //no user ID? bail
+  if(!$user_id)
 		return 'User_ID is ' .  $user_id . '. <a href="/my-account">Login or Register</a>';
 
 	//get the user's level

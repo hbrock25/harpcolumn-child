@@ -104,7 +104,7 @@ function pmpro_hc_shortcode_account($atts, $content=null, $code="")
 									<?php do_action("pmpro_member_action_links_before"); ?>
 									
 									<?php if( array_key_exists($level->id, $pmpro_levels) && pmpro_isLevelExpiringSoon( $level ) ) { ?>
-										<a href="<?php echo pmpro_url("checkout", "?level=" . $level->id, "https")?>"><?php _e("Renew", "pmpro");?></a>
+										<a href="/woo-subscribe-test"><?php _e("Renew", "pmpro");?></a>
 									<?php } ?>
 
 									<a href="<?php echo pmpro_url("cancel", "?levelstocancel=" . $level->id)?>"><?php _e("Cancel", "pmpro");?></a>

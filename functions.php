@@ -223,11 +223,13 @@ add_filter( 'tml_action_links', 'hc_add_back_register_link', 10, 2);
 */
 
 function pmpro_expiration_date_shortcode( $atts ) {
-	//make sure PMPro is active
+  global $current_user;
+
+  //make sure PMPro is active
 	if(!function_exists('pmpro_getMembershipLevelForUser'))
 		return;
 	
-	//get attributes
+  //get attributes
 	$a = shortcode_atts( array(
 	    'user' => '',
 	), $atts );
@@ -241,14 +243,16 @@ function pmpro_expiration_date_shortcode( $atts ) {
 	} elseif(!empty($a['user'])) {
 		$user = get_user_by('login', $a['user']);
 		$user_id = $user->ID;
+	} else {
+		$user_id = false;
 	}
 
-/* else {
-		$user_id = false;
-	} */
-	
+  //use globals if no values supplied
+  if(!$user_id)
+    $user_id = $current_user->ID;
+
 	//no user ID? bail
-	if(!isset($user_id))
+	if(!($user_id))
 		return 'User_ID is ' .  $user_id . '. <a href="/my-account">Login or Register</a>';
 
 	//get the user's level

@@ -47,7 +47,7 @@
 	  
 	  
 	  <div class="bbp-register-info"><?php _e("Don't have an account?", 'bbPress', 'bunyad'); ?>
-	    <a href="/membership-account/"><?php _e('Register Now!', 'bbPress', 'bunyad'); ?></a>
+	    <a href="/my-account/"><?php _e('Register Now!', 'bbPress', 'bunyad'); ?></a>
             <br />
             Old harpcolumn.com site users: use the <a href="<?php echo wp_lostpassword_url(); ?>" 
                    title="<?php esc_attr_e('Lost password?', 'bunyad'); ?>" 

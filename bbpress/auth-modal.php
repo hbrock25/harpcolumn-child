@@ -48,11 +48,6 @@
 	  
 	  <div class="bbp-register-info"><?php _e("Don't have an account?", 'bbPress', 'bunyad'); ?>
 	    <a href="/my-account/"><?php _e('Register Now!', 'bbPress', 'bunyad'); ?></a>
-            <br />
-            Old harpcolumn.com site users: use the <a href="<?php echo wp_lostpassword_url(); ?>" 
-                   title="<?php esc_attr_e('Lost password?', 'bunyad'); ?>" 
-                   class="bbp-lostpass-link lost-pass-modal"><?php _e('Lost password?', 'bunyad'); ?></a> form
-                   to create a password on the new site.
 	  </div>
 	  
 	  <?php elseif (class_exists('bbpress')): ?>

@@ -122,21 +122,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</p>
 
 			<!-- Country -->
-			<?php
-			$countries_obj   = new WC_Countries();
-			$countries   = $countries_obj->__get('countries'); ?>
-			
 			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
 
 
 			    <?php
 			    woocommerce_form_field('my_country_field', array(
-			    'type'       => 'select',
-			    'class'      => array( 'select2-drop' ),
+			    'type'       => 'country',
+			    'class'      => array( 'chzn-drop' ),
 			    'label'      => __('Country'),
 			    'required'   => true,
-			    'placeholder'    => __('Choose a Country'),
-			    'options'    => $countries
+			    'placeholder'    => __('Choose a Country')
 			    )
 			    ); ?>
 			</p>
@@ -151,7 +146,39 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
 			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_address_2" id="reg_address_2" value="<?php if ( ! empty( $_POST['billing_address_2'] ) ) echo esc_attr( $_POST['billing_address_2'] ); ?>" />
 			</p>
-			
+
+			<!-- city -->
+			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+			    <label for="reg_city"><?php _e( 'Address', 'woocommerce' ); ?> <span class="required">*</span></label>
+			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_city" id="reg_city" value="<?php if ( ! empty( $_POST['billing_city'] ) ) echo esc_attr( $_POST['billing_city'] ); ?>" />
+			</p>
+
+			<!-- State -->
+			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+
+
+			    <?php
+			    woocommerce_form_field('my_state_field', array(
+				'type'       => 'state',
+				'class'      => array( 'chzn-drop' ),
+				'label'      => __('State'),
+				'required'   => true,
+				'placeholder'    => __('Choose a State')
+			    )
+			    ); ?>
+			</p>
+
+
+
+
+
+
+
+
+
+
+
+
 			
 <!-- HC added form fields end here -->			
 					

@@ -247,7 +247,8 @@ add_filter( 'show_admin_bar', 'hide_admin_bar' );
 
 /**
  * This is the validation and storage code for the extra billing address fields
- * we retrieve on registration.
+ * we retrieve on registration. This code will break registration if the login
+ * template does not submit the extra billing fields (I think).
  */
 
 /**
@@ -293,11 +294,72 @@ function woo_hc_validate_extra_register_fields( $username, $email, $validation_e
 
   }
 
-  if ( isset( $_POST['billing_zip'] ) && empty( $_POST['billing_zip'] ) ) {
+  if ( isset( $_POST['billing_postcode'] ) && empty( $_POST['billing_postcode'] ) ) {
 
-    $validation_errors->add( 'billing_zip_error', __( '<strong>Error</strong>: Please enter a postal code', 'woocommerce' ) );
+    $validation_errors->add( 'billing_postcode_error', __( '<strong>Error</strong>: Please enter a postal code', 'woocommerce' ) );
 
   }
 }
 
 add_action( 'woocommerce_register_post', 'woo_hc_validate_extra_register_fields', 10, 3 );
+
+
+ /**
+* Save the extra register fields.
+*
+* @paramint $customer_id Current customer ID.
+*
+* @return void
+*/
+function woo_hc_save_extra_register_fields( $customer_id ) {
+       if ( isset( $_POST['billing_first_name'] ) ) {
+              // WordPress default first name field.
+              update_user_meta( $customer_id, 'first_name', sanitize_text_field( $_POST['billing_first_name'] ) );
+              // WooCommerce billing first name.
+              update_user_meta( $customer_id, 'billing_first_name', sanitize_text_field( $_POST['billing_first_name'] ) );
+       }
+       if ( isset( $_POST['billing_last_name'] ) ) {
+              // WordPress default last name field.
+              update_user_meta( $customer_id, 'last_name', sanitize_text_field( $_POST['billing_last_name'] ) );
+              // WooCommerce billing last name.
+              update_user_meta( $customer_id, 'billing_last_name', sanitize_text_field( $_POST['billing_last_name'] ) );
+       }
+
+       // Country
+       if ( isset( $_POST['billing_country'] ) ) {
+              // WooCommerce billing phone
+              update_user_meta( $customer_id, 'billing_country', sanitize_text_field( $_POST['billing_country'] ) );
+       }
+
+       // Address_1
+       if ( isset( $_POST['billing_address_1'] ) ) {
+              // WooCommerce billing address_1
+              update_user_meta( $customer_id, 'billing_address_1', sanitize_text_field( $_POST['billing_address_1'] ) );
+       }
+
+       // Address_2
+       if ( isset( $_POST['billing_address_2'] ) ) {
+              // WooCommerce billing address_2
+              update_user_meta( $customer_id, 'billing_address_2', sanitize_text_field( $_POST['billing_address_2'] ) );
+       }
+
+       // City
+       if ( isset( $_POST['billing_city'] ) ) {
+              // WooCommerce billing city
+              update_user_meta( $customer_id, 'billing_city', sanitize_text_field( $_POST['billing_city'] ) );
+       }
+
+       // State/County
+       if ( isset( $_POST['billing_state'] ) ) {
+              // WooCommerce billing state
+              update_user_meta( $customer_id, 'billing_state', sanitize_text_field( $_POST['billing_state'] ) );
+       }
+
+       // Postcode
+       if ( isset( $_POST['billing_postcode'] ) ) {
+              // WooCommerce billing postcode
+              update_user_meta( $customer_id, 'billing_postcode', sanitize_text_field( $_POST['billing_postcode'] ) );
+       }
+
+}
+add_action( 'woocommerce_created_customer', 'woo_hc_save_extra_register_fields' );

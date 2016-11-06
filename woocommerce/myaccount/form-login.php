@@ -126,7 +126,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 			    <?php
-			    woocommerce_form_field('my_country_field', array(
+			    woocommerce_form_field('billing_country', array(
 			    'type'       => 'country',
 			    'label'      => __('Country'),
 			    'required'   => true,
@@ -157,7 +157,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 			    <?php
-			    woocommerce_form_field('my_state_field', array(
+			    woocommerce_form_field('billing_state', array(
 				'type'       => 'state',
 				'label'      => __('State'),
 				'required'   => true,

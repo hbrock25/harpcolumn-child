@@ -106,25 +106,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- First name -->
 			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
 			    <label for="reg_first_name"><?php _e( 'First Name', 'woocommerce' ); ?> <span class="required">*</span></label>
-			    <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_first_name" id="reg_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) echo esc_attr( $_POST['billing_first_name'] ); ?>" />
+			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_first_name" id="reg_first_name" value="<?php if ( ! empty( $_POST['billing_first_name'] ) ) echo esc_attr( $_POST['billing_first_name'] ); ?>" />
 			</p>
 
 			<!-- Last name -->
 			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
 			    <label for="reg_last_name"><?php _e( 'Last Name', 'woocommerce' ); ?> <span class="required">*</span></label>
-			    <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_last_name" id="reg_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) echo esc_attr( $_POST['billing_last_name'] ); ?>" />
+			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_last_name" id="reg_last_name" value="<?php if ( ! empty( $_POST['billing_last_name'] ) ) echo esc_attr( $_POST['billing_last_name'] ); ?>" />
 			</p>
 			
 			<!-- Company -->
 			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-			    <label for="reg_company"><?php _e( 'Company', 'woocommerce' ); ?> <span class="required">*</span></label>
-			    <input type="email" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_company" id="reg_company" value="<?php if ( ! empty( $_POST['billing_company'] ) ) echo esc_attr( $_POST['billing_company'] ); ?>" />
+			    <label for="reg_company"><?php _e( 'Company', 'woocommerce' ); ?></label>
+			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_company" id="reg_company" value="<?php if ( ! empty( $_POST['billing_company'] ) ) echo esc_attr( $_POST['billing_company'] ); ?>" />
 			</p>
 
 			<!-- Country -->
 			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-
-
 			    <?php
 			    woocommerce_form_field('billing_country', array(
 			    'type'       => 'country',
@@ -171,7 +169,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <label for="reg_zip"><?php _e( 'Zip', 'woocommerce' ); ?> <span class="required">*</span></label>
 			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_zip" id="reg_zip" value="<?php if ( ! empty( $_POST['billing_zip'] ) ) echo esc_attr( $_POST['billing_zip'] ); ?>" />
 			</p>
-
 			
 <!-- HC added form fields end here -->			
 					

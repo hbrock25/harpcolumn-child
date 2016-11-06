@@ -275,7 +275,6 @@ function woo_hc_validate_extra_register_fields( $username, $email, $validation_e
 
   }
 
-  country address_1 city zip
   if ( isset( $_POST['billing_country'] ) && empty( $_POST['billing_country'] ) ) {
 
     $validation_errors->add( 'billing_country_error', __( '<strong>Error</strong>: Please choose a country', 'woocommerce' ) );

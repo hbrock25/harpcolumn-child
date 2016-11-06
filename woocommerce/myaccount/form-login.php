@@ -167,15 +167,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</p>
 
 
-
-
-
-
-
-
-
-
-
+			<!-- zip -->
+			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
+			    <label for="reg_zip"><?php _e( 'Zip', 'woocommerce' ); ?> <span class="required">*</span></label>
+			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_zip" id="reg_zip" value="<?php if ( ! empty( $_POST['billing_zip'] ) ) echo esc_attr( $_POST['billing_zip'] ); ?>" />
+			</p>
 
 			
 <!-- HC added form fields end here -->			

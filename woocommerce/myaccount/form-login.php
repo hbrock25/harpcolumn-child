@@ -128,7 +128,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <?php
 			    woocommerce_form_field('my_country_field', array(
 			    'type'       => 'country',
-			    'class'      => array( 'chzn-drop' ),
+			    'class'      => array( 'select2' ),
 			    'label'      => __('Country'),
 			    'required'   => true,
 			    'placeholder'    => __('Choose a Country')
@@ -149,7 +149,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<!-- city -->
 			<p class="woocommerce-FormRow woocommerce-FormRow--wide form-row form-row-wide">
-			    <label for="reg_city"><?php _e( 'Address', 'woocommerce' ); ?> <span class="required">*</span></label>
+			    <label for="reg_city"><?php _e( 'City', 'woocommerce' ); ?> <span class="required">*</span></label>
 			    <input type="text" class="woocommerce-Input woocommerce-Input--text input-text" name="billing_city" id="reg_city" value="<?php if ( ! empty( $_POST['billing_city'] ) ) echo esc_attr( $_POST['billing_city'] ); ?>" />
 			</p>
 
@@ -160,7 +160,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <?php
 			    woocommerce_form_field('my_state_field', array(
 				'type'       => 'state',
-				'class'      => array( 'chzn-drop' ),
+				'class'      => array( 'select2' ),
 				'label'      => __('State'),
 				'required'   => true,
 				'placeholder'    => __('Choose a State')

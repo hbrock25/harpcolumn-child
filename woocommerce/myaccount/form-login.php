@@ -159,8 +159,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <?php
 			    woocommerce_form_field('billing_state', array(
 				'type'       => 'state',
-				'label'      => __('State'),
-				'required'   => true,
+				'label'      => __('State -- leave blank outside US'),
 				'placeholder'    => __('Choose a State')
 			    )
 			    ); ?>

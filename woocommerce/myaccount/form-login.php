@@ -128,7 +128,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <?php
 			    woocommerce_form_field('my_country_field', array(
 			    'type'       => 'country',
-			    'class'      => array( 'select2' ),
 			    'label'      => __('Country'),
 			    'required'   => true,
 			    'placeholder'    => __('Choose a Country')
@@ -160,7 +159,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <?php
 			    woocommerce_form_field('my_state_field', array(
 				'type'       => 'state',
-				'class'      => array( 'select2' ),
 				'label'      => __('State'),
 				'required'   => true,
 				'placeholder'    => __('Choose a State')

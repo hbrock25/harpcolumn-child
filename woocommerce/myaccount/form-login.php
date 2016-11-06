@@ -183,6 +183,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<input type="submit" class="woocommerce-Button button" name="register" value="<?php esc_attr_e( 'Register', 'woocommerce' ); ?>" />
 			</p>
 
+			<p class="small" ><em>By creating an account on harpcolumn.com, you agree to our <a href="/terms-and-conditions">Terms and Conditions.</a></em></p>
+
 			<?php do_action( 'woocommerce_register_form_end' ); ?>
 
 		</form>

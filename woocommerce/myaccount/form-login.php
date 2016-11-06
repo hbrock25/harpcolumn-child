@@ -132,8 +132,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			    <?php
 			    woocommerce_form_field('my_country_field', array(
 			    'type'       => 'select',
-			    'class'      => array( 'chzn-drop' ),
+			    'class'      => array( 'select2-drop' ),
 			    'label'      => __('Country'),
+			    'required'   => true,
 			    'placeholder'    => __('Choose a Country'),
 			    'options'    => $countries
 			    )

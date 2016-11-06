@@ -244,3 +244,61 @@ function hide_admin_bar( $show ) {
 	return $show;
 }
 add_filter( 'show_admin_bar', 'hide_admin_bar' );
+
+/**
+ * This is the validation and storage code for the extra billing address fields
+ * we retrieve on registration.
+ */
+
+/**
+* Validate the extra register fields.
+*
+* @param string $username Current username.
+* @param string $email Current email.
+* @param object $validation_errorsWP_Error object.
+*
+* @return void
+
+*/
+
+function woo_hc_validate_extra_register_fields( $username, $email, $validation_errors ) {
+
+  if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
+
+    $validation_errors->add( 'billing_first_name_error', __( '<strong>Error</strong>: First name is required', 'woocommerce' ) );
+
+  }
+
+  if ( isset( $_POST['billing_last_name'] ) && empty( $_POST['billing_last_name'] ) ) {
+
+    $validation_errors->add( 'billing_last_name_error', __( '<strong>Error</strong>: Last name is required', 'woocommerce' ) );
+
+  }
+
+  country address_1 city zip
+  if ( isset( $_POST['billing_country'] ) && empty( $_POST['billing_country'] ) ) {
+
+    $validation_errors->add( 'billing_country_error', __( '<strong>Error</strong>: Please choose a country', 'woocommerce' ) );
+
+  }
+
+  if ( isset( $_POST['billing_address_1'] ) && empty( $_POST['billing_address_1'] ) ) {
+
+    $validation_errors->add( 'billing_address_1_error', __( '<strong>Error</strong>: Please enter a street address', 'woocommerce' ) );
+
+  }
+
+  if ( isset( $_POST['billing_city'] ) && empty( $_POST['billing_city'] ) ) {
+
+    $validation_errors->add( 'billing_city_error', __( '<strong>Error</strong>: Please choose a city', 'woocommerce' ) );
+
+  }
+
+  if ( isset( $_POST['billing_zip'] ) && empty( $_POST['billing_zip'] ) ) {
+
+    $validation_errors->add( 'billing_zip_error', __( '<strong>Error</strong>: Please enter a postal code', 'woocommerce' ) );
+
+  }
+}
+
+add_action( 'woocommerce_register_post', 'woo_hc_validate_extra_register_fields', 10, 3 );

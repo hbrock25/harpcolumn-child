@@ -325,6 +325,12 @@ function woo_hc_save_extra_register_fields( $customer_id ) {
               update_user_meta( $customer_id, 'billing_last_name', sanitize_text_field( $_POST['billing_last_name'] ) );
        }
 
+       // Company
+       if ( isset( $_POST['billing_company'] ) ) {
+              // WooCommerce billing phone
+              update_user_meta( $customer_id, 'billing_company', sanitize_text_field( $_POST['billing_company'] ) );
+       }
+
        // Country
        if ( isset( $_POST['billing_country'] ) ) {
               // WooCommerce billing phone

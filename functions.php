@@ -378,7 +378,7 @@ add_action( 'woocommerce_created_customer', 'woo_hc_save_extra_register_fields' 
 function my_page_meta_wrapper()
 {
 	//duplicate this row for each CPT
-	add_meta_box('pmpro_page_meta', 'Require Membership', 'pmpro_page_meta', 'media', 'side');	
+	add_meta_box('pmpro_page_meta', 'Require Membership', 'pmpro_page_meta', 'attachment', 'side');	
 }
 
 function pmpro_cpt_init()

@@ -104,9 +104,6 @@ if($id != NULL) {
 	    <li>Status: <?php echo $last_order->status?></li>
     </ul>
 
-    <p>
-	View user's WooCommerce <a href="/wp-admin/edit.php?s=<?php echo $sub->user_email ?>&post_status=all&post_type=shop_order">orders</a>
-    </p>
 <?php 
 } else { 
 ?>
@@ -115,6 +112,10 @@ if($id != NULL) {
 <?php
 
 }
+<p>
+View user's WooCommerce <a href="/wp-admin/edit.php?s=<?php echo $sub->user_email ?>&post_status=all&post_type=shop_order">orders</a>
+</p>
+
 } else {
 
   // list view

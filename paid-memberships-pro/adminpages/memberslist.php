@@ -812,7 +812,7 @@ if(!empty($_REQUEST['user_id'])) {
 		    <td>
 			<?php
 			
-			echo WC_Countries::get_formatted_address(
+			echo $woocommerce->countries->get_formatted_address(
 			    array(
 				'first_name' => $theuser->billing_first_name,
 				'last_name' => $theuser->billing_last_name,

@@ -104,17 +104,16 @@ if($id != NULL) {
 	    <li>Status: <?php echo $last_order->status?></li>
     </ul>
 
-<?php 
-} else { 
-?>
+<?php } else { ?>
     <h3>No orders for this user</h3>
     
-<?php
+<?php } ?>
 
-}
 <p>
 View user's WooCommerce <a href="/wp-admin/edit.php?s=<?php echo $sub->user_email ?>&post_status=all&post_type=shop_order">orders</a>
 </p>
+
+<?php
 
 } else {
 

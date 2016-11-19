@@ -811,7 +811,7 @@ if(!empty($_REQUEST['user_id'])) {
 		    <?php do_action("pmpro_memberslist_extra_cols_body", $theuser);?>
 		    <td>
 		      <?php
-		      echo pmpro_formatAddress(trim($theuser->pmpro_bfirstname . " " . $theuser->pmpro_blastname), $theuser->pmpro_baddress1, $theuser->pmpro_baddress2, $theuser->pmpro_bcity, $theuser->pmpro_bstate, $theuser->pmpro_bzipcode, $theuser->pmpro_bcountry, $theuser->pmpro_bphone);
+		      echo pmpro_formatAddress(trim($theuser->billing_first_name . " " . $theuser->billing_last_name), $theuser->billing_address_1, $theuser->billing_address_2, $theuser->billing_city, $theuser->billing_state, $theuser->billing_postcode, $theuser->billing_country, $theuser->billing_phone);
 		      ?>                
 		    </td>
 		    <td><?php echo $auser->membership?></td>  

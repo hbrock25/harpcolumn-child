@@ -771,6 +771,7 @@ if(!empty($_REQUEST['user_id'])) {
 		  <th><?php _e('Email', 'pmpro');?></th>
 		  <?php do_action("pmpro_memberslist_extra_cols_header", $theusers);?>
 		  <th><?php _e('Billing Address', 'pmpro');?></th>
+		  <th><?php _e('Shipping Address', 'pmpro');?></th>  
 		  <th><?php _e('Membership', 'pmpro');?></th>  
 		  <th><?php _e('Fee', 'pmpro');?></th>
 		  <th><?php _e('Joined', 'pmpro');?></th>
@@ -824,6 +825,22 @@ if(!empty($_REQUEST['user_id'])) {
 				'postcode' => $theuser->billing_postcode,
 				'country' => $theuser->billing_country));
 		      ?>                
+		    </td>
+		    <td>
+			<?php
+			
+			echo $woocommerce->countries->get_formatted_address(
+			    array(
+				'first_name' => $theuser->shipping_first_name,
+				'last_name' => $theuser->shipping_last_name,
+				'company' => $theuser->shipping_company,
+				'address_1' => $theuser->shipping_address_1,
+				'address_2' => $theuser->shipping_address_2,
+				'city' => $theuser->shipping_city,
+				'state' => $theuser->shipping_state,
+				'postcode' => $theuser->shipping_postcode,
+				'country' => $theuser->shipping_country));
+			?>                
 		    </td>
 		    <td><?php echo $auser->membership?></td>  
 		    <td>                    

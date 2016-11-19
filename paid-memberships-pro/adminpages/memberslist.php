@@ -302,7 +302,7 @@ if($id != NULL) {
 			    _e('Expires', 'pmpro');
 			?>
 		    </th>
-		    <th><?php _e('Action', 'pmpro');?></th>		
+		    <th><?php _e('Orders', 'pmpro');?></th>		
 		</tr>
 	    </thead>
 	    <tbody id="users" class="list:user user-list">  
@@ -384,7 +384,8 @@ if($id != NULL) {
 			    ?>
 			</td>
 			<td>
-			    <a href="admin.php?page=pmpro-memberslist&user_id=<?php echo $theuser->ID ?>"><?php _e('view', 'pmpro');?></a>
+			    <a href="admin.php?page=pmpro-memberslist&user_id=<?php echo $theuser->ID ?>">pmpro</a> |
+			    <a href="/wp-admin/edit.php?s=<?php echo $sub->user_email ?>&post_status=all&post_type=shop_order">woo</a>
 			</td>
 		    </tr>
 		<?php

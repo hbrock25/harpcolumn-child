@@ -152,7 +152,7 @@
 	else
 		header("Content-Disposition: attachment; filename=members_list.csv");
 	
-	$heading = "id,username,firstname,lastname,email,billing firstname,billing lastname,address1,address2,city,state,zipcode,country,phone,membership,initial payment,fee,term,discount_code_id,discount_code,joined";
+$heading = "id,username,firstname,lastname,email,billing firstname,billing lastname,company,address1,address2,city,state,zipcode,country,phone,shipping firstname,shipping lastname,shipping company,shipping address1,shipping address2,shipping city,shipping state,shipping zipcode,shipping country,membership,initial payment,fee,term,discount_code_id,discount_code,joined";
 	
 	if($l == "oldmembers")
 		$heading .= ",ended";
@@ -169,15 +169,25 @@
 		array("metavalues", "first_name"),
 		array("metavalues", "last_name"),
 		array("theuser", "user_email"),
-		array("metavalues", "pmpro_bfirstname"),
-		array("metavalues", "pmpro_blastname"),
-		array("metavalues", "pmpro_baddress1"),
-		array("metavalues", "pmpro_baddress2"),
-		array("metavalues", "pmpro_bcity"),
-		array("metavalues", "pmpro_bstate"),
-		array("metavalues", "pmpro_bzipcode"),
-		array("metavalues", "pmpro_bcountry"),
-		array("metavalues", "pmpro_bphone"),
+		array("metavalues", "billing_first_name"),
+		array("metavalues", "billing_last_name"),
+		array("metavalues", "billing_company"),
+		array("metavalues", "billing_address_1"),
+		array("metavalues", "billing_address_2"),
+		array("metavalues", "billing_city"),
+		array("metavalues", "billing_state"),
+		array("metavalues", "billing_postcode"),
+		array("metavalues", "billing_country"),
+		array("metavalues", "shipping_phone"),
+		array("metavalues", "shipping_first_name"),
+		array("metavalues", "shipping_last_name"),
+		array("metavalues", "shipping_company"),
+		array("metavalues", "shipping_address_1"),
+		array("metavalues", "shipping_address_2"),
+		array("metavalues", "shipping_city"),
+		array("metavalues", "shipping_state"),
+		array("metavalues", "shipping_postcode"),
+		array("metavalues", "shipping_country"),
 		array("theuser", "membership"),
 		array("theuser", "initial_payment"),
 		array("theuser", "billing_amount"),

@@ -370,22 +370,3 @@ function woo_hc_save_extra_register_fields( $customer_id ) {
 }
 add_action( 'woocommerce_created_customer', 'woo_hc_save_extra_register_fields' );
 
-/* Code snippet to hopefully add PMPro meta box to Media type */
-
-
-/*	Add the PMPro meta box to a CPT */
-
-function my_page_meta_wrapper()
-{
-	//duplicate this row for each CPT
-	add_meta_box('pmpro_page_meta', 'Require Membership', 'pmpro_page_meta', 'attachment', 'side');	
-}
-
-function pmpro_cpt_init()
-{
-	if (is_admin())
-	{
-		add_action('admin_menu', 'my_page_meta_wrapper');
-	}
-}
-add_action("init", "pmpro_cpt_init", 20);

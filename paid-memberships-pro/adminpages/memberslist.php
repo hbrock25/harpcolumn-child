@@ -105,7 +105,7 @@ if($id != NULL) {
     </ul>
 
     <p>
-	View user's WooCommerce <a href="/wp-admin/edit.php?s=<?php echo $user_subs->user_email ?>&post_status=all&post_type=shop_order">orders</a>
+	View user's WooCommerce <a href="/wp-admin/edit.php?s=<?php echo $sub->user_email ?>&post_status=all&post_type=shop_order">orders</a>
     </p>
 <?php 
 } else { 

@@ -810,8 +810,19 @@ if(!empty($_REQUEST['user_id'])) {
 		    <td><a href="mailto:<?php echo $theuser->user_email?>"><?php echo $theuser->user_email?></a></td>
 		    <?php do_action("pmpro_memberslist_extra_cols_body", $theuser);?>
 		    <td>
-		      <?php
-		      echo pmpro_formatAddress(trim($theuser->billing_first_name . " " . $theuser->billing_last_name), $theuser->billing_address_1, $theuser->billing_address_2, $theuser->billing_city, $theuser->billing_state, $theuser->billing_postcode, $theuser->billing_country, $theuser->billing_phone);
+			<?php
+			
+			echo WC_Country::get_formatted_address(
+			    array(
+				'first_name' => $theuser->billing_first_name,
+				'last_name' => $theuser->billing_last_name,
+				'company' => $theuser->billing_company,
+				'address_1' => $theuser->billing_address_1,
+				'address_2' => $theuser->billing_address_2,
+				'city' => $theuser->billing_city,
+				'state' => $theuser->billing_state,
+				'postcode' => $theuser->billing_postcode,
+				'country' => $theuser->billing_country));
 		      ?>                
 		    </td>
 		    <td><?php echo $auser->membership?></td>  

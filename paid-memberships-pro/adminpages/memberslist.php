@@ -12,7 +12,7 @@ if(!function_exists("current_user_can") || (!current_user_can("manage_options") 
  */
 
 //vars
-global $wpdb, $pmpro_currency_symbol;
+global $wpdb, $pmpro_currency_symbol, $woocommerce;
 if(isset($_REQUEST['s']))
   $s = $_REQUEST['s'];
 else

@@ -385,7 +385,7 @@ if($id != NULL) {
 			</td>
 			<td>
 			    <a href="admin.php?page=pmpro-memberslist&user_id=<?php echo $theuser->ID ?>">pmpro</a> |
-			    <a href="/wp-admin/edit.php?s=<?php echo $sub->user_email ?>&post_status=all&post_type=shop_order">woo</a>
+			    <a href="/wp-admin/edit.php?s=<?php echo $theuser->user_email ?>&post_status=all&post_type=shop_order">woo</a>
 			</td>
 		    </tr>
 		<?php

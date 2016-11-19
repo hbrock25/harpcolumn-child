@@ -165,8 +165,10 @@ function my_bbp_subscription_to_email(){
  * Hide admin bar from certain user roles
  */
 function hide_admin_bar( $show ) {
-    if ( ! current_user_can( 'administrator' ) &&
-	 ! current_user_can( 'editor' ) ) {
+    if ( current_user_can( 'editor' ) ||
+	 current_user_can( 'administrator' ) ) {
+	$show = true;
+    } else {
 	$show = false;
     }
 

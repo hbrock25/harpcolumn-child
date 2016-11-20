@@ -42,5 +42,5 @@ function hc_members_list_page()
         'hc_members_list_page_html'
     );
 }
-add_action('admin_menu', 'hc_members_list_page');
+add_action('admin_menu', 'hc_members_list_page', 100);
 

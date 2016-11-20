@@ -25,6 +25,20 @@ function hc_members_list_page_html() {
 	$pmsaddr = pretty_pmpro_shipping_address( $user_id );
 	$woobaddr = pretty_woo_billing_address( $user_id );
 	$woosaddr = pretty_woo_shipping_address( $user_id );
+
+	// any actions?
+
+	if(!empty($_REQUEST['copy_baddr'])) {
+	    // copy the pmpro billing address to woocommerce
+	    copy_bill_addr_pmpro_to_woo($user_id);
+	}
+
+	if(!empty($_REQUEST['copy_saddr'])) {
+	    // copy the pmpro shipping address to woocommerce
+	    copy_ship_addr_pmpro_to_woo($user_id);
+	}
+
+	// show the page
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {
 	require( HC_ML_PLUGIN_PATH . '/memberslist.php' );

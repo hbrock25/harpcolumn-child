@@ -57,7 +57,7 @@
 </table>
 
 <p>
-    <a href="#">Copy PMPro shipping</a> | <a href="#">Copy PMPro billing</a>
+    <a href="href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&user_id=<?php echo $user_id ?>&copy_saddr=true">Copy PMPro shipping</a> | <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&user_id=<?php echo $user_id ?>&copy_baddr=true">Copy PMPro billing</a>
 </p>
 
 <h3>Current and prior subscriptions:</h3>

@@ -19,34 +19,29 @@ function hc_members_list_page_html() {
     require_once(PMPRO_DIR . "/adminpages/admin_header.php");
 
     if(!empty($_REQUEST['user_id'])) {
-	// get the data from the model
 	$user_id = $_REQUEST['user_id'];
-	$pmbaddr = pretty_pmpro_billing_address( $user_id );
-	$pmsaddr = pretty_pmpro_shipping_address( $user_id );
-	$woobaddr = pretty_woo_billing_address( $user_id );
-	$woosaddr = pretty_woo_shipping_address( $user_id );
 
 	// any actions?
 
 	if(!empty($_REQUEST['copy_baddr_to_woo_bill'])) {
 	    // copy the pmpro billing address to woocommerce
 	    copy_bill_addr_pmpro_to_woo_bill($user_id);
-	}
-
-	if(!empty($_REQUEST['copy_baddr_to_woo_ship'])) {
+	} elseif (!empty($_REQUEST['copy_baddr_to_woo_ship'])) {
 	    // copy the pmpro billing address to woocommerce ship
 	    copy_bill_addr_pmpro_to_woo_ship($user_id);
-	}
-
-	if(!empty($_REQUEST['copy_saddr_to_woo_ship'])) {
+	} elseif (!empty($_REQUEST['copy_saddr_to_woo_ship'])) {
 	    // copy the pmpro shipping address to woocommerce
 	    copy_ship_addr_pmpro_to_woo_ship($user_id);
-	}
-
-	if(!empty($_REQUEST['copy_saddr_to_woo_bill'])) {
+	} elseif(!empty($_REQUEST['copy_saddr_to_woo_bill'])) {
 	    // copy the pmpro shipping address to woocommerce bill
 	    copy_ship_addr_pmpro_to_woo_bill($user_id);
 	}
+
+	// get the data from the model
+	$pmbaddr = pretty_pmpro_billing_address( $user_id );
+	$pmsaddr = pretty_pmpro_shipping_address( $user_id );
+	$woobaddr = pretty_woo_billing_address( $user_id );
+	$woosaddr = pretty_woo_shipping_address( $user_id );
 
 	// show the page
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );

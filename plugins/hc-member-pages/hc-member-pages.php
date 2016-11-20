@@ -31,9 +31,9 @@ function hc_members_list_page_html() {
     
     if(!empty($_REQUEST['user_id'])) {
 	$user_id = $_REQUEST['user_id'];
-	require( dirname( __DIR__ ) . '/views/one-user.php' );
+	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {
-	require_once( HC_ML_PLUGIN_PATH . '/memberslist.php' );
+	require( HC_ML_PLUGIN_PATH . '/memberslist.php' );
     }
     require_once(PMPRO_DIR . "/adminpages/admin_footer.php");
 }

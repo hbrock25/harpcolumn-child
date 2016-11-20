@@ -4,6 +4,7 @@
 
 function pretty_pmpro_billing_address( $user_id ) {
 
+    global $woocommerce;
     $user = get_userdata($user_id);
     $pmpro_baddr = $woocommerce->countries->get_formatted_address(
 	array(
@@ -23,6 +24,7 @@ function pretty_pmpro_billing_address( $user_id ) {
 
 function pretty_pmpro_shipping_address( $user_id ) {
 
+    global $woocommerce;
     $user = get_userdata($user_id);
     $pmpro_saddr = $woocommerce->countries->get_formatted_address(
 	array(
@@ -42,6 +44,7 @@ function pretty_pmpro_shipping_address( $user_id ) {
 
 function pretty_woo_billing_address( $user_id ) {
 
+    global $woocommerce;
     $user = get_userdata($user_id);
     $woo_baddr = $woocommerce->countries->get_formatted_address(
 	array(
@@ -61,6 +64,7 @@ function pretty_woo_billing_address( $user_id ) {
 
 function pretty_woo_shipping_address( $user_id ) {
 
+    global $woocommerce;
     $user = get_userdata($user_id);
     $woo_saddr = $woocommerce->countries->get_formatted_address(
 	array(

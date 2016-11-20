@@ -53,11 +53,20 @@
 	    <td><?php echo $woosaddr ?></td>
 	    <td><?php echo $woobaddr ?></td>
 	</tr>
+	<!-- actions -->
+	<tr class="tbody">
+	    <td>
+		<a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&amp;user_id=<?php echo $user_id ?>&amp;copy_saddr_to_woo_ship=true">Copy to woo shipping</a> | <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&amp;user_id=<?php echo $user_id ?>&amp;copy_saddr_to_woo_bill=true">Copy to woo billing</a>
+	    </td>
+	    <td>
+		<a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&amp;user_id=<?php echo $user_id ?>&amp;copy_baddr_to_woo_ship=true">Copy to woo shipping</a> | <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&amp;user_id=<?php echo $user_id ?>&amp;copy_baddr_to_woo_bill=true">Copy to woo billing</a>
+	    </td>
+	</tr>
     </tbody>
 </table>
 
 <p>
-    <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&amp;user_id=<?php echo $user_id ?>&amp;copy_saddr=true">Copy PMPro shipping</a> | <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&amp;user_id=<?php echo $user_id ?>&amp;copy_baddr=true">Copy PMPro billing</a>
+ <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&amp;user_id=<?php echo $user_id ?>&amp;copy_baddr=true">Copy PMPro billing</a>
 </p>
 
 <h3>Current and prior subscriptions:</h3>

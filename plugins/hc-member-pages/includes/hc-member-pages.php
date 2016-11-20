@@ -28,14 +28,24 @@ function hc_members_list_page_html() {
 
 	// any actions?
 
-	if(!empty($_REQUEST['copy_baddr'])) {
+	if(!empty($_REQUEST['copy_baddr_to_woo_bill'])) {
 	    // copy the pmpro billing address to woocommerce
-	    copy_bill_addr_pmpro_to_woo($user_id);
+	    copy_bill_addr_pmpro_to_woo_bill($user_id);
 	}
 
-	if(!empty($_REQUEST['copy_saddr'])) {
+	if(!empty($_REQUEST['copy_baddr_to_woo_ship'])) {
+	    // copy the pmpro billing address to woocommerce ship
+	    copy_bill_addr_pmpro_to_woo_ship($user_id);
+	}
+
+	if(!empty($_REQUEST['copy_saddr_to_woo_ship'])) {
 	    // copy the pmpro shipping address to woocommerce
-	    copy_ship_addr_pmpro_to_woo($user_id);
+	    copy_ship_addr_pmpro_to_woo_ship($user_id);
+	}
+
+	if(!empty($_REQUEST['copy_saddr_to_woo_bill'])) {
+	    // copy the pmpro shipping address to woocommerce bill
+	    copy_ship_addr_pmpro_to_woo_bill($user_id);
 	}
 
 	// show the page

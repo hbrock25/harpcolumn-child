@@ -82,7 +82,7 @@ function pretty_woo_shipping_address( $user_id ) {
     return $woo_saddr;
 }
 
-function copy_bill_addr_pmpro_to_woo($user_id) {
+function copy_bill_addr_pmpro_to_woo_bill($user_id) {
 
     $user = get_userdata($user_id);
     update_user_meta( $user_id, 'billing_first_name', $user->pmpro_bfirstname );
@@ -97,7 +97,22 @@ function copy_bill_addr_pmpro_to_woo($user_id) {
 
 }
 
-function copy_ship_addr_pmpro_to_woo($user_id) {
+function copy_bill_addr_pmpro_to_woo_ship($user_id) {
+
+    $user = get_userdata($user_id);
+    update_user_meta( $user_id, 'billing_first_name', $user->pmpro_sfirstname );
+    update_user_meta( $user_id, 'billing_last_name', $user->pmpro_slastname);
+    update_user_meta( $user_id, 'billing_company', $user->pmpro_scompany );
+    update_user_meta( $user_id, 'billing_address_1', $user->pmpro_saddress1 );
+    update_user_meta( $user_id, 'billing_address_2', $user->pmpro_saddress2 );
+    update_user_meta( $user_id, 'billing_city', $user->pmpro_scity );
+    update_user_meta( $user_id, 'billing_state', $user->pmpro_sstate );
+    update_user_meta( $user_id, 'billing_postcode', $user->pmpro_szipcode );
+    update_user_meta( $user_id, 'billing_country', $user->pmpro_scountry );
+
+}
+
+function copy_ship_addr_pmpro_to_woo_ship($user_id) {
 
     $user = get_userdata($user_id);
     update_user_meta( $user_id, 'shipping_first_name', $user->pmpro_sfirstname );
@@ -109,4 +124,18 @@ function copy_ship_addr_pmpro_to_woo($user_id) {
     update_user_meta( $user_id, 'shipping_state', $user->pmpro_sstate );
     update_user_meta( $user_id, 'shipping_postcode', $user->pmpro_szipcode );
     update_user_meta( $user_id, 'shipping_country', $user->pmpro_scountry );
+}
+
+function copy_ship_addr_pmpro_to_woo_bill($user_id) {
+
+    $user = get_userdata($user_id);
+    update_user_meta( $user_id, 'shipping_first_name', $user->pmpro_bfirstname );
+    update_user_meta( $user_id, 'shipping_last_name', $user->pmpro_blastname);
+    update_user_meta( $user_id, 'shipping_company', $user->pmpro_bcompany );
+    update_user_meta( $user_id, 'shipping_address_1', $user->pmpro_baddress1 );
+    update_user_meta( $user_id, 'shipping_address_2', $user->pmpro_baddress2 );
+    update_user_meta( $user_id, 'shipping_city', $user->pmpro_bcity );
+    update_user_meta( $user_id, 'shipping_btate', $user->pmpro_bstate );
+    update_user_meta( $user_id, 'shipping_postcode', $user->pmpro_bzipcode );
+    update_user_meta( $user_id, 'shipping_country', $user->pmpro_bcountry );
 }

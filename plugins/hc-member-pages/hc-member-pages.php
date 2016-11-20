@@ -9,7 +9,7 @@
    Author URI: http://www.harpcolumn.com
  */
 
-define( 'HC_ML_PLUGIN_PATH', plugin_dir_path( __FILE__ )
+define( 'HC_ML_PLUGIN_PATH', plugin_dir_path( __FILE__ );
 
 function hc_members_list_page_html() {
     //make sure PMPro is active

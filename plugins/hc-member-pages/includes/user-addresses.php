@@ -1,6 +1,7 @@
 <?php
 
 /* functions to return user addresses */
+global $woocommerce;
 
 function pretty_pmpro_billing_address( $user_id ) {
 

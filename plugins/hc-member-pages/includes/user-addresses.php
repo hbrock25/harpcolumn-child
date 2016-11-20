@@ -84,6 +84,7 @@ function pretty_woo_shipping_address( $user_id ) {
 
 function copy_bill_addr_pmpro_to_woo($user_id) {
 
+    $user = get_userdata($user_id);
     update_user_meta( $user_id, 'billing_first_name', $user->pmpro_bfirstname );
     update_user_meta( $user_id, 'billing_last_name', $user->pmpro_blastname);
     update_user_meta( $user_id, 'billing_company', $user->pmpro_bcompany );
@@ -97,6 +98,8 @@ function copy_bill_addr_pmpro_to_woo($user_id) {
 }
 
 function copy_ship_addr_pmpro_to_woo($user_id) {
+
+    $user = get_userdata($user_id);
     update_user_meta( $user_id, 'shipping_first_name', $user->pmpro_sfirstname );
     update_user_meta( $user_id, 'shipping_last_name', $user->pmpro_slastname);
     update_user_meta( $user_id, 'shipping_company', $user->pmpro_scompany );

@@ -30,7 +30,7 @@ echo hc_members_list_header();
 
 }
 
-function hc_members_list_header {
+function hc_members_list_header() {
 
 ?> <p>This text was included from a function</p>
 

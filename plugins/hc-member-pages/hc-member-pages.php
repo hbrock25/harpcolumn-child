@@ -20,14 +20,7 @@ function hc_members_list_page_html() {
         return;
     }
 
-    
-// page starts here
-?>
-    <div><h1>Harp Column Member List Page</h1></div>
-<?php
-
-echo hc_members_list_header();
-
+    require_once('/memberslist.php');
 }
 
 function hc_members_list_page()

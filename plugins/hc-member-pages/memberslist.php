@@ -1,30 +1,33 @@
 <?php
-  //only admins can get this
 
+function hc_members_list_header() {
+
+//only admins can get this
 if(!function_exists("current_user_can") || (!current_user_can("manage_options") && !current_user_can("pmpro_memberslist")))
-  {
-    die(__("You do not have permissions to perform this action.", "pmpro"));
-  }  
-  
+{
+die(__("You do not have permissions to perform this action.", "pmpro"));
+}  
+
 /* Adding modes: 
- * Single-membership view -- show user's bill/ship addr, old and current memberships
- * Member-address-edit view -- edit user's address info
- * New-order/renewal view -- create a (check) new order or renewal for user
- */
+* Single-membership view -- show user's bill/ship addr, old and current memberships
+* Member-address-edit view -- edit user's address info
+* New-order/renewal view -- create a (check) new order or renewal for user
+*/
 
 //vars
 global $wpdb, $pmpro_currency_symbol, $woocommerce;
 if(isset($_REQUEST['s']))
-  $s = $_REQUEST['s'];
+$s = $_REQUEST['s'];
 else
-  $s = "";
-  
+$s = "";
+
 if(isset($_REQUEST['l']))
-  $l = $_REQUEST['l'];
+$l = $_REQUEST['l'];
 else
-  $l = false;
-      
+$l = false;
+
 require_once(dirname(__FILE__) . "/admin_header.php");    
+
 ?>
 
 <?php
@@ -52,7 +55,9 @@ if(!empty($_REQUEST['user_id'])) {
     $discount_code = $wpdb->get_row($sqlQuery);
     
     // Done getting user data, now decide what to do with it
+
 ?>
+
 <h2>Subscriptions for <?php echo $user_subs[0]->display_name?></h2>
 <form id="posts-filter" method="get" action="">  
     <div class="search-box" style="float: right;">
@@ -92,7 +97,9 @@ if(!empty($_REQUEST['user_id'])) {
 $id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $wpdb->pmpro_membership_orders WHERE user_id = %s ORDER BY id DESC LIMIT 1", $user_id));
 if($id != NULL) {
     $last_order = new MemberOrder($id)
+
 ?>
+
     <h3>Most recent order</h3>
     <ul>
 	<li>ID: <a href="admin.php?page=pmpro-orders&order=<?php echo $last_order->id;?>"><?php echo $last_order->id?></a>
@@ -410,3 +417,5 @@ View user's WooCommerce <a href="/wp-admin/edit.php?s=<?php echo $sub->user_emai
     }
 
     require_once(dirname(__FILE__) . "/admin_footer.php");
+
+}

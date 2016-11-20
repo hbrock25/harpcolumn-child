@@ -30,14 +30,6 @@ echo hc_members_list_header();
 
 }
 
-function hc_members_list_header() {
-
-?> <p>This text was included from a function</p>
-
-<?php
-}    
-
-
 function hc_members_list_page()
 {
     //make sure PMPro is active

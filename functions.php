@@ -167,7 +167,7 @@ function my_bbp_subscription_to_email(){
 function hide_admin_bar( $show ) {
     if ( current_user_can( 'editor' ) ||
 	 current_user_can( 'administrator' ) ||
-	 current_user_can( 'ai1ec_event_assistant' ) ) {
+	 current_user_can( 'author' ) ) {
 	$show = true;
     } else {
 	$show = false;

@@ -1,7 +1,5 @@
 <?php
 
-function hc_members_list_header() {
-
 //only admins can get this
 if(!function_exists("current_user_can") || (!current_user_can("manage_options") && !current_user_can("pmpro_memberslist")))
 {
@@ -26,7 +24,7 @@ $l = $_REQUEST['l'];
 else
 $l = false;
 
-require_once(dirname(__FILE__) . "/admin_header.php");    
+/* require_once(dirname(__FILE__) . "/admin_header.php");    */
 
 ?>
 
@@ -416,6 +414,5 @@ View user's WooCommerce <a href="/wp-admin/edit.php?s=<?php echo $sub->user_emai
     echo pmpro_getPaginationString($pn, $totalrows, $limit, 1, get_admin_url(NULL, "/admin.php?page=pmpro-memberslist&s=" . urlencode($s)), "&l=$l&limit=$limit&pn=");
     }
 
-    require_once(dirname(__FILE__) . "/admin_footer.php");
+/*    require_once(dirname(__FILE__) . "/admin_footer.php"); */
 
-}

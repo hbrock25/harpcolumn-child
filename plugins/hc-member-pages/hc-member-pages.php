@@ -30,7 +30,12 @@ function hc_members_list_page_html() {
     require_once(PMPRO_DIR . "/adminpages/admin_header.php");
     
     if(!empty($_REQUEST['user_id'])) {
+	// get the data from the model
 	$user_id = $_REQUEST['user_id'];
+	$pmbaddr = pretty_pmpro_billing_address( $user_id );
+	$pmsaddr = pretty_pmpro_shipping_address( $user_id );
+	$woobaddr = pretty_woo_billing_address( $user_id );
+	$woosaddr = pretty_woo_shipping_address( $user_id );
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {
 	require( HC_ML_PLUGIN_PATH . '/memberslist.php' );

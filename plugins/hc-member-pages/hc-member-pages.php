@@ -9,6 +9,8 @@
    Author URI: http://www.harpcolumn.com
  */
 
+define( 'HC_ML_PLUGIN_PATH', plugin_dir_path( __FILE__ )
+
 function hc_members_list_page_html() {
     //make sure PMPro is active
     if(!function_exists('pmpro_getMembershipLevelForUser')) {
@@ -20,7 +22,7 @@ function hc_members_list_page_html() {
         return;
     }
 
-    require_once('/memberslist.php');
+    require_once( HC_ML_PLUGIN_PATH . '/memberslist.php' );
 }
 
 function hc_members_list_page()

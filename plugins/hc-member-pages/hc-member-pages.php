@@ -26,7 +26,7 @@ define( 'HCML_REQUIRED_WP_VERSION',  '3.1' ); // because of esc_textarea()
  * @return bool True if system requirements are met, false if not
  */
 
-function HCML_requirements_met() {
+function hcml_requirements_met() {
     global $wp_version;
     require_once( ABSPATH . '/wp-admin/includes/plugin.php' ); // to get is_plugin_active() early
     if ( version_compare( PHP_VERSION, HCML_REQUIRED_PHP_VERSION, '<' ) ) {
@@ -51,7 +51,7 @@ function HCML_requirements_met() {
  * The main program needs to be in a separate file that only gets loaded if the plugin requirements are met. Otherwise older PHP installations could crash when trying to parse it.
  */
 
-if ( wpps_requirements_met() ) {
+if ( hcml_requirements_met() ) {
     //vars
     global $wpdb, $pmpro_currency_symbol, $woocommerce;
     require_once( __DIR__ . '/includes/user-addresses.php' );

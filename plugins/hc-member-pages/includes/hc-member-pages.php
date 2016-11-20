@@ -12,6 +12,9 @@ function hc_members_list_page_html() {
 	return;
     }
 
+    // vars
+    global $wpdb, $pmpro_currency_symbol, $woocommerce;
+
     // headers first
     require_once(PMPRO_DIR . "/adminpages/admin_header.php");
 

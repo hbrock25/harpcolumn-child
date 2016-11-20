@@ -10,6 +10,7 @@
  */
 
 define( 'HC_ML_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'HC_MEMBER_PAGE_SLUG', "hc-members-list" );
 
 function hc_members_list_page_html() {
     //make sure PMPro is active
@@ -24,7 +25,7 @@ function hc_members_list_page_html() {
 
     //vars
     global $wpdb, $pmpro_currency_symbol, $woocommerce;
-
+    
     // headers first
     require_once(PMPRO_DIR . "/adminpages/admin_header.php");
     
@@ -48,7 +49,7 @@ function hc_members_list_page()
         'Harp Column Members List',
         'Harp Column Members List',
         'pmpro_memberslist',
-        'hc-members-list',
+        HC_MEMBER_PAGE_SLUG,
         'hc_members_list_page_html'
     );
 }

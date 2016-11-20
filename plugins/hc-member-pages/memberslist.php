@@ -283,7 +283,7 @@ $l = false;
 			    ?>
 			</td>
 			<td>
-			    <a href="admin.php?page=pmpro-memberslist&user_id=<?php echo $theuser->ID ?>">pmpro</a> |
+			    <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&user_id=<?php echo $theuser->ID ?>">pmpro</a> |
 			    <a href="/wp-admin/edit.php?s=<?php echo $theuser->user_email ?>&post_status=all&post_type=shop_order">woo</a>
 			</td>
 		    </tr>
@@ -294,7 +294,7 @@ $l = false;
 		{
 		?>
 		    <tr>
-			<td colspan="9"><p><?php _e("No members found.", "pmpro");?> <?php if($l) { ?><a href="?page=pmpro-memberslist&s=<?php echo $s?>"><?php _e("Search all levels", "pmpro");?></a>.<?php } ?></p></td>
+			<td colspan="9"><p><?php _e("No members found.", "pmpro");?> <?php if($l) { ?><a href="?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&s=<?php echo $s?>"><?php _e("Search all levels", "pmpro");?></a>.<?php } ?></p></td>
                     </tr>
                 <?php
                 }
@@ -304,7 +304,7 @@ $l = false;
     </form>
     
     <?php
-    echo pmpro_getPaginationString($pn, $totalrows, $limit, 1, get_admin_url(NULL, "/admin.php?page=pmpro-memberslist&s=" . urlencode($s)), "&l=$l&limit=$limit&pn=");
+    echo pmpro_getPaginationString($pn, $totalrows, $limit, 1, get_admin_url(NULL, "/admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&s=" . urlencode($s)), "&l=$l&limit=$limit&pn=");
 
 
 /*    require_once(dirname(__FILE__) . "/admin_footer.php"); */

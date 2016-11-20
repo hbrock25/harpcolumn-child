@@ -25,7 +25,18 @@ function hc_members_list_page_html() {
 ?>
     <div><h1>Harp Column Member List Page</h1></div>
 <?php
+
+hc_members_list_header();
+
 }
+
+function hc_members_list_header {
+
+?> <p>This text was included from a function</p>
+
+<?php
+}    
+
 
 function hc_members_list_page()
 {

@@ -166,7 +166,8 @@ function my_bbp_subscription_to_email(){
  */
 function hide_admin_bar( $show ) {
     if ( current_user_can( 'editor' ) ||
-	 current_user_can( 'administrator' ) ) {
+	 current_user_can( 'administrator' ) ||
+	 current_user_can( 'ai1ec_event_assistant' ) ) {
 	$show = true;
     } else {
 	$show = false;
@@ -204,7 +205,7 @@ function woo_hc_validate_extra_register_fields( $username, $email, $validation_e
     if ( isset( $_POST['billing_last_name'] ) && empty( $_POST['billing_last_name'] ) ) {
 
 	$validation_errors->add( 'billing_last_name_error', __( '<strong>Error</strong>: Last name is required', 'woocommerce' ) );
-
+    
     }
 
     if ( isset( $_POST['billing_country'] ) && empty( $_POST['billing_country'] ) ) {

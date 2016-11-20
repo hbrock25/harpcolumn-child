@@ -106,7 +106,7 @@ function copy_bill_addr_pmpro_to_woo_ship($user_id) {
     update_user_meta( $user_id, 'shipping_address_1', $user->pmpro_baddress1 );
     update_user_meta( $user_id, 'shipping_address_2', $user->pmpro_baddress2 );
     update_user_meta( $user_id, 'shipping_city', $user->pmpro_bcity );
-    update_user_meta( $user_id, 'shipping_btate', $user->pmpro_bstate );
+    update_user_meta( $user_id, 'shipping_state', $user->pmpro_bstate );
     update_user_meta( $user_id, 'shipping_postcode', $user->pmpro_bzipcode );
     update_user_meta( $user_id, 'shipping_country', $user->pmpro_bcountry );
 

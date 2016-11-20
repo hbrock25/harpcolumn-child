@@ -46,6 +46,7 @@ add_action('admin_menu', 'hc_members_list_page', 100);
 
 function hc_members_list_admin_bar_menu() {
 
+    global $wp_admin_bar;
     if(current_user_can('pmpro_memberslist')) {
 	$wp_admin_bar->add_menu( array(
 	    'id' => 'hc-members-list',

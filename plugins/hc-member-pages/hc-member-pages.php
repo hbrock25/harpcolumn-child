@@ -44,3 +44,15 @@ function hc_members_list_page()
 }
 add_action('admin_menu', 'hc_members_list_page', 100);
 
+function hc_members_list_admin_bar_menu() {
+
+    if(current_user_can('pmpro_memberslist')) {
+	$wp_admin_bar->add_menu( array(
+	    'id' => 'hc-members-list',
+	    'parent' => 'paid-memberships-pro',
+	    'title' => __( 'Harp Column Members List', 'pmpro'),
+	    'href' => get_admin_url(NULL, '/admin.php?page=hc-members-list')));
+    }
+}
+    
+add_action('admin_bar_menu', 'hc_members_list_admin_bar_menu', 1001);

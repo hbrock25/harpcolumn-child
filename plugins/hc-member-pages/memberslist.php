@@ -51,7 +51,7 @@ $l = false;
 	</ul>
 	<p class="search-box">
 	    <label class="hidden" for="post-search-input"><?php _e('Search Members', 'pmpro');?>:</label>
-	    <input type="hidden" name="page" value="pmpro-memberslist" />    
+	    <input type="hidden" name="page" value="hc-members-list" />    
 	    <input id="post-search-input" type="text" value="<?php echo $s?>" name="s"/>
 	    <input class="button" type="submit" value="<?php _e('Search Members', 'pmpro');?>"/>
 	</p>

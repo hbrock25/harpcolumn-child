@@ -53,7 +53,7 @@ function pretty_woo_billing_address( $user_id ) {
 	    'city' => $user->billing_city,
 	    'state' => $user->billing_state,
 	    'postcode' => $user->billing_postcode,
-	    'country' => $user->billing_country);
+	    'country' => $user->billing_country)
     );
 
     return $woo_baddr;
@@ -72,7 +72,7 @@ function pretty_woo_shipping_address( $user_id ) {
 	    'city' => $user->shipping_city,
 	    'state' => $user->shipping_state,
 	    'postcode' => $user->shipping_postcode,
-	    'country' => $user->shipping_country);
+	    'country' => $user->shipping_country)
     );
     
     return $woo_saddr;

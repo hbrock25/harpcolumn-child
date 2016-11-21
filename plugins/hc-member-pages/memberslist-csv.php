@@ -152,7 +152,7 @@
 	else
 		header("Content-Disposition: attachment; filename=members_list.csv");
 	
-$heading = "id,username,firstname,lastname,email,billing firstname,billing lastname,billing company,billing address1,billing address2,billing city,billing state,billing zipcode,billing country,billing phone,shipping firstname,shipping lastname,shipping company,shipping address1,shipping address2,shipping city,shipping state,shipping zipcode,shipping country,membership,initial payment,fee,term,discount_code_id,discount_code,joined";
+$heading = "id,username,firstname,lastname,email,billing firstname,billing lastname,billing company,billing address1,billing address2,billing city,billing state,billing zipcode,billing country,billing phone,shipping firstname,shipping lastname,shipping company,shipping address1,shipping address2,shipping city,shipping state,shipping zipcode,shipping country,membership,term,discount_code_id,discount_code,joined";
 	
 	if($l == "oldmembers")
 		$heading .= ",ended";
@@ -189,8 +189,6 @@ $heading = "id,username,firstname,lastname,email,billing firstname,billing lastn
 		array("metavalues", "shipping_postcode"),
 		array("metavalues", "shipping_country"),
 		array("theuser", "membership"),
-		array("theuser", "initial_payment"),
-		array("theuser", "billing_amount"),
 		array("theuser", "cycle_period"),
 		array("discount_code", "id"),
 		array("discount_code", "code")

@@ -79,3 +79,13 @@ function hc_members_list_admin_bar_menu() {
 
 add_action('admin_bar_menu', 'hc_members_list_admin_bar_menu', 1001);
 
+/* Source the members list page from this plugin, not the pmpro one */
+
+function hcml_wp_ajax_hc_memberslist_csv() {
+
+    require_once( HC_ML_PLUGIN_PATH . '/memberslist-csv.php');	
+    exit;	
+
+}
+add_action('wp_ajax_hc_memberslist_csv', 'hcml_wp_ajax_hc_memberslist_csv');
+

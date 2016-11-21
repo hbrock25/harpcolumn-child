@@ -22,7 +22,7 @@ $l = false;
     <form id="posts-filter" method="get" action="">  
 	<h2>
 	    <?php _e('Members List', 'pmpro');?>
-	    <a target="_blank" href="<?php echo admin_url('admin-ajax.php');?>?action=memberslist_csv&s=<?php echo $s?>&l=<?php echo $l?>" class="add-new-h2"><?php _e('Export to CSV', 'pmpro');?></a>
+	    <a target="_blank" href="<?php echo admin_url('admin-ajax.php');?>?action=hc_memberslist_csv&s=<?php echo $s?>&l=<?php echo $l?>" class="add-new-h2"><?php _e('Export to CSV', 'pmpro');?></a>
 	</h2>    
 	<ul class="subsubsub">
 	    <li>      

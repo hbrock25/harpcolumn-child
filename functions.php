@@ -149,17 +149,17 @@ function hc_add_back_register_link( $action_links, $args ) {
 
 add_filter( 'tml_action_links', 'hc_add_back_register_link', 10, 2);
 
-add_filter('bbp_get_do_not_reply_address','my_bbp_no_reply_email');
-function no_reply_email(){
+function my_bbp_no_reply_email(){
     $email = 'noreply@harpcolumn.com';
     return $email;
 }
+add_filter('bbp_get_do_not_reply_address','my_bbp_no_reply_email');
 
-add_filter('bbp_subscription_to_email','my_bbp_subscription_to_email');
 function my_bbp_subscription_to_email(){
     $email = 'noreply@harpcolumn.com'; // any email you want
     return $email;
 }
+add_filter('bbp_subscription_to_email','my_bbp_subscription_to_email');
 
 /**
  * Hide admin bar from certain user roles

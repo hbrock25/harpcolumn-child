@@ -302,6 +302,42 @@ function woo_hc_save_extra_register_fields( $customer_id ) {
 }
 add_action( 'woocommerce_created_customer', 'woo_hc_save_extra_register_fields' );
 
+// add custom column headers
+function wc_csv_export_modify_column_headers( $column_headers ) { 
+    
+    $new_headers = array(
+	'user_login' => 'User Login'
+    );
+    
+    return array_merge( $column_headers, $new_headers );
+}
+add_filter( 'wc_customer_order_csv_export_order_headers', 'wc_csv_export_modify_column_headers' );
+
+// set the data for each for custom columns
+function wc_csv_export_modify_row_data( $order_data, $order, $csv_generator ) {
+    
+    $custom_data = array(
+	'user_login' => $order->get_user() ? $order->get_user()->user_login : "No Login"
+    );
+    
+    $new_order_data   = array();
+    $one_row_per_item = 'item' === $csv_generator->format_definition['row_type'];
+    if ( $one_row_per_item ) {
+
+	foreach ( $order_data as $data ) {
+	    $new_order_data[] = array_merge( (array) $data, $custom_data );
+	}
+
+    } else {
+
+	$new_order_data = array_merge( $order_data, $custom_data );
+    }
+
+    return $new_order_data;
+}
+add_filter( 'wc_customer_order_csv_export_order_row', 'wc_csv_export_modify_row_data', 10, 3 );
+
+
 /**
  * CSV Customer Export Column Headers.
  *

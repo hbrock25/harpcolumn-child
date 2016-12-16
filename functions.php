@@ -398,3 +398,7 @@ function sv_wc_customer_csv_export_customer_row( $customer_data, $user ) {
     return array_merge( array( 'role' => $role, 'username' => $username ), $customer_data );
 }
 add_filter( 'wc_customer_order_csv_export_customer_row', 'sv_wc_customer_csv_export_customer_row', 10, 2 );
+
+// fix for Event Aggregator hitting ea.theeventscalendar.com every request
+
+add_filter( 'tribe_aggregator_should_load', '__return_false' );

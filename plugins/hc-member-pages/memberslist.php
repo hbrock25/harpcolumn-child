@@ -88,7 +88,7 @@ else
 
 	// append the search restriction if any
 	$sqlQuery .= $search_clause;
-	    
+	
 	// Add the restrictions for the various member classes
 	if($l == "oldmembers")
 	    $sqlQuery .= " AND mu.status = 'inactive' AND mu2.status IS NULL ";
@@ -112,7 +112,7 @@ else
 	    $sqlQuery .= " AND mu.status = 'active' ";      
 	
 	$sqlQuery .= " GROUP BY u.ID ";
-	    
+	
 	if($l == "oldmembers")
 	    $sqlQuery .= "ORDER BY enddate DESC ";
 	else
@@ -127,128 +127,129 @@ else
 	$totalrows = $wpdb->get_var("SELECT FOUND_ROWS() as found_rows");
 	
 	?>
-	<table class="widefat">
-	    <thead>
-		<tr class="thead">
-		    <th><?php _e('ID', 'pmpro');?></th>
-		    <th><?php _e('Username', 'pmpro');?></th>
-		    <th><?php _e('First&nbsp;Name', 'pmpro');?></th>
-		    <th><?php _e('Last&nbsp;Name', 'pmpro');?></th>
-		    <th><?php _e('Email', 'pmpro');?></th>
-		    <?php do_action("pmpro_memberslist_extra_cols_header", $theusers);?>
-		    <th><?php _e('Billing Address', 'pmpro');?></th>
-		    <th><?php _e('Shipping Address', 'pmpro');?></th>  
-		    <th><?php _e('Membership', 'pmpro');?></th>  
-		    <th><?php _e('Fee', 'pmpro');?></th>
-		    <th><?php _e('Joined', 'pmpro');?></th>
-		    <th>
+    <p class="clear"><?php printf(__("%d members found.", "pmpro"), $totalrows);?></span></p>
+    <table class="widefat">
+	<thead>
+	    <tr class="thead">
+		<th><?php _e('ID', 'pmpro');?></th>
+		<th><?php _e('Username', 'pmpro');?></th>
+		<th><?php _e('First&nbsp;Name', 'pmpro');?></th>
+		<th><?php _e('Last&nbsp;Name', 'pmpro');?></th>
+		<th><?php _e('Email', 'pmpro');?></th>
+		<?php do_action("pmpro_memberslist_extra_cols_header", $theusers);?>
+		<th><?php _e('Billing Address', 'pmpro');?></th>
+		<th><?php _e('Shipping Address', 'pmpro');?></th>  
+		<th><?php _e('Membership', 'pmpro');?></th>  
+		<th><?php _e('Fee', 'pmpro');?></th>
+		<th><?php _e('Joined', 'pmpro');?></th>
+		<th>
+		    <?php 
+		    if($l == "oldmembers")
+			_e('Ended', 'pmpro');
+		    else
+			_e('Expires', 'pmpro');
+		    ?>
+		</th>
+		<th><?php _e('Orders', 'pmpro');?></th>		
+	    </tr>
+	</thead>
+	<tbody id="users" class="list:user user-list">  
+	    <?php  
+	    $count = 0;              
+	    foreach($theusers as $auser)
+	    {
+		//get meta                                          
+		$theuser = get_userdata($auser->ID);  
+	    ?>
+		<tr <?php if($count++ % 2 == 0) { ?>class="alternate"<?php } ?>>
+		    <td><?php echo $theuser->ID?></td>
+		    <td>
+			<?php echo get_avatar($theuser->ID, 32)?>
+			<strong>
+			    <?php
+			    $userlink = '<a href="user-edit.php?user_id=' . $theuser->ID . '">' . $theuser->user_login . '</a>';
+			    $userlink = apply_filters("pmpro_members_list_user_link", $userlink, $theuser);
+			    echo $userlink;
+			    ?>                  
+			</strong>
+		    </td>
+		    <td><?php echo $theuser->first_name?></td>
+		    <td><?php echo $theuser->last_name?></td>
+		    <td><a href="mailto:<?php echo $theuser->user_email?>"><?php echo $theuser->user_email?></a></td>
+		    <?php do_action("pmpro_memberslist_extra_cols_body", $theuser);?>
+		    <td>
+			<?php
+			
+			echo $woocommerce->countries->get_formatted_address(
+			    array(
+				'first_name' => $theuser->billing_first_name,
+				'last_name' => $theuser->billing_last_name,
+				'company' => $theuser->billing_company,
+				'address_1' => $theuser->billing_address_1,
+				'address_2' => $theuser->billing_address_2,
+				'city' => $theuser->billing_city,
+				'state' => $theuser->billing_state,
+				'postcode' => $theuser->billing_postcode,
+				'country' => $theuser->billing_country));
+			?>                
+		    </td>
+		    <td>
+			<?php
+			
+			echo $woocommerce->countries->get_formatted_address(
+			    array(
+				'first_name' => $theuser->shipping_first_name,
+				'last_name' => $theuser->shipping_last_name,
+				'company' => $theuser->shipping_company,
+				'address_1' => $theuser->shipping_address_1,
+				'address_2' => $theuser->shipping_address_2,
+				'city' => $theuser->shipping_city,
+				'state' => $theuser->shipping_state,
+				'postcode' => $theuser->shipping_postcode,
+				'country' => $theuser->shipping_country));
+			?>                
+		    </td>
+		    <td><?php echo $auser->membership?></td>  
+		    <td>                    
+			<?php if((float)$auser->initial_payment > 0) { ?>
+			    <?php echo $pmpro_currency_symbol; ?><?php echo $auser->initial_payment?>
+			<?php } ?>
+			<?php if((float)$auser->initial_payment > 0 && (float)$auser->billing_amount > 0) { ?>+<br /><?php } ?>
+			<?php if((float)$auser->billing_amount > 0) { ?>
+			    <?php echo $pmpro_currency_symbol; ?><?php echo $auser->billing_amount?>/<?php echo $auser->cycle_period?>
+			<?php } ?>
+			<?php if((float)$auser->initial_payment <= 0 && (float)$auser->billing_amount <= 0) { ?>
+			    -
+			<?php } ?>
+		    </td>            
+		    <td><?php echo date(get_option("date_format"), strtotime($theuser->user_registered, current_time("timestamp")))?></td>
+		    <td>
 			<?php 
-			if($l == "oldmembers")
-			    _e('Ended', 'pmpro');
+			if($auser->enddate) 
+			    echo apply_filters("pmpro_memberslist_expires_column", date(get_option('date_format'), $auser->enddate), $auser);
 			else
-			    _e('Expires', 'pmpro');
+			    echo __(apply_filters("pmpro_memberslist_expires_column", "Never", $auser), "pmpro");
 			?>
-		    </th>
-		    <th><?php _e('Orders', 'pmpro');?></th>		
+		    </td>
+		    <td>
+			<a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&user_id=<?php echo $theuser->ID ?>">pmpro</a> |
+			<a href="/wp-admin/edit.php?s=<?php echo $theuser->user_email ?>&post_status=all&post_type=shop_order">woo</a>
+		    </td>
 		</tr>
-	    </thead>
-	    <tbody id="users" class="list:user user-list">  
-		<?php  
-		$count = 0;              
-		foreach($theusers as $auser)
-		{
-		    //get meta                                          
-		    $theuser = get_userdata($auser->ID);  
-		?>
-		    <tr <?php if($count++ % 2 == 0) { ?>class="alternate"<?php } ?>>
-			<td><?php echo $theuser->ID?></td>
-			<td>
-			    <?php echo get_avatar($theuser->ID, 32)?>
-			    <strong>
-				<?php
-				$userlink = '<a href="user-edit.php?user_id=' . $theuser->ID . '">' . $theuser->user_login . '</a>';
-				$userlink = apply_filters("pmpro_members_list_user_link", $userlink, $theuser);
-				echo $userlink;
-				?>                  
-			    </strong>
-			</td>
-			<td><?php echo $theuser->first_name?></td>
-			<td><?php echo $theuser->last_name?></td>
-			<td><a href="mailto:<?php echo $theuser->user_email?>"><?php echo $theuser->user_email?></a></td>
-			<?php do_action("pmpro_memberslist_extra_cols_body", $theuser);?>
-			<td>
-			    <?php
-			    
-			    echo $woocommerce->countries->get_formatted_address(
-				array(
-				    'first_name' => $theuser->billing_first_name,
-				    'last_name' => $theuser->billing_last_name,
-				    'company' => $theuser->billing_company,
-				    'address_1' => $theuser->billing_address_1,
-				    'address_2' => $theuser->billing_address_2,
-				    'city' => $theuser->billing_city,
-				    'state' => $theuser->billing_state,
-				    'postcode' => $theuser->billing_postcode,
-				    'country' => $theuser->billing_country));
-			    ?>                
-			</td>
-			<td>
-			    <?php
-			    
-			    echo $woocommerce->countries->get_formatted_address(
-				array(
-				    'first_name' => $theuser->shipping_first_name,
-				    'last_name' => $theuser->shipping_last_name,
-				    'company' => $theuser->shipping_company,
-				    'address_1' => $theuser->shipping_address_1,
-				    'address_2' => $theuser->shipping_address_2,
-				    'city' => $theuser->shipping_city,
-				    'state' => $theuser->shipping_state,
-				    'postcode' => $theuser->shipping_postcode,
-				    'country' => $theuser->shipping_country));
-			    ?>                
-			</td>
-			<td><?php echo $auser->membership?></td>  
-			<td>                    
-			    <?php if((float)$auser->initial_payment > 0) { ?>
-				<?php echo $pmpro_currency_symbol; ?><?php echo $auser->initial_payment?>
-			    <?php } ?>
-			    <?php if((float)$auser->initial_payment > 0 && (float)$auser->billing_amount > 0) { ?>+<br /><?php } ?>
-			    <?php if((float)$auser->billing_amount > 0) { ?>
-				<?php echo $pmpro_currency_symbol; ?><?php echo $auser->billing_amount?>/<?php echo $auser->cycle_period?>
-			    <?php } ?>
-			    <?php if((float)$auser->initial_payment <= 0 && (float)$auser->billing_amount <= 0) { ?>
-				-
-			    <?php } ?>
-			</td>            
-			<td><?php echo date(get_option("date_format"), strtotime($theuser->user_registered, current_time("timestamp")))?></td>
-			<td>
-			    <?php 
-			    if($auser->enddate) 
-				echo apply_filters("pmpro_memberslist_expires_column", date(get_option('date_format'), $auser->enddate), $auser);
-			    else
-				echo __(apply_filters("pmpro_memberslist_expires_column", "Never", $auser), "pmpro");
-			    ?>
-			</td>
-			<td>
-			    <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&user_id=<?php echo $theuser->ID ?>">pmpro</a> |
-			    <a href="/wp-admin/edit.php?s=<?php echo $theuser->user_email ?>&post_status=all&post_type=shop_order">woo</a>
-			</td>
-		    </tr>
-		<?php
-		}
-		
-		if(!$theusers)
-		{
-		?>
-		    <tr>
-			<td colspan="9"><p><?php _e("No members found.", "pmpro");?> <?php if($l) { ?><a href="?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&s=<?php echo $s?>"><?php _e("Search all levels", "pmpro");?></a>.<?php } ?></p></td>
-                    </tr>
-                <?php
-                }
-		?>    
-	    </tbody>
-	</table>
+	    <?php
+	    }
+	    
+	    if(!$theusers)
+	    {
+	    ?>
+		<tr>
+		    <td colspan="9"><p><?php _e("No members found.", "pmpro");?> <?php if($l) { ?><a href="?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&s=<?php echo $s?>"><?php _e("Search all levels", "pmpro");?></a>.<?php } ?></p></td>
+                </tr>
+            <?php
+            }
+	    ?>    
+	</tbody>
+    </table>
 </form>
 
 <?php

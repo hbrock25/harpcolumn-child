@@ -139,3 +139,14 @@ function copy_ship_addr_pmpro_to_woo_bill($user_id) {
     update_user_meta( $user_id, 'billing_postcode', $user->pmpro_szipcode );
     update_user_meta( $user_id, 'billing_country', $user->pmpro_scountry );
 }
+
+function copy_bill_addr_pmpro_to_woo_both($user_id) {
+    copy_bill_addr_pmpro_to_woo_bill($user_id);
+    copy_bill_addr_pmpro_to_woo_ship($user_id);
+}
+
+function copy_ship_addr_pmpro_to_woo_both($user_id) {
+    copy_ship_addr_pmpro_to_woo_bill($user_id);
+    copy_ship_addr_pmpro_to_woo_ship($user_id);
+}
+

@@ -35,6 +35,14 @@
 	<input type="hidden" name="page" value="<?php echo HC_MEMBER_PAGE_SLUG ?>" />    
     </div>
 </form>
+<form id="posts-filter-2" method="get" action="">  
+    <div class="search-box" style="float: right;">
+	<label class="hidden" for="post-search-input"><?php _e('Search Members', 'pmpro');?>:</label>
+	<input id="post-search-input-2" type="text" value="<?php echo $user_id?>" name="user_id"/>
+	<input class="button" type="submit" value="<?php _e('Go to user id', 'pmpro');?>"/>
+	<input type="hidden" name="page" value="<?php echo HC_MEMBER_PAGE_SLUG ?>" />    
+    </div>
+</form>
 <a href="?page=<?php echo HC_MEMBER_PAGE_SLUG ?>">&lt;-back to member list</a>
 
 <h3>PMPro vs. WooCommerce Addresses</h3>

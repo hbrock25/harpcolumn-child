@@ -84,7 +84,7 @@ else
 	    $sqlQuery .= " LEFT JOIN $wpdb->pmpro_memberships_users mu2 ON u.ID = mu2.user_id AND mu2.status = 'active' ";
 	}
 
-	$sqlQuery .= " LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE mu.membership_id > 0";
+	$sqlQuery .= " LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE mu.membership_id > 0 ";
 
 	// append the search restriction if any
 	$sqlQuery .= $search_clause;

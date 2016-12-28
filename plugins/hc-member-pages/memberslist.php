@@ -105,7 +105,7 @@ switch ($l) {
 	$restriction = " date(mu.enddate) < CURDATE() "
 		     . "AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
 	break;
-    case "exp_next_month"
+    case "exp_next_month":
 	// This is for renewal notices -- only do them for
 	// domestic and foreign non-agency subscribers
 	$restriction = " mu.status = 'active' "

@@ -49,8 +49,6 @@ $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS u.ID, u.user_login, u.user_email, UNIX_T
 
 if($l == "exp_last_60_print") {
     $sqlQuery .= " AND mu.status = 'expired' AND mu.membership_id IN(2, 6) LEFT JOIN wp_pmpro_memberships_users mu2 ON u.ID = mu2.user_id AND mu2.status = 'active' AND mu2.membership_id = 1 "; 
-} elseif($l == "oldmembers") {
-    $sqlQuery .= " LEFT JOIN $wpdb->pmpro_memberships_users mu2 ON u.ID = mu2.user_id AND mu2.status = 'active' ";
 }
 
 $sqlQuery .= " LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE ";
@@ -58,10 +56,8 @@ $sqlQuery .= " LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = 
 // where clause used to contain mu.membership_id > 0 
 
 // Add the restrictions for the various member classes
-if($l == "oldmembers")
-    $sqlQuery .= " mu.status = 'inactive' AND mu2.status IS NULL ";
-elseif($l == "paid")
-$sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
+if($l == "paid")
+    $sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
 elseif($l == "paid_print_domestic")
 $sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
 elseif($l == "exp_last_60_print")
@@ -88,10 +84,7 @@ $sqlQuery .= $search_clause;
 
 $sqlQuery .= " GROUP BY u.ID ";
 
-if($l == "oldmembers")
-    $sqlQuery .= "ORDER BY enddate DESC ";
-else
-    $sqlQuery .= "ORDER BY u.user_registered DESC ";
+$sqlQuery .= "ORDER BY u.user_registered DESC ";
 
 if($limit)
     $sqlQuery .= "LIMIT $start, $limit";
@@ -104,25 +97,15 @@ $theusers = $wpdb->get_results($sqlQuery);
 
 //begin output
 header("Content-type: text/csv");	
-if($s && $l == "oldmembers")
-    header("Content-Disposition: attachment; filename=members_list_expired_" . sanitize_file_name($s) . ".csv");
-elseif($s && $l)
-header("Content-Disposition: attachment; filename=members_list_" . intval($l) . "_level_" . sanitize_file_name($s) . ".csv");
+if($s && $l)
+    header("Content-Disposition: attachment; filename=members_list_" . intval($l) . "_level_" . sanitize_file_name($s) . ".csv");
 elseif($s)
 header("Content-Disposition: attachment; filename=members_list_" . sanitize_file_name($s) . ".csv");
-elseif($l == "oldmembers")
-header("Content-Disposition: attachment; filename=members_list_expired.csv");
 else
     header("Content-Disposition: attachment; filename=members_list.csv");
 
-$heading = "id,username,firstname,lastname,email,billing firstname,billing lastname,billing company,billing address1,billing address2,billing city,billing state,billing zipcode,billing country,billing phone,shipping firstname,shipping lastname,shipping company,shipping address1,shipping address2,shipping city,shipping state,shipping zipcode,shipping country,membership,term,discount_code_id,discount_code,joined";
+$heading = "id,username,firstname,lastname,email,billing firstname,billing lastname,billing company,billing address1,billing address2,billing city,billing state,billing zipcode,billing country,billing phone,shipping firstname,shipping lastname,shipping company,shipping address1,shipping address2,shipping city,shipping state,shipping zipcode,shipping country,membership,term,discount_code_id,discount_code,joined,expires";
 
-if($l == "oldmembers")
-    $heading .= ",ended";
-else
-    $heading .= ",expires";
-
-$heading = apply_filters("pmpro_members_list_csv_heading", $heading);
 $csvoutput = $heading;
 
 //these are the meta_keys for the fields (arrays are object, property. so e.g. $theuser->ID)
@@ -181,12 +164,7 @@ if($theusers)
 {
     foreach($theusers as $theuser)
     {
-	/* if($l == "oldmembers")
-	   $theuser = $wpdb->get_row("SELECT u.ID, u.user_login, u.user_email, UNIX_TIMESTAMP(u.user_registered) as joindate, u.user_login, u.user_nicename, u.user_url, u.user_registered, u.user_status, u.display_name, mu.membership_id, mu.initial_payment, mu.billing_amount, mu.cycle_period, UNIX_TIMESTAMP(mu.enddate) as enddate, m.name as membership FROM $wpdb->users u LEFT JOIN $wpdb->usermeta um ON u.ID = um.user_id LEFT JOIN $wpdb->pmpro_memberships_users mu ON u.ID = mu.user_id LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE u.ID = '" . $user_id . "' ORDER BY mu.id DESC LIMIT 1");
-	   else
-	   $theuser = $wpdb->get_row("SELECT u.ID, u.user_login, u.user_email, UNIX_TIMESTAMP(u.user_registered) as joindate, u.user_login, u.user_nicename, u.user_url, u.user_registered, u.user_status, u.display_name, mu.membership_id, mu.initial_payment, mu.billing_amount, mu.cycle_period, UNIX_TIMESTAMP(mu.enddate) as enddate, m.name as membership FROM $wpdb->users u LEFT JOIN $wpdb->usermeta um ON u.ID = um.user_id LEFT JOIN $wpdb->pmpro_memberships_users mu ON u.ID = mu.user_id AND mu.status = 'active' LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE u.ID = '" . $user_id . "' LIMIT 1");
-	   
-	   $sqlQuery = "SELECT meta_key as `key`, meta_value as `value` FROM $wpdb->usermeta WHERE $wpdb->usermeta.user_id = '" . $user_id . "'";			*/					
+
 	//get meta                                          
 	$metavalues = get_userdata($theuser->ID);  
 	$sqlQuery = "SELECT c.id, c.code FROM $wpdb->pmpro_discount_codes_uses cu LEFT JOIN $wpdb->pmpro_discount_codes c ON cu.code_id = c.id WHERE cu.user_id = '" . $theuser->ID . "' ORDER BY c.id DESC LIMIT 1";			
@@ -218,10 +196,6 @@ if($theusers)
 		$csvoutput .= pmpro_enclose(apply_filters("pmpro_memberslist_expires_column", date("Y-m-d", $theuser->enddate), $theuser));
 	    else
 		$csvoutput .= pmpro_enclose(apply_filters("pmpro_memberslist_expires_column", "Never", $theuser));
-	}
-	elseif($l == "oldmembers" && $theuser->enddate)
-	{
-	    $csvoutput .= pmpro_enclose(date("Y-m-d", $theuser->enddate));
 	}
 	else
 	    $csvoutput .= "N/A";

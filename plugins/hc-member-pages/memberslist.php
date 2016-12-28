@@ -88,34 +88,34 @@ else
 
 	// where clause used to contain mu.membership_id > 0 
 	
-	// append the search restriction if any
-	$sqlQuery .= $search_clause;
-	
 	// Add the restrictions for the various member classes
 	if($l == "oldmembers")
-	    $sqlQuery .= " AND mu.status = 'inactive' AND mu2.status IS NULL ";
+	    $sqlQuery .= " mu.status = 'inactive' AND mu2.status IS NULL ";
 	elseif($l == "paid")
-	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
+	$sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 7)";
 	elseif($l == "paid_print_domestic")
-	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
+	$sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 4, 5, 7)";
 	elseif($l == "exp_last_60_print")
-	$sqlQuery .= " AND date(mu.enddate) < CURDATE() AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+	$sqlQuery .= " date(mu.enddate) < CURDATE() AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
 	elseif($l == "exp_next_month")
         // This is for renewal notices -- only do them for
 	// domestic and foreign non-agency subscribers
-	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) >= date(mu.enddate))";
+	$sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) >= date(mu.enddate))";
 	elseif($l == "exp_next_2_3")
-	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),2)*100)+1), '%Y%m%d')) AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 3 MONTH)))";
+	$sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),2)*100)+1), '%Y%m%d')) AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 3 MONTH)))";
 	elseif($l == "exp_next_4_5")
-	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d')) AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
+	$sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d')) AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
 	elseif($l == "new_non_subs")
 	// They have no membership, or a guest membership, and they joined
 	// less than 60 days ago
-	$sqlQuery .= " AND (mu.user_id IS NULL OR mu.membership_id = 0) AND date(u.joindate) >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+	$sqlQuery .= " (mu.user_id IS NULL OR mu.membership_id = 0) AND date(u.joindate) >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
 	elseif($l)
-	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id = '" . $l . "' ";          
+	$sqlQuery .= " mu.status = 'active' AND mu.membership_id = '" . $l . "' ";          
 	else
-	    $sqlQuery .= " AND mu.status = 'active' ";      
+	    $sqlQuery .= " mu.status = 'active' ";      
+	
+	// append the search restriction if any
+	$sqlQuery .= $search_clause;
 	
 	$sqlQuery .= " GROUP BY u.ID ";
 	

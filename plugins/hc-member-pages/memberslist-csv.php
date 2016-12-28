@@ -188,7 +188,7 @@ if($theusers)
 	   
 	   $sqlQuery = "SELECT meta_key as `key`, meta_value as `value` FROM $wpdb->usermeta WHERE $wpdb->usermeta.user_id = '" . $user_id . "'";			*/					
 	//get meta                                          
-	$metavalues = get_userdata($the_user->ID);  
+	$metavalues = get_userdata($theuser->ID);  
 	$sqlQuery = "SELECT c.id, c.code FROM $wpdb->pmpro_discount_codes_uses cu LEFT JOIN $wpdb->pmpro_discount_codes c ON cu.code_id = c.id WHERE cu.user_id = '" . $theuser->ID . "' ORDER BY c.id DESC LIMIT 1";			
 	$discount_code = $wpdb->get_row($sqlQuery);
 	

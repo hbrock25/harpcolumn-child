@@ -109,7 +109,9 @@ else
 	elseif($l == "exp_next_4_5")
 	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d')) AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
 	elseif($l == "new_non_subs")
-	$sqlQuery .= " AND (mu.user_id IS NULL OR mu.membership_id = 0) "
+	// They have no membership, or a guest membership, and they joined
+	// less than 60 days ago
+	$sqlQuery .= " AND (mu.user_id IS NULL OR mu.membership_id = 0) AND date(u.joindate) >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))"
 	elseif($l)
 	$sqlQuery .= " AND mu.status = 'active' AND mu.membership_id = '" . $l . "' ";          
 	else

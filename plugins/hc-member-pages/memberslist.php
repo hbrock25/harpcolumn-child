@@ -109,7 +109,7 @@ else
 	// They have no membership, or a guest membership, and they joined
 	// less than 60 days ago
 //	$sqlQuery .= " (mu.user_id IS NULL OR mu.membership_id = 0) AND date(u.joindate) >= (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
-	$sqlQuery .= " joindate >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)";
+	$sqlQuery .= " u.user_registered >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)";
 	elseif($l)
 	$sqlQuery .= " mu.status = 'active' AND mu.membership_id = '" . $l . "' ";          
 	else

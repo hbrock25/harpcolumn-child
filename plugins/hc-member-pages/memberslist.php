@@ -78,9 +78,11 @@ LEFT JOIN $wpdb->pmpro_memberships_users mu
 $from_clause = "
 FROM $wpdb->users u 
 LEFT JOIN $wpdb->usermeta um 
-  ON u.ID = um.user_id 
+  ON u.ID = um.user_id "
+	     . $cond_join // one of the two above
+	     . "
 LEFT JOIN $wpdb->pmpro_membership_levels m 
-  ON mu.membership_id = m.id " . $cond_join; // one of the two above
+  ON mu.membership_id = m.id ";
 
 // WHERE stuff
 

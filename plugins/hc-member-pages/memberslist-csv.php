@@ -73,7 +73,7 @@ $sqlQuery .= " mu.status = 'active' AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9
 elseif($l == "new_non_subs")
 // They have no membership, or a guest membership, and they joined
 // less than 60 days ago
-$sqlQuery .= " (mu.user_id IS NULL OR mu.membership_id = 0) AND u.user_registered >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)";
+$sqlQuery .= " (mu.membership_id IN(0, 1) OR mu.user_id IS NULL) AND u.user_registered >= DATE_SUB(CURDATE(), INTERVAL 2 MONTH)";
 elseif($l)
 $sqlQuery .= " mu.status = 'active' AND mu.membership_id = '" . $l . "' ";          
 else

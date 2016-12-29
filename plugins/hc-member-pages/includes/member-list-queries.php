@@ -3,7 +3,8 @@
 /* functions to return various lists of users */
 
 function get_members($l, $s, $limit, $start) {
-
+    global $wpdb;
+    
     // build the query
 
     // selects
@@ -133,9 +134,11 @@ LEFT JOIN $wpdb->pmpro_membership_levels m
 }
 
 function get_rowcount_last_query() {
+    global $wpdb;
     return $wpdb->get_var("SELECT FOUND_ROWS() as found_rows");
 }
 
 function get_levels() {
+    global $wpdb;
     return $wpdb->get_results("SELECT id, name FROM $wpdb->pmpro_membership_levels ORDER BY name");
 }

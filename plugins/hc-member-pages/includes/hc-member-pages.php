@@ -53,7 +53,35 @@ function hc_members_list_page_html() {
 	// show the page
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {
-	require( HC_ML_PLUGIN_PATH . '/memberslist.php' );
+	// request is for a list of users
+
+	// get the vars
+	if(isset($_REQUEST['s']))
+	    $s = $_REQUEST['s'];
+	else
+	    $s = false;
+
+	if(isset($_REQUEST['l']))
+	    $l = $_REQUEST['l'];
+	else
+	    $l = false;
+
+	// pagination
+	if(isset($_REQUEST['pn']))
+	    $pn = $_REQUEST['pn'];
+	else
+	    $pn = 1;
+	if(isset($_REQUEST['limit']))
+	    $limit = $_REQUEST['limit'];
+	else
+	    $limit = 15;
+	$end = $pn * $limit;
+	$start = $end - $limit;
+
+	$theusers = get_members($l, $s, $start, $limit);
+	$totalrows = get_rowcount_last_query();
+	$levels = get_levels();
+	require(HC_ML_PLUGIN_PATH . '/views/list-users.php');
     }
     require_once(PMPRO_DIR . "/adminpages/admin_footer.php");
 }

@@ -2,7 +2,7 @@
 
 // expects: $user_id, $wpdb, $woocommerce, $woobaddr, $woosaddr, $pmbaddr, $pmsaddr
 // View one member
-    // We have a user. Go get all the relevant info.
+
     $user_subs = $wpdb->get_results($wpdb->prepare("SELECT u.ID,  u.user_login,  u.user_email,  u.user_registered as joindate,  u.user_login,  u.user_nicename,  u.user_url,  u.user_registered,  u.user_status,  u.display_name,  mu.membership_id,  mu.initial_payment,  mu.billing_amount,  mu.cycle_period, DATE(mu.startdate) as startdate, DATE(mu.enddate) as enddate,  m.name as membership, mu.status as membership_status FROM $wpdb->users u    LEFT JOIN $wpdb->pmpro_memberships_users mu    ON u.ID = mu.user_id LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id  WHERE u.ID = %s ORDER BY mu.id desc", $user_id));
 
 // This will now return at least one row (for the user) whether they

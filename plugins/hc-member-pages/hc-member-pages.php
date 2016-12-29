@@ -56,7 +56,8 @@ if ( hcml_requirements_met() ) {
     global $wpdb, $pmpro_currency_symbol, $woocommerce;
     require_once( __DIR__ . '/includes/user-addresses.php' );
     require_once( __DIR__ . '/includes/hc-member-pages.php' );
+    require_once( __DIR__ . '/includes/member-list-queries.php' );
 } else {
-    die("Plugin requirements not met");
+    die("Plugin requirements not met. Make sure PMPro and WooCommerce are activated.");
 }
 

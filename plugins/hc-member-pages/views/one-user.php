@@ -3,30 +3,26 @@
 // expects: $user_id, $wpdb, $woocommerce, $woobaddr, $woosaddr, $pmbaddr, $pmsaddr
 // View one member
 
-    $user_subs = $wpdb->get_results($wpdb->prepare("SELECT u.ID,  u.user_login,  u.user_email,  u.user_registered as joindate,  u.user_login,  u.user_nicename,  u.user_url,  u.user_registered,  u.user_status,  u.display_name,  mu.membership_id,  mu.initial_payment,  mu.billing_amount,  mu.cycle_period, DATE(mu.startdate) as startdate, DATE(mu.enddate) as enddate,  m.name as membership, mu.status as membership_status FROM $wpdb->users u    LEFT JOIN $wpdb->pmpro_memberships_users mu    ON u.ID = mu.user_id LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id  WHERE u.ID = %s ORDER BY mu.id desc", $user_id));
+$user_data = $wpdb->get_row($wpdb->prepare("SELECT u.ID,  u.user_login,  u.user_email,  u.user_registered as joindate,  u.user_login,  u.user_nicename,  u.user_url,  u.user_registered,  u.user_status,  u.display_name FROM $wpdb->users u WHERE u.ID = %s ", $user_id));
 
 // This will now return at least one row (for the user) whether they
-// have ever had a membership or not.
+// have ever had a membership or not, assuming there is a user.
 
-    if(count($user_subs) == 0) {
+    if(! $user_data) {
 	$pmpro_msg = __("Could not find user with id " . $user_id, "pmpro");
 	$pmpro_msgt = "error";
 	return;
     }
     
-    // Go get the metadata
-    $sqlQuery = $wpdb->prepare("SELECT meta_key as `key`, meta_value as `value` FROM $wpdb->usermeta WHERE $wpdb->usermeta.user_id = %s", $user_id);
-    $metavalues = pmpro_getMetavalues($sqlQuery);	
-    
-    // and the discount codes if any
-    $sqlQuery = "SELECT c.id, c.code FROM $wpdb->pmpro_discount_codes_uses cu LEFT JOIN $wpdb->pmpro_discount_codes c ON cu.code_id = c.id WHERE cu.user_id = '" . $user_id . "' ORDER BY c.id DESC LIMIT 1";			
-    $discount_code = $wpdb->get_row($sqlQuery);
-    
+// Get the subscriptions, if any
+
+$user_subs = $wpdb->get_results($wpdb->prepare("SELECT mu.membership_id,  mu.initial_payment,  mu.billing_amount,  mu.cycle_period, DATE(mu.startdate) as startdate, DATE(mu.enddate) as enddate,  m.name as membership, mu.status as membership_status FROM $wpdb->pmpro_memberships_users mu LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE mu.user_id = %s ORDER BY mu.id desc ", $user_id));
+
     // Done getting user data, now decide what to do with it
 
 ?>
 
-<h2>Subscriptions for <?php echo $user_subs[0]->display_name?></h2>
+<h2>Subscriptions for <?php echo $user_data->display_name?></h2>
 <form id="posts-filter" method="get" action="">  
     <div class="search-box" style="float: right;">
 	<label class="hidden" for="post-search-input"><?php _e('Search Members', 'pmpro');?>:</label>

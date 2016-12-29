@@ -20,7 +20,14 @@ function hc_members_list_page_html() {
 
     if(!empty($_REQUEST['user_id'])) {
 	$user_id = $_REQUEST['user_id'];
+	
+	// get the vars
+	if(isset($_REQUEST['s']))
+	    $s = $_REQUEST['s'];
+	else
+	    $s = "";
 
+	
 	// any actions?
 
 	if(!empty($_REQUEST['copy_baddr_to_woo_bill'])) {
@@ -50,6 +57,8 @@ function hc_members_list_page_html() {
 	$woobaddr = pretty_woo_billing_address( $user_id );
 	$woosaddr = pretty_woo_shipping_address( $user_id );
 
+	
+	
 	// show the page
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {

@@ -9,8 +9,10 @@ function get_members($l, $s, $limit, $start) {
 	      . user_list_joins($l)
 	      . user_list_where($l, $s)
 	      . " GROUP BY u.ID "
-	      . " ORDER BY u.user_registered DESC "
-	      . $limit ? " LIMIT $start, $limit" : "";
+	      . " ORDER BY u.user_registered DESC ";
+
+    if($limit)
+	      $sqlQuery .= " LIMIT $start, $limit";
  
     // Query assembled, now get the results
     return $wpdb->get_results($sqlQuery);

@@ -35,6 +35,7 @@
 	<input type="hidden" name="page" value="<?php echo HC_MEMBER_PAGE_SLUG ?>" />    
     </div>
 </form>
+<br clear="all" />
 <form id="posts-filter-2" method="get" action="">  
     <div class="search-box" style="float: right;">
 	<label class="hidden" for="post-search-input"><?php _e('Search Members', 'pmpro');?>:</label>

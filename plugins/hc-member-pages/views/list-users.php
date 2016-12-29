@@ -150,7 +150,7 @@ if(!function_exists("current_user_can") || (!current_user_can("manage_options") 
 		<td>
 		    <?php 
 		    if($auser->enddate) 
-			echo $auser->enddate;
+			echo date(get_option("date_format"), strtotime($auser->enddate, current_time("timestamp")));
 		    else
 			echo "Never";
 		    ?>

@@ -78,7 +78,7 @@ function hc_members_list_page_html() {
 	$end = $pn * $limit;
 	$start = $end - $limit;
 
-	$theusers = get_members($l, $s, $start, $limit);
+	$theusers = get_members($l, $s, $limit, $start);
 	$totalrows = get_rowcount_last_query();
 	$levels = get_levels();
 	require_once(HC_ML_PLUGIN_PATH . '/views/list-users.php');

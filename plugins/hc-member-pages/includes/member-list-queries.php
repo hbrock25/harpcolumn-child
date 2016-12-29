@@ -11,7 +11,7 @@ function get_members($l, $s, $limit, $start) {
 	      . " GROUP BY u.ID "
 	      . " ORDER BY u.user_registered DESC "
 	      . $limit ? " LIMIT $start, $limit" : "";
-
+ 
     // Query assembled, now get the results
     return $wpdb->get_results($sqlQuery);
 }

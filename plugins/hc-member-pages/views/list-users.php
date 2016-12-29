@@ -136,8 +136,3 @@ if(!function_exists("current_user_can") || (!current_user_can("manage_options") 
     </tbody>
 </table>
 
-<!-- pagination -->
-
-<?php
-echo pmpro_getPaginationString($pn, $totalrows, $limit, 1, add_query_arg(array("s" => urlencode($s), "l" => $l, "limit" => $limit)));
-

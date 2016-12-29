@@ -399,11 +399,6 @@ function sv_wc_customer_csv_export_customer_row( $customer_data, $user ) {
 }
 add_filter( 'wc_customer_order_csv_export_customer_row', 'sv_wc_customer_csv_export_customer_row', 10, 2 );
 
-// fix for Event Aggregator hitting ea.theeventscalendar.com every request
-
-add_filter( 'tribe_aggregator_should_load', '__return_false' );
-
-
 // remove the prime-mentions-results action since it makes the site really slow
 function hc_bp_friends_remove_action() {
     remove_action('bp_activity_mentions_prime_results', 'bp_friends_prime_mentions_results' );

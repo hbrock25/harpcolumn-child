@@ -16,7 +16,7 @@ $user_data = $wpdb->get_row($wpdb->prepare("SELECT u.ID,  u.user_login,  u.user_
     
 // Get the subscriptions, if any
 
-$user_subs = $wpdb->get_results($wpdb->prepare("SELECT mu.membership_id,  mu.initial_payment,  mu.billing_amount,  mu.cycle_period, DATE(mu.startdate) as startdate, DATE(mu.enddate) as enddate,  m.name as membership, mu.status as membership_status FROM $wpdb->pmpro_memberships_users mu LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE mu.user_id = %s ORDER BY mu.id desc ", $user_id));
+$user_subs = $wpdb->get_results($wpdb->prepare("SELECT mu.membership_id,  mu.initial_payment,  mu.billing_amount,  mu.cycle_period, UNIX_TIMESTAMP(mu.startdate) as startdate, UNIX_TIMESTAMP(mu.enddate) as enddate,  m.name as membership, mu.status as membership_status FROM $wpdb->pmpro_memberships_users mu LEFT JOIN $wpdb->pmpro_membership_levels m ON mu.membership_id = m.id WHERE mu.user_id = %s ORDER BY mu.id desc ", $user_id));
 
     // Done getting user data, now decide what to do with it
 
@@ -91,8 +91,8 @@ $user_subs = $wpdb->get_results($wpdb->prepare("SELECT mu.membership_id,  mu.ini
 	    <tr>
 		<td><?php echo $sub->membership?></td>
 		<td><?php echo $sub->membership_status?></td>
-		<td><?php echo $sub->startdate?></td>
-		<td><?php echo $sub->enddate?></td>
+		<td><?php echo date(get_option("date_format"), $sub->startdate)?></td>
+		<td><?php echo date(get_option("date_format"), echo $sub->enddate)?></td>
 	    </tr>
 	<?php 
 	} ?>

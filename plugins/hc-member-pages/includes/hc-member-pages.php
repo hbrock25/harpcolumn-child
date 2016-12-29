@@ -81,6 +81,10 @@ function hc_members_list_page_html() {
 	$theusers = get_members($l, $s, $limit, $start);
 	$totalrows = get_rowcount_last_query();
 	$levels = get_levels();
+
+	// first the choose-level form
+	require(HC_ML_PLUGIN_PATH . '/views/list-users-form.php');
+	// now the main page
 	require(HC_ML_PLUGIN_PATH . '/views/list-users.php');
     }
     require_once(PMPRO_DIR . "/adminpages/admin_footer.php");

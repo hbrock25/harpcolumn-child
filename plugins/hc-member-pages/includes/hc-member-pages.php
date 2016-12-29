@@ -81,7 +81,7 @@ function hc_members_list_page_html() {
 	$theusers = get_members($l, $s, $start, $limit);
 	$totalrows = get_rowcount_last_query();
 	$levels = get_levels();
-	require(HC_ML_PLUGIN_PATH . '/views/list-users.php');
+	require_once(HC_ML_PLUGIN_PATH . '/views/list-users.php');
     }
     require_once(PMPRO_DIR . "/adminpages/admin_footer.php");
 }

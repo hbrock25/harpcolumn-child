@@ -128,8 +128,8 @@ add_action('wp_ajax_hc_memberslist_csv', 'hcml_wp_ajax_hc_memberslist_csv');
 function hcml_parse_request($request, $page = "list-users") {
     // parse the request vars for a list page.
     $s = (isset($request['s']) ? $request['s'] : false);
-    $s = (isset($request['l']) ? $request['l'] : false);
-    $s = (isset($request['pn']) ? $request['pn'] : 1);
+    $l = (isset($request['l']) ? $request['l'] : false);
+    $pn = (isset($request['pn']) ? $request['pn'] : 1);
 
     //limit is special
     if(!empty($request['limit'])) {

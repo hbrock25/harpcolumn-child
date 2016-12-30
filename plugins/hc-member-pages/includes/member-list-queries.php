@@ -23,12 +23,16 @@ function get_members($l, $s, $limit, $start) {
     $sqlQuery = user_list_select()
 	      . user_list_joins($l)
 	      . user_list_where($l, $s)
-	      . " GROUP BY u.ID "
-	      . " ORDER BY u.user_registered DESC ";
+	      . " GROUP BY u.ID ";
+    if($l == "old_members" || $l == "exp_last_60_print") {
+	$sqlQuery .= "ORDER BY mu.enddate DESC ";
+    } else {
+	$sqlQuery .= " ORDER BY u.user_registered DESC ";
+    }
 
     if($limit)
-	      $sqlQuery .= " LIMIT $start, $limit";
- 
+	$sqlQuery .= " LIMIT $start, $limit";
+    
     // Query assembled, now get the results
     return $wpdb->get_results($sqlQuery);
 }

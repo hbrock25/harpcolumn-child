@@ -25,7 +25,7 @@ function get_members($l, $s, $limit, $start) {
 	      . user_list_where($l, $s)
 	      . " GROUP BY u.ID ";
     if($l == "old_members" || $l == "exp_last_60_print") {
-	$sqlQuery .= "ORDER BY mu.enddate DESC ";
+	$sqlQuery .= "ORDER BY mu.enddate DESC, mu.startdate DESC ";
     } else {
 	$sqlQuery .= " ORDER BY u.user_registered DESC ";
     }

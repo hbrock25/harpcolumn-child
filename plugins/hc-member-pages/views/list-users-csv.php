@@ -1,11 +1,11 @@
 <?php	
-//only admins can get this
-if(!function_exists("current_user_can") || (!current_user_can("manage_options") && !current_user_can("pmpro_memberslist_csv")))
-{
-    die(__("You do not have permissions to perform this action.", "pmpro"));
-}	
-
-global $wpdb;	
+/**
+ * Download a CSV of users
+ * Expects:
+ * $l: type of users to show
+ * $s: search string
+ * $theusers: sql result array
+ **/
 
 //begin output
 header("Content-type: text/csv");	

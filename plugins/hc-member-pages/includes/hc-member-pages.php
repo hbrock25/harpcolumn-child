@@ -62,31 +62,8 @@ function hc_members_list_page_html() {
 	// show the page
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {
-	// request is for a list of users
 
-	// get the vars
-	if(isset($_REQUEST['s']))
-	    $s = $_REQUEST['s'];
-	else
-	    $s = false;
-
-	if(isset($_REQUEST['l']))
-	    $l = $_REQUEST['l'];
-	else
-	    $l = false;
-
-	// pagination
-	if(isset($_REQUEST['pn']))
-	    $pn = $_REQUEST['pn'];
-	else
-	    $pn = 1;
-	if(isset($_REQUEST['limit']))
-	    $limit = $_REQUEST['limit'];
-	else
-	    $limit = 15;
-	$end = $pn * $limit;
-	$start = $end - $limit;
-
+	extract hcml_parse_request($_REQUEST);
 	$theusers = get_members($l, $s, $limit, $start);
 	$totalrows = get_rowcount_last_query();
 	$levels = get_levels();
@@ -129,48 +106,56 @@ function hc_members_list_admin_bar_menu() {
 
 add_action('admin_bar_menu', 'hc_members_list_admin_bar_menu', 1001);
 
-/* Source the members list page from this plugin, not the pmpro one */
+/* responds to an ajax request for a csv of the current members list */
 
 function hcml_wp_ajax_hc_memberslist_csv() {
-    global $wpdb, $pmpro_currency_symbol, $woocommerce;
-
-    // get the vars
-    if(isset($_REQUEST['s']))
-	$s = $_REQUEST['s'];
-    else
-	$s = false;
-
-    if(isset($_REQUEST['l']))
-	$l = $_REQUEST['l'];
-    else
-	$l = false;
-
-    if(!empty($_REQUEST['pn']))
-	$pn = $_REQUEST['pn'];
-    else
-	$pn = 1;
-
-    if(!empty($_REQUEST['limit']))
-	$limit = $_REQUEST['limit'];
-    else
-	$limit = false;
-
-    if($limit)
-    {	
-	$end = $pn * $limit;
-	$start = $end - $limit;		
+    // check user capabilities
+    if (!current_user_can('manage_options') ||
+	! current_user_can('pmpro_memberslist')) {
+	return;
     }
-    else
-    {
-	$end = NULL;
-	$start = NULL;
-    }	
-
+    global $wpdb, $pmpro_currency_symbol, $woocommerce;
+    extract hcml_parse_request($_REQUEST, "list-users-csv");
     $theusers = get_members($l, $s, $limit, $start);
-    
     require_once( HC_ML_PLUGIN_PATH . '/views/list-users-csv.php');	
     exit;	
 
 }
 add_action('wp_ajax_hc_memberslist_csv', 'hcml_wp_ajax_hc_memberslist_csv');
 
+function hcml_parse_request($request, $page = "list-users") {
+    // parse the request vars for a list page.
+    if(isset($request['s']))
+	$vars->s = $request['s'];
+    else
+	$vars->s = false;
+
+    if(isset($request['l']))
+	$vars->l = $request['l'];
+    else
+	$vars->l = false;
+
+    if(!empty($request['pn']))
+	$vars->pn = $request['pn'];
+    else
+	$vars->pn = 1;
+
+    if(!empty($request['limit'])) {
+	$vars->limit = $request['limit'];
+    } else {
+	if($page == "list-users") {
+	    $vars->limit = 15;
+	} else {
+	    $vars->limit = false;
+	}
+    }
+    
+    if($vars->limit) {	
+	$vars->end = $vars->pn * $vars->limit;
+	$vars->start = $vars->end - $vars->limit;		
+    } else {
+	$vars->end = NULL;
+	$vars->start = NULL;
+    }
+    return $vars;
+}

@@ -168,7 +168,7 @@ function hcml_wp_ajax_hc_memberslist_csv() {
 
     $theusers = get_members($l, $s, $limit, $start);
     
-    require_once( HC_ML_PLUGIN_PATH . '/memberslist-csv.php');	
+    require_once( HC_ML_PLUGIN_PATH . '/views/list-users-csv.php');	
     exit;	
 
 }

@@ -175,3 +175,8 @@ function get_levels() {
     return $wpdb->get_results("SELECT id, name FROM $wpdb->pmpro_membership_levels ORDER BY name");
 }
 
+
+// utility function for the CSV output
+function pmpro_enclose($s) {
+    return "\"" . str_replace("\"", "\\\"", $s) . "\"";
+}

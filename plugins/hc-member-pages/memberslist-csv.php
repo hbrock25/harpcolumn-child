@@ -108,7 +108,3 @@ if($theusers)
 
 print $csvoutput;
 
-function pmpro_enclose($s)
-{
-    return "\"" . str_replace("\"", "\\\"", $s) . "\"";
-}

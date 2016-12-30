@@ -63,7 +63,7 @@ function hc_members_list_page_html() {
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {
 
-	extract hcml_parse_request($_REQUEST);
+	extract(hcml_parse_request($_REQUEST));
 	$theusers = get_members($l, $s, $limit, $start);
 	$totalrows = get_rowcount_last_query();
 	$levels = get_levels();
@@ -115,7 +115,7 @@ function hcml_wp_ajax_hc_memberslist_csv() {
 	return;
     }
     global $wpdb, $pmpro_currency_symbol, $woocommerce;
-    extract hcml_parse_request($_REQUEST, "list-users-csv");
+    extract(hcml_parse_request($_REQUEST, "list-users-csv"));
     $theusers = get_members($l, $s, $limit, $start);
     require_once( HC_ML_PLUGIN_PATH . '/views/list-users-csv.php');	
     exit;	

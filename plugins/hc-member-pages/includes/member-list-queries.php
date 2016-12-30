@@ -111,7 +111,7 @@ INNER JOIN $wpdb->pmpro_memberships_users mu
   AND mu.membership_id NOT IN(0, 1, 7) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
   ON u.ID = mu2.user_id
-  AND ((mu2.status = 'active' AND mu2.membership_id NOT IN(0, 1, 7))";
+  AND (mu2.status = 'active' AND mu2.membership_id NOT IN(0, 1, 7))";
 
     if($l == "exp_last_60_print") {
 	$from_clause .= $exp_last_60_join;

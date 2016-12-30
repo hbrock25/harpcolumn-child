@@ -108,9 +108,10 @@ LEFT JOIN $wpdb->pmpro_memberships_users mu2
 INNER JOIN $wpdb->pmpro_memberships_users mu 
   ON u.ID = mu.user_id 
   AND (mu.status = 'expired' OR mu.status = 'changed')
-  AND mu.membership_id IN(2, 3, 4, 5, 6, 8, 9) 
+  AND mu.membership_id NOT IN(0, 1, 7) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
-  ON u.ID = mu2.user_id ";
+  ON u.ID = mu2.user_id
+  AND ((mu2.status = 'active' AND mu2.membership_id NOT IN(0, 1, 7))";
 
     if($l == "exp_last_60_print") {
 	$from_clause .= $exp_last_60_join;
@@ -154,9 +155,9 @@ function user_list_where($l, $s) {
 	    break;
 
 	case "old_members":
-	    // No where clause at all on this one.
-	    $restriction = " ((mu2.status = 'active' AND mu2.membership_id = 1)"
-			 . "       OR mu2.status NOT IN('active')) ";
+	    // there must *not* be a match with the list of user_ids with
+	    // active subscriptions
+	    $restriction = " mu2.user_id IS NULL ";
 	    break;
 	case "exp_next_month":
 	    // This is for renewal notices -- only do them for

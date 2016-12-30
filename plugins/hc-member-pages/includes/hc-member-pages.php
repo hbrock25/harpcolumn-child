@@ -69,10 +69,10 @@ function hc_members_list_page_html() {
 	$totalrows = get_rowcount_last_query();
 	$levels = get_levels();
 
-	// first the choose-level form
-	require(HC_ML_PLUGIN_PATH . '/views/list-users-form.php');
-	// and the paginator
+	// first the paginator
 	require(HC_ML_PLUGIN_PATH . '/views/list-users-pagination.php');
+	// then the choose-level form
+	require(HC_ML_PLUGIN_PATH . '/views/list-users-form.php');
 	// now the main page
 	require(HC_ML_PLUGIN_PATH . '/views/list-users.php');
 	// and the paginator again

@@ -63,6 +63,7 @@ function hc_members_list_page_html() {
 	require( HC_ML_PLUGIN_PATH . '/views/one-user.php' );
     } else {
 
+	// returns $s, $l, $pn, $limit, $start, $end
 	extract(hcml_parse_request($_REQUEST));
 	$theusers = get_members($l, $s, $limit, $start);
 	$totalrows = get_rowcount_last_query();
@@ -115,6 +116,7 @@ function hcml_wp_ajax_hc_memberslist_csv() {
 	return;
     }
     global $wpdb, $pmpro_currency_symbol, $woocommerce;
+    // returns $s, $l, $pn, $limit, $start, $end
     extract(hcml_parse_request($_REQUEST, "list-users-csv"));
     $theusers = get_members($l, $s, $limit, $start);
     require_once( HC_ML_PLUGIN_PATH . '/views/list-users-csv.php');	
@@ -125,37 +127,45 @@ add_action('wp_ajax_hc_memberslist_csv', 'hcml_wp_ajax_hc_memberslist_csv');
 
 function hcml_parse_request($request, $page = "list-users") {
     // parse the request vars for a list page.
-    if(isset($request['s']))
-	$vars->s = $request['s'];
-    else
-	$vars->s = false;
-
+    /* if(isset($request['s']))
+       $s = $request['s'];
+     * else
+       $s = false;
+     */
+    $s = (isset($request['s']) ? $request['s'] : false);
+    
     if(isset($request['l']))
-	$vars->l = $request['l'];
+	$l = $request['l'];
     else
-	$vars->l = false;
+	$l = false;
 
     if(!empty($request['pn']))
-	$vars->pn = $request['pn'];
+	$pn = $request['pn'];
     else
-	$vars->pn = 1;
+	$pn = 1;
 
     if(!empty($request['limit'])) {
-	$vars->limit = $request['limit'];
+	$limit = $request['limit'];
     } else {
 	if($page == "list-users") {
-	    $vars->limit = 15;
+	    $limit = 15;
 	} else {
-	    $vars->limit = false;
+	    $limit = false;
 	}
     }
     
-    if($vars->limit) {	
-	$vars->end = $vars->pn * $vars->limit;
-	$vars->start = $vars->end - $vars->limit;		
+    if($limit) {	
+	$end = $pn * $limit;
+	$start = $end - $limit;		
     } else {
-	$vars->end = NULL;
-	$vars->start = NULL;
+	$end = NULL;
+	$start = NULL;
     }
-    return $vars;
+    return array(
+	"s" => $s,
+	"l" => $l,
+	"pn" => $pn,
+	"limit" => $limit,
+	"start" => $start,
+	"end" => $end);
 }

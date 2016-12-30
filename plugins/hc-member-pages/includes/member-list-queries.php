@@ -144,6 +144,10 @@ function user_list_where($l, $s) {
 			 . "AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
 	    break;
 
+	case "old_members":
+	    // No where clause at all on this one.
+	    $restriction = " true ";
+	    break;
 	case "exp_next_month":
 	    // This is for renewal notices -- only do them for
 	    // domestic and foreign non-agency subscribers

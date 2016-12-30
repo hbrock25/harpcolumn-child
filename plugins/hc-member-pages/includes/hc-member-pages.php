@@ -132,7 +132,42 @@ add_action('admin_bar_menu', 'hc_members_list_admin_bar_menu', 1001);
 /* Source the members list page from this plugin, not the pmpro one */
 
 function hcml_wp_ajax_hc_memberslist_csv() {
+    global $wpdb, $pmpro_currency_symbol, $woocommerce;
 
+    // get the vars
+    if(isset($_REQUEST['s']))
+	$s = $_REQUEST['s'];
+    else
+	$s = false;
+
+    if(isset($_REQUEST['l']))
+	$l = $_REQUEST['l'];
+    else
+	$l = false;
+
+    if(!empty($_REQUEST['pn']))
+	$pn = $_REQUEST['pn'];
+    else
+	$pn = 1;
+
+    if(!empty($_REQUEST['limit']))
+	$limit = $_REQUEST['limit'];
+    else
+	$limit = false;
+
+    if($limit)
+    {	
+	$end = $pn * $limit;
+	$start = $end - $limit;		
+    }
+    else
+    {
+	$end = NULL;
+	$start = NULL;
+    }	
+
+    $theusers = get_members($l, $s, $limit, $start);
+    
     require_once( HC_ML_PLUGIN_PATH . '/memberslist-csv.php');	
     exit;	
 

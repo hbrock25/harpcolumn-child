@@ -83,7 +83,6 @@ $user_subs = $wpdb->get_results($wpdb->prepare("SELECT mu.membership_id,  mu.ini
 	    <th><?php _e('Status', 'pmpro');?></th>
 	    <th><?php _e('Start Date', 'pmpro');?></th>
 	    <th><?php _e('Expiration Date', 'pmpro');?></th>
-	    <th><?php _e('Amount Paid', 'pmpro');?></th>
 	</tr>
     </thead>
     <tbody id="users" class="list:user user-list">  

@@ -71,9 +71,11 @@ function hc_members_list_page_html() {
 
 	// first the choose-level form
 	require(HC_ML_PLUGIN_PATH . '/views/list-users-form.php');
+	// and the paginator
+	require(HC_ML_PLUGIN_PATH . '/views/list-users-pagination.php');
 	// now the main page
 	require(HC_ML_PLUGIN_PATH . '/views/list-users.php');
-	// and the paginator
+	// and the paginator again
 	require(HC_ML_PLUGIN_PATH . '/views/list-users-pagination.php');
     }
     require_once(PMPRO_DIR . "/adminpages/admin_footer.php");

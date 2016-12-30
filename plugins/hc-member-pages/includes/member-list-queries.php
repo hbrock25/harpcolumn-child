@@ -95,12 +95,10 @@ LEFT JOIN $wpdb->usermeta um
     $exp_last_60_join = "
 INNER JOIN $wpdb->pmpro_memberships_users mu 
   ON u.ID = mu.user_id 
-  AND (mu.status = 'expired' OR mu.status = 'changed')
+  AND mu.status NOT IN('active')
   AND mu.membership_id IN(2, 6) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
-  ON u.ID = mu2.user_id 
-  AND ((mu2.status = 'active' AND mu2.membership_id = 1) 
-        OR mu2.membership_id = 0)";
+  ON u.ID = mu2.user_id ";
     
     // Here we want current users who have any kind of expired subscription
     // (there can be many of these), and no current subscription, with 
@@ -152,7 +150,9 @@ function user_list_where($l, $s) {
 
 	case "exp_last_60_print":
 	    $restriction = " date(mu.enddate) < CURDATE() "
-			 . "AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))";
+			 . "AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))"
+			 . "  AND ((mu2.status = 'active' AND mu2.membership_id = 1)"
+			 . "       OR mu2.status NOT IN('active'))";
 	    break;
 
 	case "old_members":

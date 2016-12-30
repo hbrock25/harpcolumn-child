@@ -58,3 +58,5 @@
 	<input class="button" type="submit" value="<?php _e('Search Members', 'pmpro');?>"/>
     </p>
 </form>
+
+<br clear="all" />

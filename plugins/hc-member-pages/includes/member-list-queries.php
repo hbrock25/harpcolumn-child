@@ -81,9 +81,7 @@ function user_list_joins($l) {
     $from_clause = "
 FROM $wpdb->users u 
 LEFT JOIN $wpdb->usermeta um 
-  ON u.ID = um.user_id 
-LEFT JOIN $wpdb->pmpro_memberships_users mu 
-  ON u.ID = mu.user_id ";
+  ON u.ID = um.user_id "; 
     
     // Here we want current users who have an expired domestic subscription
     // (there can be many of these), and no current subscription.
@@ -91,6 +89,8 @@ LEFT JOIN $wpdb->pmpro_memberships_users mu
     // to consider. We only add this join if the user asks for exp_last_60_print
 
     $exp_last_60_join = "
+INNER JOIN $wpdb->pmpro_memberships_users mu 
+  ON u.ID = mu.user_id 
   AND (mu.status = 'expired' OR mu.status = 'changed')
   AND mu.membership_id IN(2, 6) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
@@ -103,6 +103,8 @@ LEFT JOIN $wpdb->pmpro_memberships_users mu2
     // no date limit. We only add this if the user asks for old_members.
 
     $old_members_join = "
+INNER JOIN $wpdb->pmpro_memberships_users mu 
+  ON u.ID = mu.user_id 
   AND (mu.status = 'expired' OR mu.status = 'changed')
   AND mu.membership_id IN(2, 3, 4, 5, 6, 8, 9) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
@@ -114,7 +116,12 @@ LEFT JOIN $wpdb->pmpro_memberships_users mu2
 	$from_clause .= $exp_last_60_join;
     } elseif($l == "old_members") {
 	$from_clause .= $old_members_join;
-    }	
+    } else {
+	$from_clause .= "
+LEFT JOIN $wpdb->pmpro_memberships_users mu 
+  ON u.ID = mu.user_id 
+";
+    }
     
     // conditional join needs to come before this bit, since it defines
     // the mu table. This finishes it off.

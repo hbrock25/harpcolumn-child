@@ -98,16 +98,19 @@ INNER JOIN $wpdb->pmpro_memberships_users mu
   AND mu.status NOT IN('active')
   AND mu.membership_id IN(2, 6) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
-  ON u.ID = mu2.user_id ";
+  ON u.ID = mu2.user_id
+  AND (mu2.status = 'active' AND mu2.membership_id NOT IN(0, 1, 7))";
     
     // Here we want current users who have any kind of expired subscription
     // (there can be many of these), and no current subscription, with 
     // no date limit. We only add this if the user asks for old_members.
+    // Actually the only real difference between these two is that the second
+    // one will find *any* prior paid subscription.
 
     $old_members_join = "
 INNER JOIN $wpdb->pmpro_memberships_users mu 
   ON u.ID = mu.user_id 
-  AND (mu.status = 'expired' OR mu.status = 'changed')
+  AND mu.status NOT IN('active')
   AND mu.membership_id NOT IN(0, 1, 7) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
   ON u.ID = mu2.user_id
@@ -148,10 +151,11 @@ function user_list_where($l, $s) {
 	    break;
 
 	case "exp_last_60_print":
+	    // there must *not* be a match with the list of user_ids with
+	    // active subscriptions
 	    $restriction = " date(mu.enddate) < CURDATE() "
 			 . "AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))"
-			 . "  AND ((mu2.status = 'active' AND mu2.membership_id = 1)"
-			 . "       OR mu2.status NOT IN('active'))";
+			 . "  AND mu2.user_id IS NULL ";
 	    break;
 
 	case "old_members":

@@ -12,12 +12,6 @@
  * $levels: available membership levels
  **/
 
-//only admins can get this
-if(!function_exists("current_user_can") || (!current_user_can("manage_options") && !current_user_can("pmpro_memberslist")))
-{
-    die(__("You do not have permissions to perform this action.", "pmpro"));
-}  
-
 ?>
 
 <!-- form to choose users -->
@@ -36,6 +30,8 @@ if(!function_exists("current_user_can") || (!current_user_can("manage_options") 
 		<option value="" <?php if(!$l) { ?>selected="selected"<?php } ?>><?php _e('All Levels', 'pmpro');?></option>
 		<option value="paid" <?php if($l == "paid") { ?>selected="selected"<?php } ?>><?php _e('Paid Subscribers', 'pmpro');?></option>
 		<option value="new_non_subs" <?php if($l == "new_non_subs") { ?>selected="selected"<?php } ?>><?php _e('New Non-Subscribers', 'pmpro');?></option>
+		<option value="old_members" <?php if($l == "old_members") { ?>selected="selected"<?php } ?>><?php _e('Former Subscribers', 'pmpro');?></option>
+
 		<option value="paid_print_domestic" <?php if($l == "paid_print_domestic") { ?>selected="selected"<?php } ?>><?php _e('Paid Domestic Print Subscribers', 'pmpro');?></option>
 		<option value="exp_last_60_print" <?php if($l == "exp_last_60_print") { ?>selected="selected"<?php } ?>><?php _e('Recently Expired Domestic Print Subs', 'pmpro');?></option>
 		<option value="exp_next_month" <?php if($l == "exp_next_month") { ?>selected="selected"<?php } ?>><?php _e('Expires next month', 'pmpro');?></option>

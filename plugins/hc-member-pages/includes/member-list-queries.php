@@ -3,6 +3,21 @@
 /* functions to return various lists of users */
 
 function get_members($l, $s, $limit, $start) {
+
+/* Harp Column Membership Levels:
++----+------------------------------------------------------+
+|  1 | Harp Column Guest                                    |
+|  2 | Harp Column Subscriber                               |
+|  3 | Harp Column Subscriber, Digital (outside U.S. only)  |
+|  4 | Harp Column Subscriber, Overseas, Print Edition      |
+|  5 | Harp Column Subscriber, Canada/Mexico, Print Edition |
+|  6 | Harp Column Subscriber (two years)                   |
+|  7 | Harp Column Advertisers                              |
+|  8 | Harp Column Mini-Subscription                        |
+|  9 | Agency Subscribers                                   |
++----+------------------------------------------------------+
+*/   
+
     global $wpdb;
     
     $sqlQuery = user_list_select()
@@ -75,16 +90,31 @@ LEFT JOIN $wpdb->pmpro_memberships_users mu
     // The WHERE clause will restrict the age of the expired subscription
     // to consider. We only add this join if the user asks for exp_last_60_print
 
-    $cond_join = "
-  AND mu.status = 'expired' 
+    $exp_last_60_join = "
+  AND (mu.status = 'expired' OR mu.status = 'changed')
   AND mu.membership_id IN(2, 6) 
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
   ON u.ID = mu2.user_id 
   AND ((mu2.status = 'active' AND mu2.membership_id = 1) 
         OR mu2.membership_id = 0)";
     
-    if($l == "exp_last_60_print")
-	$from_clause .= $cond_join;
+    // Here we want current users who have any kind of expired subscription
+    // (there can be many of these), and no current subscription, with 
+    // no date limit. We only add this if the user asks for old_members.
+
+    $old_members_join = "
+  AND (mu.status = 'expired' OR mu.status = 'changed')
+  AND mu.membership_id IN(2, 3, 4, 5, 6, 8, 9) 
+LEFT JOIN $wpdb->pmpro_memberships_users mu2 
+  ON u.ID = mu2.user_id 
+  AND ((mu2.status = 'active' AND mu2.membership_id = 1) 
+        OR mu2.membership_id = 0)";
+
+    if($l == "exp_last_60_print") {
+	$from_clause .= $exp_last_60_join;
+    } elseif($l == "old_members") {
+	$from_clause .= $old_members_join;
+    }	
     
     // conditional join needs to come before this bit, since it defines
     // the mu table. This finishes it off.

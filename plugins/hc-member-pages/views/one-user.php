@@ -91,7 +91,7 @@ $user_subs = $wpdb->get_results($wpdb->prepare("SELECT mu.membership_id,  mu.ini
 		<td><?php echo $sub->membership?></td>
 		<td><?php echo $sub->membership_status?></td>
 		<td><?php echo date(get_option("date_format"), $sub->startdate)?></td>
-		<td><?php echo date(get_option("date_format"), echo $sub->enddate)?></td>
+		<td><?php echo date(get_option("date_format"), $sub->enddate)?></td>
 	    </tr>
 	<?php 
 	} ?>

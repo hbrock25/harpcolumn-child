@@ -112,6 +112,11 @@ INNER JOIN $wpdb->pmpro_memberships_users mu
   ON u.ID = mu.user_id 
   AND mu.status NOT IN('active')
   AND mu.membership_id NOT IN(0, 1, 7) 
+  AND mu.enddate = (SELECT MAX(mu3.enddate) 
+      FROM $wpdb->pmpro_memberships_users mu3 
+      WHERE mu3.status NOT IN('active')
+      AND mu3.membership_id NOT IN(0, 1, 7
+      AND u.ID = mu3.user_id))
 LEFT JOIN $wpdb->pmpro_memberships_users mu2 
   ON u.ID = mu2.user_id
   AND (mu2.status = 'active' AND mu2.membership_id NOT IN(0, 1, 7))";

@@ -35,14 +35,6 @@ function pmpro_shortcode_protection_text($atts, $content=null, $code="")
 }
 add_shortcode("protection_text", "pmpro_shortcode_protection_text");
 
-function dae_pmpro_email_recipient($recipient, $email)
-{
-    //if($email->template == "invoice")			//use this to check for a certain template
-    $recipient = NULL;	
-    return $recipient;
-}
-// add_filter("pmpro_email_recipient", "dae_pmpro_email_recipient", 10, 2);
-
 // For buddyblog form -- don't let users set their own categories.
 
 function buddyblog_my_post_form_settings($settings)
@@ -126,28 +118,6 @@ function my_tribe_get_events_title($title) {
 }
 
 add_filter('tribe_get_events_title', 'my_tribe_get_events_title');
-
-function tml_action_url( $url, $action, $instance ) {
-    if ( 'register' == $action )
-	$url = '/membership-account/subscribe/';
-    return $url;
-}
-
-add_filter( 'tml_action_url', 'tml_action_url', 10, 3 );
-
-/* Always display the "register" link even though we don't 
- * allow native wordpress user registration
- */
-
-function hc_add_back_register_link( $action_links, $args ) {
-    $action_links[] = array(
-	'title' => 'Register',
-	'url'   => '/membership-account/subscribe/'
-    );
-    return $action_links;
-}
-
-add_filter( 'tml_action_links', 'hc_add_back_register_link', 10, 2);
 
 function my_bbp_no_reply_email(){
     $email = 'noreply@harpcolumn.com';
@@ -404,3 +374,37 @@ function hc_bp_friends_remove_action() {
     remove_action('bp_activity_mentions_prime_results', 'bp_friends_prime_mentions_results' );
 }
 add_action( 'bp_activity_mentions_prime_results', 'hc_bp_friends_remove_action', 9 );
+
+function hc_pmpro_getfile_403() {
+    header( "HTTP/1.1 403 Restricted Content" );
+    header( "Location: " . $_SERVER['REQUEST_URI'] );
+
+    echo '
+    <html>
+    <head>
+    <title>Access Denied</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="author" content="Harp Column" />
+    <meta name="description" content="Harp Column - Practical News for Practical Harpists" />
+    <meta name="keywords" content="Access Denied" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" href="/wp-content/plugins/wp-maintenance-mode/assets/css/style.min.css">
+    <style>.wrap h1 { color: #cd0076; }</style>    </head>
+		      <body class="">
+	<div class="wrap">
+	<h1>Access Denied</h1>
+	<h2><p>You have attempted to access content, probably a Harp
+	Column issue, that you do not have permission to see.</p>
+	<p>To gain access, <a href="/subscribe">subscribe</a> to Harp
+	Column, or if you already have a
+	subscription, <a href="/my-account">log in</a>.</p>
+	</h2>
+	</div>
+	</body>
+	</html>
+';
+
+    exit;
+}
+
+add_action("pmpro_getfile_before_error", "hc_pmpro_getfile_403");

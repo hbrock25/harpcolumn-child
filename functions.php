@@ -396,6 +396,7 @@ function hc_pmpro_getfile_403() {
         <center>
         <img src="/wp-content/uploads/2016/12/Harp-Column-main-logo.png" />
         </center>
+        <br />
         <h1>We\'re sorry</h1>
 	<h2><p>Only Harp Column subscribers can download the Harp
 	Column issue at this location, and you do not appear to be

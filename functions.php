@@ -387,9 +387,9 @@ function hc_pmpro_getfile_403() {
     <meta name="description" content="Harp Column - Practical News for Practical Harpists" />
     <meta name="keywords" content="Access Denied" />
     <meta name="robots" content="index, follow" />
-    <style>.wrap h1 { color: #cd0076; } img { padding-bottom: 20px; }</style>
+    <style>.wrap { width: 605px; margin: 100px auto 0; text-align: center;} h1 { color: #cd0076; } img { padding-bottom: 20px; }</style>
     </head>
-      <body class="">
+      <body style="background-color: #fff; color: #1b1f23; font-family: sans-serif;">
 	<div class="wrap">
         <center>
         <img src="/wp-content/uploads/2016/12/Harp-Column-main-logo.png" />

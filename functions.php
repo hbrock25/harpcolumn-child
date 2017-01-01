@@ -398,7 +398,7 @@ function hc_pmpro_getfile_403() {
         <h1>We\'re sorry</h1>
 	<h2><p>Only Harp Column subscribers can download the Harp
 	Column issue at this location, and you do not appear to be
-        a Harp Column subscriber</p>
+        a Harp Column subscriber.</p>
 	<p>To subscribe to Harp Column, <a href="/subscribe">click here</a>,
         or if you already have a
 	subscription, <a href="/my-account">log in</a>.</p>

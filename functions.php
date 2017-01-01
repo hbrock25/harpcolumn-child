@@ -387,9 +387,7 @@ function hc_pmpro_getfile_403() {
     <meta name="description" content="Harp Column - Practical News for Practical Harpists" />
     <meta name="keywords" content="Access Denied" />
     <meta name="robots" content="index, follow" />
-    <link rel="stylesheet" href="/wp-content/plugins/wp-maintenance-mode/assets/css/style.min.css">
-    <style>.wrap h1 { color: #cd0076; }
-    </style>
+    <style>.wrap h1 { color: #cd0076; } img { padding-bottom: 20px; }</style>
     </head>
       <body class="">
 	<div class="wrap">

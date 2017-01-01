@@ -388,14 +388,20 @@ function hc_pmpro_getfile_403() {
     <meta name="keywords" content="Access Denied" />
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" href="/wp-content/plugins/wp-maintenance-mode/assets/css/style.min.css">
-    <style>.wrap h1 { color: #cd0076; }</style>    </head>
-		      <body class="">
+    <style>.wrap h1 { color: #cd0076; }
+    </style>
+    </head>
+      <body class="">
 	<div class="wrap">
-	<h1>Access Denied</h1>
-	<h2><p>You have attempted to access content, probably a Harp
-	Column issue, that you do not have permission to see.</p>
-	<p>To gain access, <a href="/subscribe">subscribe</a> to Harp
-	Column, or if you already have a
+        <center>
+        <img src="/wp-content/uploads/2016/12/Harp-Column-main-logo.png" />
+        </center>
+        <h1>We\'re sorry</h1>
+	<h2><p>Only Harp Column subscribers can download the Harp
+	Column issue at this location, and you do not appear to be
+        a Harp Column subscriber</p>
+	<p>To subscribe to Harp Column, <a href="/subscribe">click here</a>,
+        or if you already have a
 	subscription, <a href="/my-account">log in</a>.</p>
 	</h2>
 	</div>

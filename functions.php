@@ -376,8 +376,7 @@ function hc_bp_friends_remove_action() {
 add_action( 'bp_activity_mentions_prime_results', 'hc_bp_friends_remove_action', 9 );
 
 function hc_pmpro_getfile_403() {
-    header( "HTTP/1.1 403 Restricted Content" );
-    header( "Location: " . $_SERVER['REQUEST_URI'] );
+    header( "HTTP/1.1 403 Restricted Content", true, 403 );
 
     echo '
     <html>

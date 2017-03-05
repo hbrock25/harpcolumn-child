@@ -179,7 +179,8 @@ function user_list_where($l, $s) {
 	    $restriction = " mu.status = 'active' "
 			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) "
 			 . " AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) "
-			 . "  >= date(mu.enddate))";
+			 . "  >= date(mu.enddate)) "
+	                 . "AND mu.enddate > 0";
 	    break;
 
 	case "exp_next_2_3":
@@ -201,7 +202,8 @@ function user_list_where($l, $s) {
 	    $restriction = " mu.status = 'active' "
 			 . "AND mu.membership_id = 3 "
 			 . "AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) "
-			 . "  >= date(mu.enddate))";
+			 . "  >= date(mu.enddate)) "
+	                 . "AND mu.enddate > 0";
 	    break;
 
 	case "exp_next_2_3_digital":

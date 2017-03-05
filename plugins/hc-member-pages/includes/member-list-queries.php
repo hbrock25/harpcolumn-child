@@ -180,7 +180,7 @@ function user_list_where($l, $s) {
 			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) "
 			 . " AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) "
 			 . "  >= date(mu.enddate)) "
-	                 . "AND mu.enddate > (DATE_ADD(CURDATE(),interval -DAY(CURDATE())+1 DAY) ";
+	                 . "AND mu.enddate > DATE_FORMAT(NOW() ,'%Y-%m-01')";
 	    break;
 
 	case "exp_next_2_3":
@@ -203,7 +203,7 @@ function user_list_where($l, $s) {
 			 . "AND mu.membership_id = 3 "
 			 . "AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) "
 			 . "  >= date(mu.enddate)) "
-	                 . "AND mu.enddate > DATE_ADD(CURDATE(),interval -DAY(CURDATE())+1 DAY) ";
+	                 . "AND mu.enddate > DATE_FORMAT(NOW() ,'%Y-%m-01')";
 	    break;
 
 	case "exp_next_2_3_digital":

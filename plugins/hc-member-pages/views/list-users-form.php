@@ -34,12 +34,12 @@
 
 		<option value="paid_print_domestic" <?php if($l == "paid_print_domestic") { ?>selected="selected"<?php } ?>><?php _e('Paid Domestic Print Subscribers', 'pmpro');?></option>
 		<option value="exp_last_60_print" <?php if($l == "exp_last_60_print") { ?>selected="selected"<?php } ?>><?php _e('Recently Expired Domestic Print Subs', 'pmpro');?></option>
-		<option value="exp_next_month" <?php if($l == "exp_next_month") { ?>selected="selected"<?php } ?>><?php _e('Received Last Issue Print', 'pmpro');?></option>
-		<option value="exp_next_2_3" <?php if($l == "exp_next_2_3") { ?>selected="selected"<?php } ?>><?php _e('Received Next To Last Issue Print', 'pmpro');?></option>
-		<option value="exp_next_4_5" <?php if($l == "exp_next_4_5") { ?>selected="selected"<?php } ?>><?php _e('Received Third From Last Issue Print', 'pmpro');?></option>
-		<option value="exp_next_month_digital" <?php if($l == "exp_next_month_digital") { ?>selected="selected"<?php } ?>><?php _e('Received Last Issue Digital', 'pmpro');?></option>
-		<option value="exp_next_2_3_digital" <?php if($l == "exp_next_2_3_digital") { ?>selected="selected"<?php } ?>><?php _e('Received Next To Last Issue Digital', 'pmpro');?></option>
-		<option value="exp_next_4_5_digital" <?php if($l == "exp_next_4_5_digital") { ?>selected="selected"<?php } ?>><?php _e('Received Third From Last Issue Digital', 'pmpro');?></option>
+		<option value="exp_next_month" <?php if($l == "exp_next_month") { ?>selected="selected"<?php } ?>><?php _e('Received Final Print Issue', 'pmpro');?></option>
+		<option value="exp_next_2_3" <?php if($l == "exp_next_2_3") { ?>selected="selected"<?php } ?>><?php _e('Received One Before Final Print Issue', 'pmpro');?></option>
+		<option value="exp_next_4_5" <?php if($l == "exp_next_4_5") { ?>selected="selected"<?php } ?>><?php _e('Received Second Before Final Print Issue', 'pmpro');?></option>
+		<option value="exp_next_month_digital" <?php if($l == "exp_next_month_digital") { ?>selected="selected"<?php } ?>><?php _e('Received Final Digital Issue', 'pmpro');?></option>
+		<option value="exp_next_2_3_digital" <?php if($l == "exp_next_2_3_digital") { ?>selected="selected"<?php } ?>><?php _e('Received One Before Final Digital Issue', 'pmpro');?></option>
+		<option value="exp_next_4_5_digital" <?php if($l == "exp_next_4_5_digital") { ?>selected="selected"<?php } ?>><?php _e('Received Second Before Final Digital Issue', 'pmpro');?></option>
 
 		<!-- These are the standard level queries -->
 		<?php

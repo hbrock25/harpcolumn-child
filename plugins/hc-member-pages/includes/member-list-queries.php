@@ -197,6 +197,28 @@ function user_list_where($l, $s) {
 			 . "AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
 	    break;
 
+	case "exp_next_month_digital":
+	    $restriction = " mu.status = 'active' "
+			 . "AND mu.membership_id = 3 "
+			 . "AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) "
+			 . "  >= date(mu.enddate))";
+	    break;
+
+	case "exp_next_2_3_digital":
+	    $restriction = " mu.status = 'active' "
+			 . "AND mu.membership_id = 3 "
+			 . "AND (mu.enddate >= "
+			 . "  STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),2)*100)+1), '%Y%m%d')) "
+			 . "AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 3 MONTH)))";
+	    break;
+
+	case "exp_next_4_5_digital":
+	    $restriction = " mu.status = 'active' "
+			 . "AND mu.membership_id = 3"
+			 . "AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d')) "
+			 . "AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
+	    break;
+
 	case "new_non_subs":
 	    // They have no membership, or a guest membership, and they joined
 	    // less than 60 days ago

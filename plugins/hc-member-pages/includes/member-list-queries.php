@@ -163,7 +163,7 @@ function user_list_where($l, $s) {
 	case "exp_last_60_print":
 	    // there must *not* be a match with the list of user_ids with
 	    // active subscriptions
-	    $restriction = " date(mu.enddate) =< CURDATE() "
+	    $restriction = " date(mu.enddate) < DATE_ADD(CURDATE(), INTERVAL 1 DAY) "
 			 . "AND date(mu.enddate) > (DATE_SUB(CURDATE(), INTERVAL 2 MONTH))"
 			 . "  AND mu2.user_id IS NULL ";
 	    break;

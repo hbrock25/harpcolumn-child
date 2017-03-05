@@ -199,7 +199,7 @@ function user_list_where($l, $s) {
 	    break;
 
 	case "exp_next_month_digital":
-	    $restriction = " mu.status = 'active' "
+	    $restriction = " (mu.status = 'active' OR mu.status = 'expired') "
 			 . "AND mu.membership_id = 3 "
 			 . "AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) "
 			 . "  >= date(mu.enddate)) "

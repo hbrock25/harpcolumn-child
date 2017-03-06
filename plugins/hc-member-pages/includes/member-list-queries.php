@@ -177,7 +177,7 @@ function user_list_where($l, $s) {
 	    // This is for renewal notices -- only do them for
 	    // domestic and foreign non-agency subscribers
 	    $restriction = " (mu.status = 'active' OR mu.status = 'expired') "
-			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) "
+			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 9) "
 			 . " AND (LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 1 MONTH)) "
 			 . "  >= date(mu.enddate)) "
 	                 . "AND mu.enddate > DATE_FORMAT(NOW() ,'%Y-%m-01')";
@@ -185,7 +185,7 @@ function user_list_where($l, $s) {
 
 	case "exp_next_2_3":
 	    $restriction = " mu.status = 'active' "
-			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9) "
+			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 9) "
 			 . "AND (mu.enddate >= "
 			 . "  STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),2)*100)+1), '%Y%m%d')) "
 			 . "AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 3 MONTH)))";
@@ -193,7 +193,7 @@ function user_list_where($l, $s) {
 
 	case "exp_next_4_5":
 	    $restriction = " mu.status = 'active' "
-			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 8, 9)"
+			 . "AND mu.membership_id NOT IN(0, 1, 3, 7, 9)"
 			 . "AND (mu.enddate >= STR_TO_DATE(((PERIOD_ADD(EXTRACT(YEAR_MONTH FROM CURDATE()),4)*100)+1), '%Y%m%d')) "
 			 . "AND (mu.enddate <= LAST_DAY(DATE_ADD(CURDATE(), INTERVAL 5 MONTH)))";
 	    break;

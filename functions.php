@@ -191,15 +191,4 @@ function hc_pmpro_getfile_403() {
 
 add_action("pmpro_getfile_before_error", "hc_pmpro_getfile_403");
 
-add_filter( "adverts_form_load", "customize_adverts_add" );
-function customize_adverts_add( $form ) {
-  if( $form['name'] != "advert" ) {
-    return $form;
-  }
-  foreach( $form["field"] as $key => $field ) {
-    if( $field["name"] == "_adverts_account" ) {
-        unset( $form["field"][$key] );
-    }
-  }
-  return $form;
-}
+add_filter( "adverts_form_load", "adverts_remove_account_field", 100 );

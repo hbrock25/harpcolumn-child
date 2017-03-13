@@ -191,4 +191,17 @@ function hc_pmpro_getfile_403() {
 
 add_action("pmpro_getfile_before_error", "hc_pmpro_getfile_403");
 
+/* Don't ask users if we should create an account for them when they create
+ * an ad -- for WPAdverts plugin
+*/
+	
 add_filter( "adverts_form_load", "adverts_remove_account_field", 100 );
+
+// Require login for people filling in contact forms.
+action( "init", "my_contact_form_init", 1000 );
+function my_contact_form_init() {
+    if( ! is_user_logged_in() ) {
+        remove_all_actions( "adverts_tpl_single_bottom" );
+    }
+}
+	

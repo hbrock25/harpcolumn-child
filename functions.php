@@ -179,15 +179,13 @@ function hc_pmpro_getfile_403() {
         a Harp Column subscriber.</p>
 	<p>To subscribe to Harp Column, <a href="/subscribe">click here</a>,
         or if you already have a
-	subscription, <a href="/my-account">log in</a>.</p>
+	    subscription, <a href="/my-account">log in</a>.</p>
 	</h2>
 	</div>
-	</body>
-	</html>
-';
-
+      </body>
+    </html>';
     exit;
-}
+    }
 
 add_action("pmpro_getfile_before_error", "hc_pmpro_getfile_403");
 
@@ -203,6 +201,12 @@ add_action( "init", "my_contact_form_init", 1000 );
 function my_contact_form_init() {
     if( ! is_user_logged_in() ) {
         remove_all_actions( "adverts_tpl_single_bottom" );
+	add_action( "adverts_tpl_single_bottom", "adverts_anon_message" );
     }
 }
+    
+function anon_message() {
+    echo '<a href="/my-account">Login</a> to contact the seller.';
+}
+	
 	

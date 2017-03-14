@@ -206,7 +206,7 @@ function my_contact_form_init() {
 }
     
 function adverts_anon_message() {
-    echo '<a href="/my-account">Login</a> to contact the seller.';
+    echo 'Please <a href="/my-account">login</a> to contact the seller.';
 }
 	
 	

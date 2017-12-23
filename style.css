@@ -104,3 +104,9 @@ h2.hc_entry_title {
   margin-top: 0px;
   margin-bottom: 5px;
 }
+
+/* fix AWPCP listing menu buttons */
+
+a.awpcp-classifieds-menu--menu-item-link.button {
+  color: #fff
+}

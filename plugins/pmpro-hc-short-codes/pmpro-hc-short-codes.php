@@ -45,13 +45,11 @@ function pmpro_expiration_date_shortcode( $atts ) {
 
 	//get the user's level
       $level = pmpro_getMembershipLevelForUser($user_id);
-      $logout_url = wp_nonce_url( "/my-account/customer-logout");
-
 
 	if(!empty($level) && !empty($level->enddate) && $level->id > 1)
-		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <a href="/renew">Renew</a> | <a href="/my-account">My Account</a> | <a href="' . $logout_url . '">Logout</a>';
+		$content = 'Your subscription expires on ' . date(get_option('date_format'), $level->enddate) . '. <a href="/renew">Renew</a> | <a href="/my-account">My Account</a> | <a href="' . wc_logout_url()  . '">Logout</a>';
 	else
-		$content = '<a href="/subscribe">Subscribe</a> | <a href="/my-account">My Account</a> | <a href="' . $logout_url . '">Logout</a>';
+		$content = '<a href="/subscribe">Subscribe</a> | <a href="/my-account">My Account</a> | <a href="' . wc_logout_url()  . '">Logout</a>';
 
 	return $content;
 }

@@ -244,3 +244,8 @@ function wc_csv_export_modify_row_data( $order_data, $order, $csv_generator ) {
     return $new_order_data;
 }
 add_filter( 'wc_customer_order_csv_export_order_row', 'wc_csv_export_modify_row_data', 10, 3 );
+
+/**
+ * Remove related products output
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );

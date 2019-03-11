@@ -30,12 +30,14 @@
 	    <th><?php _e('Fee', 'pmpro');?></th>
 	    <th><?php _e('Joined', 'pmpro');?></th>
 	    <th><?php _e('Expires', 'pmpro');?></th>
+	    <th><?php _e('Deferred Revenue');?></th>
 	    <th><?php _e('Orders', 'pmpro');?></th>		
 	</tr>
     </thead>
     <tbody id="users" class="list:user user-list">  
 	<?php  
-	$count = 0;              
+	$count = 0;
+        $revenue = 0;
 	foreach($theusers as $auser)
 	{
 	    //get meta                                          
@@ -103,13 +105,37 @@
 		<td><?php echo date(get_option("date_format"), strtotime($theuser->user_registered, current_time("timestamp")))?></td>
 		<td>
 		    <?php 
-		    if($auser->enddate) 
+		    if($auser->enddate && $auser->exp_num > 0) {
 			echo date(get_option("date_format"), $auser->enddate);
-		    else
-			echo "Never";
+		    } else {
+ 			echo "Never";
+		    }
 		    ?>
 		</td>
+		|
 		<td>
+		    <?php
+		    if($auser->enddate && $auser->exp_num > 0) {
+			$today = new DateTime();
+			$interval = $today->diff(new DateTime($auser->enddate));
+			(float)$issues_remaining = ceil(($interval->m + (12*$interval->y))/2);
+			if($auser->exp_period == 'Year') {
+			    (float)$rev_per_issue = (float)$auser->initial_payment / ((float)$auser->exp_num * 6);
+			} elseif($auser->exp_period == 'Day') {
+			    // days
+			    (float)$rev_per_issue = (float)$auser -> initial_payment / ((float)$auser->exp_num / 60);
+			} else {
+			    $rev_per_issue = 0;
+			}
+			(float)$deferred_revenue = (float)$rev_per_issue * (float)$issues_remaining;
+			echo $pmpro_currency_symbol . $deferred_revenue;
+			$revenue += $deferred_revenue;
+		    } else {
+			echo "None";
+		    }
+		    ?>
+		</td>
+|		<td>
 		    <a href="admin.php?page=<?php echo HC_MEMBER_PAGE_SLUG ?>&user_id=<?php echo $theuser->ID ?>">pmpro</a> |
 		    <a href="/wp-admin/edit.php?s=<?php echo $theuser->user_email ?>&post_status=all&post_type=shop_order">woo</a>
 		</td>

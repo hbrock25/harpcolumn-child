@@ -63,7 +63,9 @@ mu.trial_amount,
 mu.trial_limit,
 UNIX_TIMESTAMP(mu.startdate) as startdate,
 UNIX_TIMESTAMP(mu.enddate) as enddate,
-m.name as membership 
+m.name as membership,
+m.expiration_number as exp_num,
+m.expiration_period as exp_period 
 ";
 
 }

@@ -7,6 +7,8 @@
  * $theusers: sql result array
  **/
 
+// WC()->countries->countries[ $order->shipping_country ]; <-- use this to get proper country name //
+
 //begin output
 header("Content-type: text/csv");	
 if($s && $l)

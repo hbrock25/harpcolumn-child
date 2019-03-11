@@ -300,3 +300,8 @@ function pmprowoo_harpcol_checkout_level_extend_memberships($level_array)
 	return $level_array;
 }
 add_filter('pmprowoo_checkout_level', 'pmprowoo_harpcol_checkout_level_extend_memberships');
+
+/**
+ * Remove related products output
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );

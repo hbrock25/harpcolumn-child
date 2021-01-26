@@ -7,11 +7,11 @@ function hc_members_list_page_html() {
 /* Define the actions for the main page */
 
     // check user capabilities
-    if (!current_user_can('manage_options') ||
-	! current_user_can('pmpro_memberslist')) {
-	return;
-    }
-
+    /* if (!current_user_can('manage_options') ||
+       ! current_user_can('pmpro_memberslist')) {
+       return;
+     * }
+     */
     // vars
     global $wpdb, $pmpro_currency_symbol, $woocommerce;
 
@@ -98,13 +98,13 @@ add_action('admin_menu', 'hc_members_list_page', 100);
 function hc_members_list_admin_bar_menu() {
 
     global $wp_admin_bar;
-    if(current_user_can('pmpro_memberslist')) {
+#    if(current_user_can('pmpro_memberslist')) {
 	$wp_admin_bar->add_menu( array(
 	    'id' => 'hc-members-list',
 	    'parent' => 'paid-memberships-pro',
 	    'title' => __( 'Harp Column Members List', 'pmpro'),
 	    'href' => get_admin_url(NULL, '/admin.php?page=hc-members-list')));
-    }
+#    }
 }
 
 add_action('admin_bar_menu', 'hc_members_list_admin_bar_menu', 1001);
@@ -113,10 +113,10 @@ add_action('admin_bar_menu', 'hc_members_list_admin_bar_menu', 1001);
 
 function hcml_wp_ajax_hc_memberslist_csv() {
     // check user capabilities
-    if (!current_user_can('manage_options') ||
-	! current_user_can('pmpro_memberslist')) {
-	return;
-    }
+    /* if (!current_user_can('manage_options') ||
+       ! current_user_can('pmpro_memberslist')) {
+       return;
+     * }*/
     global $wpdb, $pmpro_currency_symbol, $woocommerce;
     // returns $s, $l, $pn, $limit, $start, $end
     extract(hcml_parse_request($_REQUEST, "list-users-csv"));
